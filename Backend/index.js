@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const potdgfg  = require('./Data/Potd');
-const potdlc = require('./Data/Potdlc');
+const potd = require('./Data/Potd');
 const cors = require('cors');
 
 const app = express();
@@ -13,53 +12,70 @@ app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/algo");
 
-app.post('/admin/gfg', (req,res)=>{
-    const body = req.body;
-    const datenow = new Date();
-    const date = datenow.toDateString();
-    potdgfg.findOne({date:date})
-    .then(result =>{
-        if(result)
-             res.json("Question already exists")
-        else{
-            potdgfg.create({date:date,details:body})
-            .then(r => res.json("Posted"))
-            .catch(e => res.json(e));
+app.post('/admin', async (req, res) => {
+    try {
+        if (req.body.name === 'leetcode') {
+            var lc = req.body;
         }
-    })
-    .catch(err => console.log(err))
+        if (req.body.name === 'gfg') {
+            var gfg = req.body;
+        }
+        const datenow = new Date();
+        const date = datenow.toDateString();
+        const result = await potd.findOne({ date: date });
+        if (result) {
+            const v = Object.entries(result);
+            const f = Object.entries(v[2][1])
+            console.log(f.length);
+            if(f.length ==5)
+            {
+                res.json("Question already exists");
+                return;
+            }
+            if (f[2][0] == "leetcode") {
+                try {
+                    await potd.updateOne({ date: date }, { $set: { geeksforgeeks: gfg } });
+                    res.json("Posted")
+                    console.log("gfgposted");
+                } catch (err) {
+                    console.log(err);
+                    res.status(500).json({ message: 'Error updating geeksforgeeks data' });
+                    return;
+                }
+            }else if(f[2][0] == "geeksforgeeks"){
+                try {
+                    await potd.updateOne({ date: date }, { $set: { leetcode: lc } });
+                    res.json("Posted")
+                    console.log("lcposted");
+                } catch (err) {
+                    console.log(err);
+                    res.status(500).json({ message: 'Error updating geeksforgeeks data' });
+                    return;
+                }
+            }
+        } else {
+            await potd.create({ date: date, geeksforgeeks: gfg, leetcode: lc });
+            res.json("Posted");
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 });
 
-app.post('/admin/lc', (req,res)=>{
-    const body = req.body;
-    const datenow = new Date();
-    const date = datenow.toDateString();
-    potdlc.findOne({date:date})
-    .then(result =>{
-        if(result)
-             res.json("Question already exists")
-        else{
-            potdlc.create({date:date,details:body})
-            .then(r => res.json("Posted"))
-            .catch(e => res.json(e));
-        }
-    })
-    .catch(err => console.log(err))
-});
 
 app.get('/potd', async (req, res) => {
     try {
-      // Query the database to find the most recent two data objects
-      const latestTwoData = await potd.find().sort({ _id: -1 }).limit(2).exec();
-      res.json(latestTwoData);
+        const result = await potd.find();
+        res.json(result);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Internal server error' });
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
 
 const port = process.env.PORT || 8000;
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log("Server started");
 });

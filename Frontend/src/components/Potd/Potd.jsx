@@ -5,7 +5,7 @@ import lcl from '../Pics/leetcodelogo.png';
 import alg from '../Pics/logo.png'
 
 function Potd() {
-  const [nameg, setng] = useState();
+
   const [questiong, setqg] = useState();
   const [conceptg, setcg] = useState();
   const [companiesg, setcomg] = useState();
@@ -13,31 +13,39 @@ function Potd() {
   const [solutiong, setsg] = useState();
   const [loading, setLoading] = useState(true);
 
-  const [namel, setnl] = useState();
   const [questionl, setql] = useState();
   const [conceptl, setcl] = useState();
   const [companiesl, setcoml] = useState();
   const [levell, setlvll] = useState();
   const [solutionl, setsl] = useState();
 
+  const [divData, setDiv] = useState([]);
+  const [isopen, setopen] = useState(null);
+
   useEffect(() => {
     axios.get('http://localhost:8000/potd')
       .then(result => {
-        const data1 = result.data[0];
-        const data2 = result.data[1];
-        (data1.name === "gfg")?(setng(data1.name)):(setnl(data1.name));
-        (data1.name === "gfg")?(setqg(data1.question)):(setql(data1.question));
-        (data1.name === "gfg")?(setcg(data1.concept)):(setcl(data1.concept));
-        (data1.name === "gfg")?(setcomg(data1.companies)):(setcoml(data1.companies));
-        (data1.name === "gfg")?(setlvlg(data1.level)):(setlvll(data1.level));
-        (data1.name === "gfg")?(setsg(data1.solution)):(setsl(data1.solution));
 
-        (data2.name === "gfg")?(setng(data2.name)):(setnl(data2.name));
-        (data2.name === "gfg")?(setqg(data2.question)):(setql(data2.question));
-        (data2.name === "gfg")?(setcg(data2.concept)):(setcl(data2.concept));
-        (data2.name === "gfg")?(setcomg(data2.companies)):(setcoml(data2.companies));
-        (data2.name === "gfg")?(setlvlg(data2.level)):(setlvll(data2.level));
-        (data2.name === "gfg")?(setsg(data2.solution)):(setsl(data2.solution));
+        setDiv(result.data.reverse());
+        console.log(divData);
+
+        const datenow = new Date();
+        const date = datenow.toDateString();
+        const ress = result.data.find(obj => obj.date === date);
+
+        const geeks = ress.geeksforgeeks;
+        setqg(geeks.question);
+        setcg(geeks.concept);
+        setcomg(geeks.companies);
+        setlvlg(geeks.level);
+        setsg(geeks.solution);
+
+        const leet = ress.leetcode;
+        setql(leet.question);
+        setcl(leet.concept);
+        setcoml(leet.companies);
+        setlvll(leet.level);
+        setsl(leet.solution);
         setLoading(false);
       })
       .catch(error => {
@@ -50,7 +58,11 @@ function Potd() {
     return <div>Loading...</div>;
   }
 
+  const handlesetopen = (index) =>{
+    setopen(index === isopen ? null : index)
+  }
   return (
+    <div>
     <div className='bg-white flex px-10 flex-wrap justify-center space-x-0 md:space-x-8'>
       <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-3 w-auto'>
         <div className='p-10 font-bold text-black'>
@@ -84,6 +96,51 @@ function Potd() {
             </p>    
           <a href={solutionl}>Solution: Link</a>
         </div>
+      </div>
+    </div>
+    <div className="container">
+        {divData.map((data, index) => (
+          <div key={index} onClick={()=>handlesetopen(index)} className="column w-4/5 mx-52 mt-5 font-serif font-medium pl-5 py-2 rounded-lg bg-slate-400">
+            {data.date}
+            {isopen === index && (
+            <div className=' flex flex-wrap justify-center space-x-0 md:space-x-5'>
+            <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-5 w-auto'>
+              <div className='p-5 font-semibold text-xs text-black'>
+                <img src={(gfgl)} className='w-52 h-12' />
+                <a href={data.geeksforgeeks.question} >Question: LINK</a>
+                <h1>Concepts: {data.geeksforgeeks.concept}</h1>
+                <h1>Companies: {data.geeksforgeeks.companies}</h1>
+                <p>Difficulty level: 
+                { 
+                  (data.geeksforgeeks.level === "Easy" || data.geeksforgeeks.level === "easy")?(<span className='bg-green-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Easy</span>):
+                  (data.geeksforgeeks.level === "Medium" || data.geeksforgeeks.level === "medium")?(<span className='bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Medium</span>) : 
+                  (<span className='bg-red-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Hard</span>)
+                  }
+                </p>
+                <a href={data.geeksforgeeks.solution}>Solution: Link</a>
+              </div>
+            </div>
+      
+            <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-5 w-auto'>
+              <div className='p-5 font-semibold text-xs text-black'>
+                <img src={lcl} className='w-52 h-12' />
+                <a href={data.leetcode.question} >Question: LINK</a>
+                <h1>Concepts: {data.leetcode.concept}</h1>
+                <h1>Companies: {data.leetcode.companies}</h1>
+                <p>Difficulty level:
+                  { 
+                  (data.leetcode.level === "Easy" || data.leetcode.level === "easy")?(<span className='bg-green-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Easy</span>):
+                  (data.leetcode.level === "Medium" || data.leetcode.level === "medium")?(<span className='bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Medium</span>) : 
+                  (<span className='bg-red-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl'>Hard</span>)
+                  }
+                  </p>    
+                <a href={data.leetcode.solution}>Solution: Link</a>
+              </div>
+            </div>
+          </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
