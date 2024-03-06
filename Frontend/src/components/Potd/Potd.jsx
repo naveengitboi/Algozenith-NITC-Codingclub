@@ -7,6 +7,7 @@ import alg from '../Pics/logo.png'
 function Potd() {
 
   const [questiong, setqg] = useState();
+  const [quesnameg,setqng] = useState();
   const [conceptg, setcg] = useState();
   const [companiesg, setcomg] = useState();
   const [levelg, setlvlg] = useState();
@@ -14,6 +15,7 @@ function Potd() {
   const [loading, setLoading] = useState(true);
 
   const [questionl, setql] = useState();
+  const [quesnamel, setqnl] = useState();
   const [conceptl, setcl] = useState();
   const [companiesl, setcoml] = useState();
   const [levell, setlvll] = useState();
@@ -35,6 +37,7 @@ function Potd() {
 
         const geeks = ress.geeksforgeeks;
         setqg(geeks.question);
+        setqng(geeks.quesname);
         setcg(geeks.concept);
         setcomg(geeks.companies);
         setlvlg(geeks.level);
@@ -42,6 +45,7 @@ function Potd() {
 
         const leet = ress.leetcode;
         setql(leet.question);
+        setqnl(leet.quesname);
         setcl(leet.concept);
         setcoml(leet.companies);
         setlvll(leet.level);
@@ -63,11 +67,11 @@ function Potd() {
   }
   return (
     <div>
-    <div className='bg-white flex px-10 flex-wrap justify-center space-x-0 md:space-x-8'>
+    <div className='bg-white flex px-5 md:px-10 flex-wrap justify-center space-x-0 md:space-x-8'>
       <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-3 w-auto'>
         <div className='p-10 font-bold text-black'>
           <img src={(gfgl)} className='w-72 h-20' />
-          <a href={questiong} >Question: LINK</a>
+          <a href={questiong} >Question: {quesnameg}</a>
           <h1>Concepts: {conceptg}</h1>
           <h1>Companies: {companiesg}</h1>
           <p>Difficulty level: 
@@ -84,7 +88,7 @@ function Potd() {
       <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-3 w-auto'>
         <div className='p-10 font-bold text-black'>
           <img src={lcl} className='w-72 h-16 mb-4' />
-          <a href={questionl} >Question: LINK</a>
+          <a href={questionl} >Question: {quesnamel}</a>
           <h1>Concepts: {conceptl}</h1>
           <h1>Companies: {companiesl}</h1>
           <p>Difficulty level:
@@ -100,14 +104,14 @@ function Potd() {
     </div>
     <div className="container">
         {divData.map((data, index) => (
-          <div key={index} onClick={()=>handlesetopen(index)} className="column w-4/5 mx-52 mt-5 font-serif font-medium pl-5 py-2 rounded-lg bg-slate-400">
+          <div key={index} onClick={()=>handlesetopen(index)} className="column w-4/5 mx-6 md:mx-52 mt-5 font-serif font-medium pl-5 py-2 rounded-lg bg-slate-400">
             {data.date}
             {isopen === index && (
             <div className=' flex flex-wrap justify-center space-x-0 md:space-x-5'>
             <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-5 w-auto'>
               <div className='p-5 font-semibold text-xs text-black'>
                 <img src={(gfgl)} className='w-52 h-12' />
-                <a href={data.geeksforgeeks.question} >Question: LINK</a>
+                <a href={data.geeksforgeeks.question} >Question: {data.geeksforgeeks.quesname}</a>
                 <h1>Concepts: {data.geeksforgeeks.concept}</h1>
                 <h1>Companies: {data.geeksforgeeks.companies}</h1>
                 <p>Difficulty level: 
@@ -124,7 +128,7 @@ function Potd() {
             <div className='bg-white rounded-3xl shadow-md shadow-gray-400 flex mt-5 w-auto'>
               <div className='p-5 font-semibold text-xs text-black'>
                 <img src={lcl} className='w-52 h-12' />
-                <a href={data.leetcode.question} >Question: LINK</a>
+                <a href={data.leetcode.question} >Question: {data.leetcode.quesname}</a>
                 <h1>Concepts: {data.leetcode.concept}</h1>
                 <h1>Companies: {data.leetcode.companies}</h1>
                 <p>Difficulty level:

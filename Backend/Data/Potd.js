@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const gfg = new mongoose.Schema({
     name:{type:String},
     question:{type:String},
+    quesname:{type:String},
     concept:{type:String},
     companies:{type:String},
     level:{type:String},
@@ -13,6 +14,7 @@ const gfg = new mongoose.Schema({
 const lc = new mongoose.Schema({
     name:{type:String},
     question:{type:String},
+    quesname:{type:String},
     concept:{type:String},
     companies:{type:String},
     level:{type:String},

@@ -5,7 +5,7 @@ import logo from '../Pics/logo.png';
 export default function Header() {
     return (
         <header className="shadow z-0 top-0">
-            <nav className="flex max-w-screen-xl bg-yellow-50 border-gray-200 py-2.5">
+            <nav className="flex justify-center max-w-screen-xl bg-yellow-50 border-gray-200 py-2.5">
                 <div className="flex flex-wrap max-w-screen-xl">
                     <Link to="/" className="flex px-5 items-center">
                         <img
@@ -16,10 +16,10 @@ export default function Header() {
                     </Link>
 
                     <div
-                        className="hidden px-52 justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+                        className=" lg:px-52 justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
                         id="mobile-menu-2"
                     >
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                        <ul className="flex flex-col md:flex-row font-medium lg:flex-row gap-[3vw]">
                             <li>
                                 <NavLink
                                 to="/"

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const potd = require('./Data/Potd');
+const oppo = require('./Data/Opportunities');
 const cors = require('cors');
 
 const app = express();
@@ -13,12 +14,13 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/algo");
 
 app.post('/admin', async (req, res) => {
-    try {
-        if (req.body.name === 'leetcode') {
-            var lc = req.body;
+    const {formdata,formType} = req.body;    
+    if(formType === 'potd'){
+        if (formdata.name === 'leetcode') {
+            var lc = formdata;
         }
-        if (req.body.name === 'gfg') {
-            var gfg = req.body;
+        if (formdata.name === 'gfg') {
+            var gfg = formdata;
         }
         const datenow = new Date();
         const date = datenow.toDateString();
@@ -57,8 +59,14 @@ app.post('/admin', async (req, res) => {
             await potd.create({ date: date, geeksforgeeks: gfg, leetcode: lc });
             res.json("Posted");
         }
-    } catch (err) {
-        console.error(err);
+    }
+    else if(formType === 'oppo'){
+        await oppo.create({companyname:formdata.companyname,logo:formdata.logo,jobtype:formdata.jobtype,jobrole:formdata.jobrole,
+            location:formdata.location,salary:formdata.salary,batch:formdata.batch,apply:formdata.apply});
+        res.json("oppo suc");
+    }
+    else{
+        console.error("Error in posting things");
         res.status(500).json({ message: 'Internal server error' });
     }
 });
@@ -69,6 +77,16 @@ app.get('/potd', async (req, res) => {
         const result = await potd.find();
         res.json(result);
     } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/opportunities', async (req,res)=>{
+    try{
+        const out = await oppo.find();
+        res.json(out);
+    }catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
     }
