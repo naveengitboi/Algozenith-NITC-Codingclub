@@ -13,6 +13,7 @@ function App() {
   const [level, setlvl] = useState();
   const [solution, sets] = useState("");
   const [notify, setNotify] = useState("");
+  const [time, settime] = useState(false);
 
   const onsubhand = (e) => {
     e.preventDefault();
@@ -44,6 +45,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+
+    settime(true);
+
+    const timer = setTimeout(() => {
+      settime(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   };
 
   const [companyname, setcompanyname] = useState("Company name");
@@ -55,6 +64,7 @@ function App() {
   const [batch, setbatch] = useState("2024");
   const [apply, setapply] = useState("");
   const [notify2, setNotify2] = useState("");
+  const [time2, settime2] = useState(false);
 
   const companysubmit = (e) => {
     e.preventDefault();
@@ -82,6 +92,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+
+    settime2(true);
+
+    const timer = setTimeout(() => {
+      settime2(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   };
 
   const [platformname, setplatformname] = useState();
@@ -89,6 +107,8 @@ function App() {
   const [date, setdate] = useState();
   const [contestlink, setcontestlink] = useState();
   const [solutionlink, setsolutionlink] = useState();
+  const [notify3, setNotify3] = useState("");
+  const [time3, settime3] = useState(false);
 
   const editorialsubmit = (e) => {
     e.preventDefault();
@@ -107,18 +127,88 @@ function App() {
         formType: "editorials",
       })
       .then((result) => {
+        setNotify3("Editorial Posted");
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    settime3(true);
+
+    const timer = setTimeout(() => {
+      settime3(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   };
 
-  const deletehandle = (e) => {
+  const deletepotd = (e) => {
     e.preventDefault();
 
-    axios.delete("http://localhost:8000/admin" , )
-  }
+    axios
+      .delete("http://localhost:8000/admin", { data: { meta: "potd" } })
+      .then((res) => {
+        if (res.data == "potd del") setNotify("Deleted Today's POTD's");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    settime(true);
+
+    const timer = setTimeout(() => {
+      settime(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  };
+
+  const deleteoppo = (e) => {
+    e.preventDefault();
+
+    axios
+      .delete("http://localhost:8000/admin", { data: { meta: "oppo" } })
+      .then((res) => {
+        if (res.data === "oppo del") setNotify2("Deleted Previous JOB");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    settime2(true);
+
+    const timer = setTimeout(() => {
+      settime2(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  };
+
+  const deleteeditorial = (e) => {
+    e.preventDefault();
+
+    axios
+      .delete("http://localhost:8000/admin", { data: { meta: "editorial" } })
+      .then((res) => {
+        if (res.data === "editorial del")
+          setNotify3("Deleted Previous Editorial");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    settime3(true);
+
+    const timer = setTimeout(() => {
+      settime3(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  };
 
   return (
     <div className="flex justify-center p-24">
@@ -161,21 +251,22 @@ function App() {
             placeholder="Solution Link"
             onChange={(e) => sets(e.target.value)}
           />
-          <button
-            type="submit"
-            className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-          >
-            Submit
-          </button>
+          <div className="flex space-x-5">
+            <button
+              type="submit"
+              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+            >
+              Submit
+            </button>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+              onClick={deletepotd}
+            >
+              Delete
+            </button>
+          </div>
         </form>
-        <h1 className="text-green-500">{notify}</h1>
-        <button
-          type="submit"
-          className="bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded"
-          onClick={deletehandle}
-        >
-          Delete
-        </button>
+        {time && <h1 className="text-purple-500 mx-10">{notify}</h1>}
       </div>
       <div className="w-64 bg-slate-200 ml-5">
         <h1 className="ml-8 font-bold mt-2">Job Opportunities</h1>
@@ -221,14 +312,22 @@ function App() {
             placeholder="Apply Link"
             onChange={(e) => setapply(e.target.value)}
           />
-          <button
-            type="submit"
-            className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-          >
-            Submit
-          </button>
+          <div className="flex space-x-5">
+            <button
+              type="submit"
+              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+            >
+              Submit
+            </button>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+              onClick={deleteoppo}
+            >
+              Delete
+            </button>
+          </div>
         </form>
-        <h1 className="text-green-500">{notify2}</h1>
+        {time2 && <h1 className="text-purple-500 mx-10">{notify2}</h1>}
       </div>
       <div className="w-64 bg-slate-200 ml-5">
         <h1 className="ml-8 font-bold mt-2">Editorials</h1>
@@ -255,14 +354,22 @@ function App() {
             placeholder="Solutions Link"
             onChange={(e) => setsolutionlink(e.target.value)}
           />
-          <button
-            type="submit"
-            className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-          >
-            Submit
-          </button>
+          <div className="flex space-x-5">
+            <button
+              type="submit"
+              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+            >
+              Submit
+            </button>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+              onClick={deleteeditorial}
+            >
+              Delete
+            </button>
+          </div>
         </form>
-        <h1 className="text-green-500">{notify2}</h1>
+        {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>}
       </div>
     </div>
   );

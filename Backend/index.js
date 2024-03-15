@@ -9,7 +9,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Enable CORS middleware
 app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/algo");
@@ -90,6 +89,33 @@ app.post("/admin", async (req, res) => {
   } else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.delete("/admin", async (req, res) => {
+  const meta = req.body.meta;
+  console.log(meta);
+  if (meta === "potd") {
+    const datenow = new Date();
+    const date = datenow.toDateString();
+    await potd.deleteOne({ date: date });
+    res.send("potd del");
+  } else if (meta === "oppo") {
+    const latest = await oppo.findOneAndDelete({}, { sort: { _id: -1 } });
+    if (latest) {
+      res.send("oppo del");
+    } else {
+      console.log("No document found for deletion");
+      res.status(404).send("404");
+    }
+  } else if (meta === "editorial") {
+    const latest = await editorial.findOneAndDelete({}, { sort: { _id: -1 } });
+    if (latest) {
+      res.send("editorial del");
+    } else {
+      console.log("No document found for deletion");
+      res.status(404).send("404");
+    }
   }
 });
 
