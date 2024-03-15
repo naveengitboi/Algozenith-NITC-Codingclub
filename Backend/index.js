@@ -15,7 +15,8 @@ app.use(cors({
   credentials: true
 }));
 
-mongoose.connect("mongodb://localhost:27017/algo");
+// mongoose.connect("mongodb://localhost:27017/algo");
+mongoose.connect("mongodb+srv://bavigaddaharsha:<MhwBXNMu3x6SYe2H>@cluster0.atppk1v.mongodb.net");
 
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
