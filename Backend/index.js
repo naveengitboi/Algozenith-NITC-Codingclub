@@ -9,14 +9,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: ["https://algozenith-nitc-codingclub.vercel.app"],
-  methods: ["POST","GET","DELETE"],
-  credentials: true
-}));
+app.use(cors());
 
-// mongoose.connect("mongodb://localhost:27017/algo");
-mongoose.connect("mongodb+srv://bavigaddaharsha:<MhwBXNMu3x6SYe2H>@cluster0.atppk1v.mongodb.net");
+mongoose.connect("mongodb://localhost:27017/algo");
 
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
