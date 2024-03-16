@@ -114,7 +114,7 @@ app.delete("/admin", async (req, res) => {
       res.send("editorial del");
     } else {
       console.log("No document found for deletion");
-      res.status(404).send("404");
+      res.status(404).send("404 ok");
     }
   }
 });
