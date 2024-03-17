@@ -5,6 +5,8 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
+  const url = "http://localhost:8000";
+  // const url = "https://algozenith-nitc-codingclub-2.onrender.com";
   const [name, setn] = useState();
   const [question, setq] = useState();
   const [quesname, setqn] = useState();
@@ -29,7 +31,7 @@ function App() {
     };
 
     axios
-      .post("http://localhost:8000/admin", {
+      .post(url+"/admin", {
         formdata: potd_details,
         formType: "potd",
       })
@@ -81,7 +83,7 @@ function App() {
     };
 
     axios
-      .post("http://localhost:8000/admin", {
+      .post(url+"/admin", {
         formdata: companydetails,
         formType: "oppo",
       })
@@ -122,7 +124,7 @@ function App() {
     };
 
     axios
-      .post("http://localhost:8000/admin", {
+      .post(url+"/admin", {
         formdata: editorials,
         formType: "editorials",
       })
@@ -147,7 +149,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete("http://localhost:8000/admin", { data: { meta: "potd" } })
+      .delete(url+"/admin", { data: { meta: "potd" } })
       .then((res) => {
         if (res.data == "potd del") setNotify("Deleted Today's POTD's");
         console.log(res.data);
@@ -169,7 +171,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete("http://localhost:8000/admin", { data: { meta: "oppo" } })
+      .delete(url+"/admin", { data: { meta: "oppo" } })
       .then((res) => {
         if (res.data === "oppo del") setNotify2("Deleted Previous JOB");
         console.log(res);
@@ -191,7 +193,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete("http://localhost:8000/admin", { data: { meta: "editorial" } })
+      .delete(url+"/admin", { data: { meta: "editorial" } })
       .then((res) => {
         if (res.data === "editorial del")
           setNotify3("Deleted Previous Editorial");

@@ -5,13 +5,14 @@ import axios from "axios";
 import algologo from "../Pics/logo.png";
 import codeforces from "../Pics/codeforces.png";
 import gfglogo from "../Pics/gfglog.png";
+import url from "../url.js";
 
 function Editorials() {
   const [editorialdata, seteditorialsdata] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/editorials")
+      .get(url+"/editorials")
       .then((result) => {
         seteditorialsdata(result.data.reverse());
         console.log(editorialdata);

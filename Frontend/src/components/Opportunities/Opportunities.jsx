@@ -5,13 +5,14 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare as arrow } from "@fortawesome/free-solid-svg-icons";
 import { faBuildingUser } from "@fortawesome/free-solid-svg-icons";
+import url from "../url.js";
 
 function Opportunities() {
   const [opportunitiesdata, setOpportunitiesData] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/opportunities")
+      .get(url+"/opportunities")
       .then((response) => {
         setOpportunitiesData(response.data.reverse());
         console.log(response.data);

@@ -5,6 +5,7 @@ import lcl from "../Pics/leetcodelogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import url from "../url.js";
 
 function Potd() {
   const [questiong, setqg] = useState();
@@ -27,7 +28,7 @@ function Potd() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/potd")
+      .get(url + "/potd")
       .then((result) => {
         setDiv(result.data.reverse());
         console.log(divData);
@@ -59,9 +60,9 @@ function Potd() {
       });
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   const handlesetopen = (index) => {
     setopen(index === isopen ? null : index);
