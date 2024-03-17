@@ -9,14 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: ["http://127.0.0.1:5173"],
-  methods: ["POST","GET","DELETE"],
-  credentials: true
-}));
+app.use(cors());
 
-// mongoose.connect("mongodb://localhost:27017/algo");
-mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost:27017/algo");
+// mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
 
 
 app.post("/admin", async (req, res) => {
