@@ -13,7 +13,7 @@ app.use(cors({
   origin: ["http://127.0.0.1:5173"],
   methods: ["POST","GET","DELETE"],
   credentials: true
-  ));
+}));
 
 // mongoose.connect("mongodb://localhost:27017/algo");
 mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
