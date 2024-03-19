@@ -31,7 +31,7 @@ function App() {
     };
 
     axios
-      .post(url+"/admin", {
+      .post(url + "/admin", {
         formdata: potd_details,
         formType: "potd",
       })
@@ -83,7 +83,7 @@ function App() {
     };
 
     axios
-      .post(url+"/admin", {
+      .post(url + "/admin", {
         formdata: companydetails,
         formType: "oppo",
       })
@@ -124,7 +124,7 @@ function App() {
     };
 
     axios
-      .post(url+"/admin", {
+      .post(url + "/admin", {
         formdata: editorials,
         formType: "editorials",
       })
@@ -149,7 +149,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete(url+"/admin", { data: { meta: "potd" } })
+      .delete(url + "/admin", { data: { meta: "potd" } })
       .then((res) => {
         if (res.data == "potd del") setNotify("Deleted Today's POTD's");
         console.log(res.data);
@@ -171,7 +171,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete(url+"/admin", { data: { meta: "oppo" } })
+      .delete(url + "/admin", { data: { meta: "oppo" } })
       .then((res) => {
         if (res.data === "oppo del") setNotify2("Deleted Previous JOB");
         console.log(res);
@@ -193,7 +193,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .delete(url+"/admin", { data: { meta: "editorial" } })
+      .delete(url + "/admin", { data: { meta: "editorial" } })
       .then((res) => {
         if (res.data === "editorial del")
           setNotify3("Deleted Previous Editorial");
@@ -213,165 +213,186 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center p-24">
-      <div className="w-64 rounded-lg bg-slate-300">
-        <h1 className="ml-8 font-bold mt-2">POTD</h1>
-        <form className="space-y-5 space-x-8 py-2" onSubmit={onsubhand}>
-          <input
-            type="text"
-            placeholder="Platform name"
-            onChange={(e) => setn(e.target.value)}
-            className="ml-8"
-          />
-          <input
-            type="url"
-            placeholder="Question Link"
-            onChange={(e) => setq(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Question name"
-            onChange={(e) => setqn(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Concepts and topics"
-            onChange={(e) => setc(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Companies"
-            onChange={(e) => setcom(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Difficulty Level"
-            onChange={(e) => setlvl(e.target.value)}
-          />
-          <input
-            type="url"
-            placeholder="Solution Link"
-            onChange={(e) => sets(e.target.value)}
-          />
-          <div className="flex space-x-5">
-            <button
-              type="submit"
-              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-            >
-              Submit
-            </button>
-            <button
-              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-              onClick={deletepotd}
-            >
-              Delete
-            </button>
-          </div>
-        </form>
-        {time && <h1 className="text-purple-500 mx-10">{notify}</h1>}
+    <div>
+      <div className="flex justify-center w-1/3 ml-50 mt-10 font-bold bg-blue-600 text-white py-2 rounded-r-full">
+        ALGOZENITH ADMIN PAGE
       </div>
-      <div className="w-64 bg-slate-200 ml-5">
-        <h1 className="ml-8 font-bold mt-2">Job Opportunities</h1>
-        <form className="space-y-4 space-x-8 py-2" onSubmit={companysubmit}>
-          <input
-            type="text"
-            placeholder="Company Name"
-            className="ml-8"
-            onChange={(e) => setcompanyname(e.target.value)}
-          />
-          <input
-            type="url"
-            placeholder="Logo Link"
-            onChange={(e) => setlogo(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Job Type"
-            onChange={(e) => setjobtype(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Job Role"
-            onChange={(e) => setjobrole(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Location"
-            onChange={(e) => setlocation(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Salary or CTC"
-            onChange={(e) => setsalary(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Batches eg(2024,2025...)"
-            onChange={(e) => setbatch(e.target.value)}
-          />
-          <input
-            type="url"
-            placeholder="Apply Link"
-            onChange={(e) => setapply(e.target.value)}
-          />
-          <div className="flex space-x-5">
-            <button
-              type="submit"
-              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-            >
-              Submit
-            </button>
-            <button
-              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-              onClick={deleteoppo}
-            >
-              Delete
-            </button>
-          </div>
-        </form>
-        {time2 && <h1 className="text-purple-500 mx-10">{notify2}</h1>}
-      </div>
-      <div className="w-64 bg-slate-200 ml-5">
-        <h1 className="ml-8 font-bold mt-2">Editorials</h1>
-        <form className="space-y-4 space-x-8 py-2" onSubmit={editorialsubmit}>
-          <input
-            type="text"
-            placeholder="Platform Name"
-            className="ml-8"
-            onChange={(e) => setplatformname(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Contest Number"
-            onChange={(e) => setcontestnumber(e.target.value)}
-          />
-          <input type="date" onChange={(e) => setdate(e.target.value)} />
-          <input
-            type="url"
-            placeholder="Contest Link"
-            onChange={(e) => setcontestlink(e.target.value)}
-          />
-          <input
-            type="url"
-            placeholder="Solutions Link"
-            onChange={(e) => setsolutionlink(e.target.value)}
-          />
-          <div className="flex space-x-5">
-            <button
-              type="submit"
-              className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
-            >
-              Submit
-            </button>
-            <button
-              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-              onClick={deleteeditorial}
-            >
-              Delete
-            </button>
-          </div>
-        </form>
-        {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>}
+      <div className="flex justify-center p-10">
+        <div className="w-64 rounded-lg bg-slate-300">
+          <h1 className="ml-8 font-bold mt-2">POTD</h1>
+          <form className="space-y-5 space-x-8 py-2 " onSubmit={onsubhand}>
+            <input
+              type="text"
+              placeholder="Platform name"
+              onChange={(e) => setn(e.target.value)}
+              className="ml-8 outline-none"
+            />
+            <input
+              type="url"
+              placeholder="Question Link"
+              onChange={(e) => setq(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Question name"
+              onChange={(e) => setqn(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Concepts and topics"
+              onChange={(e) => setc(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Companies"
+              onChange={(e) => setcom(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Difficulty Level"
+              onChange={(e) => setlvl(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="url"
+              placeholder="Solution Link"
+              onChange={(e) => sets(e.target.value)}
+              className="outline-none"
+            />
+            <div className="flex space-x-5">
+              <button
+                type="submit"
+                className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+              >
+                Submit
+              </button>
+              <button
+                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                onClick={deletepotd}
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+          {time && <h1 className="text-purple-500 mx-10">{notify}</h1>}
+        </div>
+        <div className="w-64 bg-slate-200 ml-5">
+          <h1 className="ml-8 font-bold mt-2">Job Opportunities</h1>
+          <form className="space-y-4 space-x-8 py-2" onSubmit={companysubmit}>
+            <input
+              type="text"
+              placeholder="Company Name"
+              className="ml-8 outline-none"
+              onChange={(e) => setcompanyname(e.target.value)}
+            />
+            <input
+              type="url"
+              placeholder="Logo Link"
+              onChange={(e) => setlogo(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Job Type"
+              onChange={(e) => setjobtype(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Job Role"
+              onChange={(e) => setjobrole(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Location"
+              onChange={(e) => setlocation(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Salary or CTC"
+              onChange={(e) => setsalary(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Batches eg(2024,2025...)"
+              onChange={(e) => setbatch(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="url"
+              placeholder="Apply Link"
+              onChange={(e) => setapply(e.target.value)}
+              className="outline-none"
+            />
+            <div className="flex space-x-5">
+              <button
+                type="submit"
+                className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+              >
+                Submit
+              </button>
+              <button
+                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                onClick={deleteoppo}
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+          {time2 && <h1 className="text-purple-500 mx-10">{notify2}</h1>}
+        </div>
+        <div className="w-64 bg-slate-200 ml-5">
+          <h1 className="ml-8 font-bold mt-2">Editorials</h1>
+          <form className="space-y-4 space-x-8 py-2" onSubmit={editorialsubmit}>
+            <input
+              type="text"
+              placeholder="Platform Name"
+              className="ml-8 outline-none"
+              onChange={(e) => setplatformname(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Contest Number"
+              onChange={(e) => setcontestnumber(e.target.value)}
+              className="outline-none"
+            />
+            <input type="date" onChange={(e) => setdate(e.target.value)} />
+            <input
+              type="url"
+              placeholder="Contest Link"
+              onChange={(e) => setcontestlink(e.target.value)}
+              className="outline-none"
+            />
+            <input
+              type="url"
+              placeholder="Solutions Link"
+              onChange={(e) => setsolutionlink(e.target.value)}
+              className="outline-none"
+            />
+            <div className="flex space-x-5">
+              <button
+                type="submit"
+                className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+              >
+                Submit
+              </button>
+              <button
+                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                onClick={deleteeditorial}
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+          {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>}
+        </div>
       </div>
     </div>
   );

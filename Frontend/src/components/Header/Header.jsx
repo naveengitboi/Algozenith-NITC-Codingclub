@@ -76,7 +76,7 @@ export default function Header() {
                   Editorials
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/members"
                   className={({ isActive }) =>
@@ -90,7 +90,7 @@ export default function Header() {
                 >
                   Members
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to="/about"
