@@ -76,21 +76,6 @@ export default function Header() {
                   Editorials
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink
-                  to="/members"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
-                                        ${
-                                          isActive
-                                            ? "text-blue-900/90"
-                                            : "text-gray-700"
-                                        } lg:hover:bg-transparent lg:border-0 hover:text-blue-900/90 lg:p-0`
-                  }
-                >
-                  Members
-                </NavLink>
-              </li> */}
               <li>
                 <NavLink
                   to="/about"
