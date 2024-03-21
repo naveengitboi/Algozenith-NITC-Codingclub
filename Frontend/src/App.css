@@ -30,46 +30,37 @@
 
   --tiny_size: 0.625rem;
 }
-.largerFont
-{
-    font-family: var(--primary_font);
+.largerSize {
+  font-family: var(--primary_font);
   font-size: var(--larger_size);
 }
 
-.medLSize
-{
-    font-family: var(--primary_font);
+.medLSize {
+  font-family: var(--primary_font);
   font-size: var(--medium_lsize);
 }
-.smallLSize
-{
-    font-family: var(--primary_font);
+.smallLSize {
+  font-family: var(--primary_font);
   font-size: var(--small_lsize);
 }
-.thickFont
-{
+.thickFont {
   font-family: var(--secondary_font);
   line-height: 1;
 }
-.paraMedium
-{
+.paraMedium {
   font-family: var(--primary_font);
   font-size: var(--para_medium_size);
 }
 
-.paraSmall
-{
+.paraSmall {
   font-family: var(--primary_font);
   font-size: var(--para_small_size);
 }
 
-.tinySize
-{
+.tinySize {
   font-family: var(--normal_font);
   font-size: var(--tiny_size);
 }
-
-
 
 .gradMidLine {
   height: 2px;
@@ -101,9 +92,10 @@ body {
   );
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .pagePadding {
   padding-top: 5rem;
 }
-
