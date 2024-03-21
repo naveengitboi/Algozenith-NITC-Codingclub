@@ -8,7 +8,6 @@ import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
 import Opportunities from './components/Opportunities/Opportunities.jsx'
 import Editorials from './components/Editorials/Editorials.jsx'
-import Members from './components/Members/Members.jsx'
 import Potd from './components/Potd/Potd.jsx'
 
 const router = createBrowserRouter(
@@ -19,7 +18,6 @@ const router = createBrowserRouter(
       <Route path='/opportunities' element={< Opportunities/>}/>
       <Route path='/potd' element={<Potd/>}/>
       <Route path='/editorials' element={<Editorials />} />
-      {/* <Route path='/members' element={<Members/>}/> */}
       <Route path='/about' element={<About />} />
       <Route path='*' element={<div>Not Found</div>} />
     </Route>

@@ -29,11 +29,11 @@ function App() {
       level,
       solution,
     };
-
+    const typed = name === "leetcode" ? "leetcode" : "gfg";
     axios
       .post(url + "/admin", {
         formdata: potd_details,
-        formType: "potd",
+        formType: typed,
       })
       .then((result) => {
         if (result.data === "Posted") {

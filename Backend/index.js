@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const potd = require("./Data/Potd");
 const oppo = require("./Data/Opportunities");
 const editorial = require("./Data/Editorials");
+const leetcode = require("./Data/Leetcode");
+const gfg = require("./Data/Gfg");
 const cors = require("cors");
 
 const app = express();
@@ -14,59 +16,36 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
 
-
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
-  if (formType === "potd") {
-    if (formdata.name === "leetcode") {
-      var lc = formdata;
-    }
-    if (formdata.name === "gfg") {
-      var gfg = formdata;
-    }
+  if (formType === "leetcode") {
     const datenow = new Date();
-    const date = datenow.toDateString();
-    const result = await potd.findOne({ date: date });
-    if (result) {
-      const v = Object.entries(result);
-      const f = Object.entries(v[2][1]);
-      console.log(f.length);
-      if (f.length == 5) {
-        res.json("Question already exists");
-        return;
-      }
-      if (f[2][0] == "leetcode") {
-        try {
-          await potd.updateOne(
-            { date: date },
-            { $set: { geeksforgeeks: gfg } }
-          );
-          res.json("Posted");
-          console.log("gfgposted");
-        } catch (err) {
-          console.log(err);
-          res
-            .status(500)
-            .json({ message: "Error updating geeksforgeeks data" });
-          return;
-        }
-      } else if (f[2][0] == "geeksforgeeks") {
-        try {
-          await potd.updateOne({ date: date }, { $set: { leetcode: lc } });
-          res.json("Posted");
-          console.log("lcposted");
-        } catch (err) {
-          console.log(err);
-          res
-            .status(500)
-            .json({ message: "Error updating geeksforgeeks data" });
-          return;
-        }
-      }
-    } else {
-      await potd.create({ date: date, geeksforgeeks: gfg, leetcode: lc });
-      res.json("Posted");
-    }
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    await leetcode.create({
+      date: date,
+      question: formdata.question,
+      quesname: formdata.quesname,
+      concept: formdata.concept,
+      companies: formdata.companies,
+      level: formdata.level,
+      solution: formdata.solution,
+    });
+    res.json("Posted");
+  } else if (formType === "gfg") {
+    const datenow = new Date();
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    await gfg.create({
+      date: date,
+      question: formdata.question,
+      quesname: formdata.quesname,
+      concept: formdata.concept,
+      companies: formdata.companies,
+      level: formdata.level,
+      solution: formdata.solution,
+    });
+    res.json("Postedh");
   } else if (formType === "oppo") {
     await oppo.create({
       companyname: formdata.companyname,
@@ -121,9 +100,19 @@ app.delete("/admin", async (req, res) => {
   }
 });
 
-app.get("/potd", async (req, res) => {
+app.get("/gfg", async (req, res) => {
   try {
-    const result = await potd.find();
+    const result = await gfg.find();
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/leetcode", async (req, res) => {
+  try {
+    const result = await leetcode.find();
     res.json(result);
   } catch (err) {
     console.error(err);
