@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sora:wght@100..800&family=Teko:wght@300..700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --lr_padding: 15vw;
+  --primary_font: "Sora", sans-serif;
+  --secondary_font: "Teko", sans-serif;
+  --normal_font: "Inter", sans-serif;
+
+  /* colors */
+  --pri_dark_tone: #003f7e;
+  --pri_light_tone: #0077c0;
+  --sec_color: #7c7fff;
+  --white_color: #fafafa;
+
+  /* font sizes */
+  /* large sizes */
+  --larger_size: 6rem;
+  --medium_lsize: 4rem;
+  --small_lsize: 3rem;
+
+  --para_larger_size: 2rem;
+  --para_medium_size: 1.25rem;
+  --para_small_size: 1rem;
+
+  --tiny_size: 0.625rem;
+}
+.largerFont
+{
+    font-family: var(--primary_font);
+  font-size: var(--larger_size);
+}
+
+.medLSize
+{
+    font-family: var(--primary_font);
+  font-size: var(--medium_lsize);
+}
+.smallLSize
+{
+    font-family: var(--primary_font);
+  font-size: var(--small_lsize);
+}
+.thickFont
+{
+  font-family: var(--secondary_font);
+  line-height: 1;
+}
+.paraMedium
+{
+  font-family: var(--primary_font);
+  font-size: var(--para_medium_size);
+}
+
+.paraSmall
+{
+  font-family: var(--primary_font);
+  font-size: var(--para_small_size);
+}
+
+.tinySize
+{
+  font-family: var(--normal_font);
+  font-size: var(--tiny_size);
+}
+
+
+
+.gradMidLine {
+  height: 2px;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    rgba(124, 126, 255, 0),
+    #7c7fff,
+    rgba(124, 126, 255, 0)
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.gradOneSidePurpleLine {
+  height: 2px;
+  background-image: linear-gradient(#7c7fff, #7c7eff00);
+}
+.commonPadding {
+  padding-left: var(--lr_padding);
+  padding-right: var(--lr_padding);
+}
+body {
+  background-image: linear-gradient(
+    rgba(245, 252, 255, 0.407),
+    rgba(255, 238, 238, 0.518),
+    rgba(255, 252, 245, 0.566),
+    rgba(234, 246, 250, 0.589)
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.pagePadding {
+  padding-top: 5rem;
+}
+
