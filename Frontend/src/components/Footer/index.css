@@ -1,0 +1,51 @@
+.footerContainer footer {
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logoSection .thickFont {
+  font-size: var(--para_larger_size);
+  font-weight: bold;
+  color: var(--pri_dark_tone);
+}
+
+.logoSection .paraSmall {
+  font-weight: 600;
+  color: var(--pri_dark_tone);
+}
+
+.socialLinks,
+.socialLinks a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.socialLinks a {
+  --size: 50px;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid var(--pri_light_tone);
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  transition: all 0.25s ease;
+}
+.socialLinks svg {
+  font-size: 1.5rem;
+  color: var(--pri_light_tone);
+  transition: all 0.25s ease;
+}
+.socialLinks a:hover svg {
+  transform: scale(1.15);
+  color: var(--sec_color);
+}
+.navigateBtn .paraSmall {
+  font-weight: 600;
+  color: var(--pri_dark_tone);
+}
