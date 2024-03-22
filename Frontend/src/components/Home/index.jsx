@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './index.css'
 import Counter from '../../elements/Counter';
+import JobsHome from '../homeElements/JobsHome';
 
 const counterData = [
     {
@@ -40,11 +41,12 @@ export default function Home() {
                 </div>
                 <div className="heroImg">
                     <img src="/images/algogrid.png" alt="algoclubgrid" />
-                    
                 </div>
             </div>
 
             <div className='gradMidLine'></div>
+
+            <JobsHome/>
             
         </div>
     );

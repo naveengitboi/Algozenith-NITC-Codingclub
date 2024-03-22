@@ -10,13 +10,14 @@ import Opportunities from './components/Opportunities/Opportunities.jsx'
 import Editorials from './components/Editorials/Editorials.jsx'
 import Members from './components/Members/Members.jsx'
 import Potd from './components/Potd/Potd.jsx'
+import JobPosts from './components/JobPosts/index.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route path='/' element={<Home />}/>
       <Route path='home' element={<Home/>}/>
-      <Route path='/opportunities' element={< Opportunities/>}/>
+      <Route path='/opportunities' element={< JobPosts/>}/>
       <Route path='/potd' element={<Potd/>}/>
       <Route path='/editorials' element={<Editorials />} />
       {/* <Route path='/members' element={<Members/>}/> */}
