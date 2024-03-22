@@ -11,8 +11,8 @@ function JobCard({ job }) {
         <div className="details">
           <h1 className="thickFont">{job.companyName}</h1>
           <div className="batcheAndRole">
-            <p className="paraSmall">{job.batches}</p>
-            <p className="paraSmall">{job.jobRole}</p>
+            <p className="paraSmall batches">{job.batches}</p>
+            <p className="paraSmall jbRole">{job.jobRole}</p>
           </div>
 
           <div className="locationAndPay">
