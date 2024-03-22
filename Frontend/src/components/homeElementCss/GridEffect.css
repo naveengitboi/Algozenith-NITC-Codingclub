@@ -1,0 +1,68 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.gridElement {
+  --bradius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  border-radius: var(--bradius);
+  position: relative;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.gridElement::before {
+  --size: 250px;
+  content: "";
+  background-image: radial-gradient(var(--sec_color), transparent, transparent);
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.25s, top 0s, left 0s;
+}
+.gridElement:hover::before {
+  opacity: 1;
+}
+.gridElement .gridInner {
+  border-radius: var(--bradius);
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.gridInner::before {
+  --size: 400px;
+  content: "";
+  background-image: radial-gradient(var(--sec_color), transparent, transparent);
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.25s, top 0s, left 0s;
+}
+/* .gridInner:hover::before {
+  opacity: 1;
+} */
+.gridElement .paraMedium {
+  pointer-events: none;
+  z-index: 3;
+}
+.gridElement svg {
+  font-size: 2.25rem;
+  color: var(--sec_color);
+}

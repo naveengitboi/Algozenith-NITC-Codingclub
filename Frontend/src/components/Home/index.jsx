@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import './index.css'
 import Counter from '../../elements/Counter';
 import JobsHome from '../homeElements/JobsHome';
+import GridEffect from '../homeElements/GridEffect';
 
 const counterData = [
     {
@@ -47,6 +48,10 @@ export default function Home() {
             <div className='gradMidLine'></div> 
 
             <JobsHome/>
+
+            <div className="grid">
+                <GridEffect/>
+            </div>
             
         </div>
     );

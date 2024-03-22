@@ -6,9 +6,9 @@ import JobCard from "../../elements/JobCard";
 
 export const jobsPosts = [
   {
-    companyName: "Accenture",
-    batches: "B-23,24,25",
-    jobRole: "Associate Software Developer",
+    companyName: "Associate",
+    batches: "B-23,24,25 and before",
+    jobRole: "Associate Web Developer",
     location: "OnSite",
     pay: "Rs 25000/-",
     type: "internship",
@@ -17,7 +17,7 @@ export const jobsPosts = [
   },
   {
     companyName: "Accenture",
-    batches: "B-23,24,25",
+    batches: "B-23,24 ",
     jobRole: "SDE 1",
     location: "OnSite",
     pay: "Rs 25000/-",
