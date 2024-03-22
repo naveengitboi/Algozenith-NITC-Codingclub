@@ -44,7 +44,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='gradMidLine'></div>
+            <div className='gradMidLine'></div> 
 
             <JobsHome/>
             

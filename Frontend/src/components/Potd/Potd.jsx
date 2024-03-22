@@ -12,6 +12,7 @@ import lcdark from "../Pics/lcdark.png";
 import lclight from "../Pics/lclight.png";
 import gfgdark from "../Pics/gfgdark.png";
 import gfglight from "../Pics/gfglight.png";
+import "../Potd/potd.css";
 
 function Potd() {
   const [lcdata, setLcData] = useState([]);
@@ -88,7 +89,7 @@ function Potd() {
   };
 
   return (
-    <div>
+    <div className="pagePadding ">
       <div className="flex flex-col items-center mt-5">
         <div className="w-3/4 flex justify-between">
           <h1 className="text-[#003f7e] font-bold text-2xl">
@@ -100,18 +101,18 @@ function Potd() {
               onClick={() => {
                 setopenfilter(!openfilter);
               }}
-              className="cursor-pointer rounded-full px-2 py-2 border border-[#003f7e]"
+              className="filtericon cursor-pointer rounded-full px-2 py-2 border border-[#003f7e]"
             />
             <div className="flex justify-end">
               {openfilter && (
-                <div className="absolute z-10 w-52 h-36 flex flex-col justify-center bg-slate-100 rounded-xl">
+                <div className="absolute z-10 w-52 h-36 flex flex-col justify-center bg-slate-100 rounded-xl ">
                   <div className="flex mx-2 justify-between">
                     <h1 className="text-[#2167ac] font-bold">
                       Choose by Month
                     </h1>
                     <FontAwesomeIcon
                       icon={faXmark}
-                      className="h-6 text-[#2167ac] hover:text-black cursor-pointer"
+                      className="text-[#2167ac] hover:text-black cursor-pointer h-6 xmark"
                       onClick={() => {
                         setopenfilter(!openfilter);
                       }}
@@ -120,13 +121,13 @@ function Potd() {
                   <div className="mt-2 items-center ml-2 mr-2 grid gap-2 grid-cols-4 ">
                     <div
                       onClick={() => setmonth("Jan")}
-                      className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
+                      className=" text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                     >
                       Jan
                     </div>
                     <div
                       onClick={() => setmonth("Feb")}
-                      className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
+                      className=" text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                     >
                       Feb
                     </div>
@@ -205,7 +206,7 @@ function Potd() {
           {monthdata.map((data, index) => (
             <ReactCardFlip
               key={index}
-              flipDirection="horizontal"
+              flipDirection="vertical"
               isFlipped={index === flippedIndex}
             >
               <div
@@ -213,7 +214,7 @@ function Potd() {
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
                 onClick={() => handleCardClick(index)}
-                className="h-36 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+                className="h-36 card shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
               >
                 <div className="flex flex-col items-center ml-2 mt-4">
                   <h1
@@ -244,7 +245,7 @@ function Potd() {
                   handleMouseLeave();
                   handleCardClick(index);
                 }}
-                className="h-36 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+                className="h-36 card shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
               >
                 <div className="p-2 text-sm font-semibold flex flex-col space-y-2 text-white">
                   <a className="flex" href={data.question}>

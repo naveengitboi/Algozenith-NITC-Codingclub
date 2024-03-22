@@ -22,30 +22,52 @@ app.post("/admin", async (req, res) => {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    await leetcode.create({
-      date: date,
-      question: formdata.question,
-      quesname: formdata.quesname,
-      concept: formdata.concept,
-      companies: formdata.companies,
-      level: formdata.level,
-      solution: formdata.solution,
-    });
-    res.json("Posted");
+    leetcode.findOne({date:date})
+    .then(found => {
+      if(found){
+        res.json("Question already exists");
+      }
+      else
+      {
+         leetcode.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
+      }
+    })
+    .catch((err)=>res.json("Error")) 
   } else if (formType === "gfg") {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    await gfg.create({
-      date: date,
-      question: formdata.question,
-      quesname: formdata.quesname,
-      concept: formdata.concept,
-      companies: formdata.companies,
-      level: formdata.level,
-      solution: formdata.solution,
-    });
-    res.json("Postedh");
+    gfg.findOne({date:date})
+    .then(found => {
+      if(found){
+        res.json("Question already exists");
+      }
+      else
+      {
+         gfg.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
+      }
+    })
+    .catch((err)=>res.json("Error"))
   } else if (formType === "oppo") {
     await oppo.create({
       companyname: formdata.companyname,

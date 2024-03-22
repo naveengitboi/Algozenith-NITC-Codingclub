@@ -6,7 +6,9 @@ function Navbar() {
     <div className='navbarContainer'>
         <nav className='navbar commonPadding'>
         <div className="logo">
+          <NavLink to='/'>
             <img src="/images/logo.png" alt="AZ logo" />
+          </NavLink>
         </div>
         <ul className='navLinks'>
             <li><NavLink to='/'>Home</NavLink></li>

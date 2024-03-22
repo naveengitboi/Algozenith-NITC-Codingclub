@@ -8,7 +8,7 @@ export const jobsPosts = [
   {
     companyName: "Accenture",
     batches: "B-23,24,25",
-    jobRole: "SDE 1",
+    jobRole: "Associate Software Developer",
     location: "OnSite",
     pay: "Rs 25000/-",
     type: "internship",
