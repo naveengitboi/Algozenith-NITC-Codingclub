@@ -1,0 +1,116 @@
+.titles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleSvg {
+  border: 1px solid var(--pri_light_tone);
+  --size: 50px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleSvg svg {
+  font-size: 1.25rem;
+  color: var(--pri_dark_tone);
+  transition: all 0.25s ease;
+}
+.titleSvg:hover svg {
+  transform: scale(1.15);
+  cursor: pointer;
+}
+.jobsCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 1rem 0.25rem;
+}
+.jobCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+}
+
+.jobInfoContainer {
+  width: 100%;
+  padding: 0.5rem 0;
+  background-image: linear-gradient(135deg, #0077c0, #7c7fff);
+  border-radius: 0.25rem;
+  color: var(--white_color);
+}
+.typeAndFrom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--pri_dark_tone);
+  --bradius: 2rem;
+}
+.type {
+  background-color: var(--white_color);
+}
+.typeAndFrom .paraMedium {
+  border-radius: 0 var(--bradius) var(--bradius) 0;
+  padding: 0.5rem 1.65rem;
+}
+.typeAndFrom .svg {
+  border-radius: var(--bradius) 0 0 var(--bradius);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.typeAndFrom .svg svg {
+  font-size: 1.5rem;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.55rem;
+}
+.details .thickFont {
+  font-size: var(--medium_lsize);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.batcheAndRole,
+.locationAndPay {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.locationAndPay .paraSmall {
+  background-color: var(--white_color);
+  color: var(--pri_dark_tone);
+  font-weight: 500;
+  padding: 0.5rem 1.85rem;
+  border-radius: 0.25rem;
+}
+.jobAction {
+  margin-top: 0.5rem;
+  width: 100%;
+  background-color: var(--pri_dark_tone);
+  color: var(--white_color);
+  padding: 0.75rem 2.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* home routes */
+.jobsHome {
+  margin: var(--top_gap) 0;
+}
+.jobsHomesCards {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
