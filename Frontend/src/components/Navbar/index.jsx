@@ -1,7 +1,12 @@
 import React from 'react'
 import './index.css'
 import { NavLink } from 'react-router-dom'
+
+
+
 function Navbar() {
+ 
+
   return (
     <div className='navbarContainer'>
         <nav className='navbar commonPadding'>

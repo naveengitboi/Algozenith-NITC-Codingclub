@@ -124,3 +124,20 @@ body {
   padding-top: 5rem;
   min-height: 100vh;
 }
+.gapBwSections {
+  margin: 20vh 0;
+}
+
+.cursor {
+  --size: 20px;
+  position: fixed;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--sec_color);
+  z-index: 3000;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: all 0.05s ease;
+  
+}

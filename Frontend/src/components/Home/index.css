@@ -1,7 +1,8 @@
 .homeHeroContainer {
   display: flex;
   align-items: center;
-  padding: 1.85rem 0;
+  margin: 0;
+  height: 100vh;
 }
 
 .heroDetails,
@@ -49,13 +50,11 @@
 }
 
 .heroImg img {
-  max-width: 150%;
-  transform: rotate(-30deg) translateY(-150px);
-  left: 0;
-  top: 0;
+  max-width: 145%;
+  transform: rotate(-30deg) translateY(-15%);
 }
 
-.grid {
+.gridLinesEffect {
   background-image: linear-gradient(rgb(255, 255, 255), rgb(246, 246, 246));
   background-size: cover;
   background-repeat: no-repeat;
