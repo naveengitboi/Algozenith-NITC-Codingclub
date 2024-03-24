@@ -5,11 +5,14 @@ const oppo = require("./Data/Opportunities");
 const editorial = require("./Data/Editorials");
 const leetcode = require("./Data/Leetcode");
 const gfg = require("./Data/Gfg");
+const upcontest = require("./Data/Upcontest");
 const UserModel = require("./Data/Login")
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const nodemailer = require('nodemailer');
+
+
 
 const app = express();
 app.use(express.json());
@@ -61,12 +64,12 @@ app.post('/login', (req, res) => {
       UserModel.findOne({ email, password })
       .then(function (user) {
           if (user) {
-              const accessToken = jwt.sign({email: email}, "jwt-access-token-secret-key", {expiresIn: '5m'});
-              const refreshToken = jwt.sign({email: email}, "jwt-refresh-token-secret-key", {expiresIn: '60m'});
+              const accessToken = jwt.sign({email: email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
+              const refreshToken = jwt.sign({email: email}, "jwt-refresh-token-secret-key", {expiresIn: '30m'});
 
-              res.cookie('accessToken', accessToken, {maxAge: 300000})
+              res.cookie('accessToken', accessToken, {maxAge: 60000})
 
-              res.cookie('refreshToken' , refreshToken, {maxAge:3600000 , httpOnly: true , secure: true , sameSite:'strict'})
+              res.cookie('refreshToken' , refreshToken, {maxAge:1800000 , httpOnly: true , secure: true , sameSite:'strict'})
               res.json({ message: 'Valid user' });
           } else {
               res.json({ message: 'Invalid user' });
@@ -123,8 +126,8 @@ const renewToken = (req , res) => {
       if(err){
         return res.json({valid :false, message: "Invalid Refresh Token"})
       }else{
-        const accessToken = jwt.sign({email: decoded.email}, "jwt-access-token-secret-key", {expiresIn: '5m'});
-        res.cookie('accessToken', accessToken, {maxAge: 300000})
+        const accessToken = jwt.sign({email: decoded.email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
+        res.cookie('accessToken', accessToken, {maxAge: 60000})
         exist = true;
       }
     })
@@ -135,36 +138,59 @@ const renewToken = (req , res) => {
 app.get("/admin" ,verfyUser, (req, res) => {
   return res.json({valid: true, message: "autorized"})
 })
+
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
   if (formType === "leetcode") {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    await leetcode.create({
-      date: date,
-      question: formdata.question,
-      quesname: formdata.quesname,
-      concept: formdata.concept,
-      companies: formdata.companies,
-      level: formdata.level,
-      solution: formdata.solution,
-    });
-    res.json("Posted");
+    leetcode.findOne({date:date})
+    .then(found => {
+      if(found){
+        res.json("Question already exists");
+      }
+      else
+      {
+         leetcode.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
+      }
+    })
+    .catch((err)=>res.json("Error")) 
   } else if (formType === "gfg") {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    await gfg.create({
-      date: date,
-      question: formdata.question,
-      quesname: formdata.quesname,
-      concept: formdata.concept,
-      companies: formdata.companies,
-      level: formdata.level,
-      solution: formdata.solution,
-    });
-    res.json("Postedh");
+    gfg.findOne({date:date})
+    .then(found => {
+      if(found){
+        res.json("Question already exists");
+      }
+      else
+      {
+         gfg.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
+      }
+    })
+    .catch((err)=>res.json("Error"))
   } else if (formType === "oppo") {
     await oppo.create({
       companyname: formdata.companyname,
@@ -180,12 +206,20 @@ app.post("/admin", async (req, res) => {
   } else if (formType === "editorials") {
     await editorial.create({
       platformname: formdata.platformname,
-      constestnumber: formdata.constestnumber,
+      contestnumber: formdata.contestnumber,
       date: formdata.date,
       contestlink: formdata.contestlink,
       solutionlink: formdata.solutionlink,
     });
     res.json("editorial posted");
+  }else if(formType === "upcontest"){
+    await upcontest.create({
+      upplatform: formdata.upplatform,
+      contesttype: formdata.contesttype,
+      update: formdata.update,
+      uplink: formdata.uplink,  
+    });
+    res.json("upcontest posted");
   } else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });
@@ -253,6 +287,16 @@ app.get("/editorials", async (req, res) => {
   try {
     const editdata = await editorial.find();
     res.json(editdata);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/upcontest", async (req, res) => {
+  try {
+    const upcontestdata = await upcontest.find();
+    res.json(upcontestdata);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
