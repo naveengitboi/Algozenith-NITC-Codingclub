@@ -96,7 +96,9 @@ function LinkItem({ talk }) {
             },
           }}
           transition={{ duration: 1, type: "spring" }}
-          onMouseEnter={() => dispatch(addViewTalk())} onMouseLeave={() => dispatch(removeViewTalk())} 
+          onMouseEnter={() => dispatch(addViewTalk())} 
+          onMouseLeave={() => dispatch(removeViewTalk())} 
+          onClick={() => dispatch(removeViewTalk())}
         />
 
         <motion.div
