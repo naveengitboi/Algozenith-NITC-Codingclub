@@ -18,18 +18,26 @@ import PlacementTalks from "./components/PlacementTalks/";
 
 import { store } from "./Redux/Store.js";
 import { Provider } from "react-redux";
+import Mission from "./components/homeElements/Mission.jsx";
+import Vission from "./components/homeElements/Vission.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home />} >
+         <Route index element={<Mission/>} />
+         <Route path="mission" element={<Mission/>} />
+         <Route path="vission" element={<Vission/>} />
+      </Route>
       <Route path="home" element={<Home />} />
       <Route path="/opportunities" element={<JobPosts />} />
       <Route path="/placementtalks" element={<PlacementTalks />} />
       <Route path="/potd" element={<Potd />} />
       <Route path="/editorials" element={<Editorials />} />
       {/* <Route path='/members' element={<Members/>}/> */}
-      <Route path="/about" element={<About />} />
+      <Route path="/about" element={<About />} >
+       
+      </Route>
       <Route path="*" element={<div>Not Found</div>} />
     </Route>
   )

@@ -6,6 +6,7 @@ import JobsHome from "../homeElements/JobsHome";
 import GridEffect from "../homeElements/GridEffect";
 import NumberAnimator from "../../customHooks/NumberAnimator";
 import InfiniteScroller from "../../elements/InfiniteScroller";
+import MVision from "../homeElements/MVision";
 // import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
 
 const counterData = [
@@ -52,7 +53,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="gradMidLine"></div>
+      {/* <div className="gradMidLine"></div> */}
+
+      <div className="gapBwSections">
+          <MVision/>
+      </div>
 
       <div className="jobsHomePageContainer gapBwSections">
         <JobsHome />
