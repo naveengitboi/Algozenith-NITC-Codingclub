@@ -53,7 +53,7 @@ export default function Home() {
             
            
 
-            <div className="grid gapBwSections">
+            <div className="gridLinesEffect gapBwSections">
                 <GridEffect/>
             </div>
 
