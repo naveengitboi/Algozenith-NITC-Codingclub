@@ -1,0 +1,169 @@
+.aboutTopContainer {
+  margin-top: 4rem;
+}
+
+.aboutHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutHeader .gradOneSidePurpleLine {
+  width: 80%;
+  margin-left: 1rem;
+}
+.goalsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 1rem 0 2rem;
+  align-content: center;
+}
+
+.goal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-align: center;
+  line-height: 1.1;
+}
+.goalImg {
+  overflow: hidden;
+  width: 70%;
+  margin: 0.5rem 0 1.5rem;
+}
+.goal .goalImg img {
+  min-width: 110%;
+}
+.goalInfo .paraMedium {
+  font-weight: 600;
+  color: var(--pri_light_tone);
+}
+
+.goalInfo .smallLSize {
+  color: var(--pri_dark_tone);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.aimsfor .paraSmall {
+  color: var(--pri_dark_tone);
+  text-align: center;
+}
+
+.aimsfor .paraSmall span {
+  font-weight: bold;
+  color: var(--pri_light_tone);
+}
+
+.clubMem .guides {
+  margin: 2rem 0;
+}
+
+.guides .aboutHeader {
+  margin: 1rem 0;
+}
+.imagesInner {
+  display: flex;
+}
+.imagesOuter {
+  overflow-x: hidden;
+  cursor: grab;
+}
+.memContainer {
+  margin: 0 0.85rem;
+}
+.imageContainer {
+  min-width: 350px;
+}
+.imageContainer img {
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.personProf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  color: var(--pri_dark_tone);
+}
+.personProf .tinySize {
+  font-family: var(--primary_font);
+  font-weight: 600;
+}
+.batchDet {
+  display: flex;
+  align-items: center;
+}
+.personProf .batchDet span {
+  --size: 6px;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--sec_color);
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
+.roleDet span {
+  color: var(--sec_color);
+}
+
+.clubPillars .imageContainer {
+  min-width: 250px;
+}
+
+.joinUsPage {
+  margin: 3rem 0 5rem;
+}
+.action {
+  --bradius: 0.85rem;
+  color: var(--white_color);
+  padding: 2rem 0;
+}
+.application {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--pri_dark_tone);
+  padding: 0.95rem 1.5rem;
+  border-radius: var(--bradius) var(--bradius) 0 0;
+}
+
+.application svg {
+  font-size: 1.45rem;
+}
+
+.contributeText {
+  background-color: var(--pri_dark_tone);
+  padding: 2.85rem;
+  border-radius: 0 var(--bradius) var(--bradius);
+}
+
+.actionsDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionsDiv button {
+  display: flex;
+  align-items: center;
+  font-size: var(--para_small_size);
+  background-color: var(--white_color);
+  color: var(--pri_dark_tone);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  font-family: var(--primary_font);
+  border-radius: 0.25rem;
+}
+
+.actionsDiv button svg {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}

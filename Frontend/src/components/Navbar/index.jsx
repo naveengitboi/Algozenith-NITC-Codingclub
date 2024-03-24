@@ -1,12 +1,19 @@
 import React from 'react'
 import './index.css'
 import { NavLink } from 'react-router-dom'
+
+
+
 function Navbar() {
+ 
+
   return (
     <div className='navbarContainer'>
         <nav className='navbar commonPadding'>
         <div className="logo">
+          <NavLink to='/'>
             <img src="/images/logo.png" alt="AZ logo" />
+          </NavLink>
         </div>
         <ul className='navLinks'>
             <li><NavLink to='/'>Home</NavLink></li>

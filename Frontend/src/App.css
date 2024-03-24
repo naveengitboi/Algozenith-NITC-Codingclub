@@ -18,6 +18,7 @@
   --pri_light_tone: #0077c0;
   --sec_color: #7c7fff;
   --white_color: #fafafa;
+  --bg: white;
 
   /* font sizes */
   /* large sizes */
@@ -75,7 +76,9 @@
   background-image: linear-gradient(
     to right,
     rgba(124, 126, 255, 0),
+    rgba(124, 126, 255, 0),
     #7c7fff,
+    rgba(124, 126, 255, 0),
     rgba(124, 126, 255, 0)
   );
   background-size: cover;
@@ -84,7 +87,10 @@
 
 .gradOneSidePurpleLine {
   height: 2px;
-  background-image: linear-gradient(#7c7fff, #7c7eff00);
+  width: 100%;
+  background-image: linear-gradient(to right, #7c7fff, rgba(124, 126, 255, 0));
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .gradCompleteLine {
   height: 2px;
@@ -117,4 +123,21 @@ body {
 .pagePadding {
   padding-top: 5rem;
   min-height: 100vh;
+}
+.gapBwSections {
+  margin: 20vh 0;
+}
+
+.cursor {
+  --size: 20px;
+  position: fixed;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--sec_color);
+  z-index: 3000;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: all 0.05s ease;
+  
 }
