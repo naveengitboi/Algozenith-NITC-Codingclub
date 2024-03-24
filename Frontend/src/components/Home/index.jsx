@@ -5,6 +5,7 @@ import Counter from "../../elements/Counter";
 import JobsHome from "../homeElements/JobsHome";
 import GridEffect from "../homeElements/GridEffect";
 import NumberAnimator from "../../customHooks/NumberAnimator";
+import InfiniteScroller from "../../elements/InfiniteScroller";
 // import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
 
 const counterData = [
@@ -65,7 +66,9 @@ export default function Home() {
         <img src="/images/algohero.png" alt="code classic" />
       </div>
 
-      <div className="resourcesPage"></div>
+      <div className="resourcesPage gapBwSections">
+          <InfiniteScroller/>
+      </div>
     </div>
   );
 }
