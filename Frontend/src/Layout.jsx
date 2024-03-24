@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { motion, useMotionValue } from "framer-motion";
-import viewTalk from './assets/hoverimg/viewTalk.svg'
+import readTalk from './assets/hoverimg/readTalk.svg'
 import {  useSelector } from "react-redux";
-
+import dragImg from './assets/hoverimg/drag.svg'
 
 const cursorVarient = {
 
@@ -17,8 +17,14 @@ const cursorVarient = {
     viewTalkImg:{
       width:80,
       height:80,
-      backgroundImage:`url(${viewTalk})`,
+      backgroundImage:`url(${readTalk})`,
       backgroundSize:`cover`,
+    },
+    draggerImage:{
+      width:80,
+      height:80,
+      backgroundImage:`url(${dragImg})`,
+      backgroundSize:`cover`
     }
   }
 

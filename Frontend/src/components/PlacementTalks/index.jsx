@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
 import "./index.css";
 import { motion } from "framer-motion";
-import {useSelector, useDispatch} from 'react-redux'
-import { addViewTalk, removeViewTalk } from '../../Redux/ImageHoverSlicer'
+import { useDispatch} from 'react-redux'
+import { withCursor, removeCursorChange } from '../../Redux/ImageHoverSlicer'
 
 const placementTalksData = [
   {
@@ -96,11 +96,11 @@ function LinkItem({ talk }) {
             },
           }}
           transition={{ duration: 1, type: "spring" }}
-          onMouseEnter={() => dispatch(addViewTalk())} 
-          onMouseLeave={() => dispatch(removeViewTalk())} 
-          onClick={() => dispatch(removeViewTalk())}
+          onMouseEnter={() => dispatch(withCursor('viewTalk'))} 
+          onMouseLeave={() => dispatch(removeCursorChange())} 
+          onClick={() => dispatch(removeCursorChange())}
         />
-
+ 
         <motion.div
           variants={{
             initial: {

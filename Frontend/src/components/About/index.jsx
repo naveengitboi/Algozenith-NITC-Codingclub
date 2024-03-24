@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
+import {useDispatch} from 'react-redux'
+import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
+
 const goalsData = [
   {
     goalImg: "/images/goals/ideas.png",
@@ -91,7 +94,12 @@ const clubPillars = [
     },
 ]
 
+
+
 function About() {
+
+    const dispatch = useDispatch();
+
     const [dragWidth, setDragWidth] = useState(0)
     const [clubPillarDrag, setClubPillarDrag] = useState(0)
     const clubGuidesRef = useRef()
@@ -148,10 +156,15 @@ function About() {
             <div className="gradOneSidePurpleLine"></div>
           </div>
 
-          <motion.div ref={clubGuidesRef} className="imagesOuter">
+          <motion.div ref={clubGuidesRef} className="imagesOuter"
+           
+          >
             <motion.div drag='x'  
                 dragConstraints={{left:-dragWidth, right:0}}
-            className="imagesInner">
+            className="imagesInner"
+             onMouseEnter={() => {dispatch(withCursor('drag'))}}
+             onMouseLeave={() => {dispatch(removeCursorChange())}}
+            >
                 {
                     clubGuides.map((mem, idx) => {
                         return(
@@ -179,7 +192,9 @@ function About() {
             <div className="gradOneSidePurpleLine"></div>
           </div>
 
-          <motion.div ref={clubPillarsRef} className="imagesOuter">
+          <motion.div ref={clubPillarsRef} className="imagesOuter"
+              
+          >
             <motion.div drag='x'  
                  dragConstraints={{left:-clubPillarDrag, right:0}}
             className="imagesInner">
