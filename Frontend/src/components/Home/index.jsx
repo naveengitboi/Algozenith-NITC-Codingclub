@@ -47,11 +47,27 @@ export default function Home() {
 
             <div className='gradMidLine'></div>
 
-            <JobsHome/>
+            <div className="jobsHomePageContainer gapBwSections">
+                <JobsHome/>
+            </div>
+            
+           
 
-            <div className="grid">
+            <div className="grid gapBwSections">
                 <GridEffect/>
             </div>
+
+             <div className="algoHeroImg gapBwSections">
+                <img src="/images/algohero.png" alt="code classic" />
+            </div>
+
+            <div className="resourcesPage">
+                
+            </div>
+
+
+
+            
             
         </div>
     );

@@ -1,0 +1,42 @@
+.talkItem {
+  margin: 0.5rem 0;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.storyLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  color: gray;
+  transition: all 0.25s ease;
+  overflow-x: hidden;
+}
+.storyLink:hover {
+  color: var(--pri_dark_tone);
+}
+.storyDetails {
+  line-height: 1;
+}
+.storyDetails .thickFont {
+  font-family: var(--secondary_font);
+  font-weight: 600;
+}
+.storyDetails .thickFont span {
+  display: inline-block;
+}
+.storyLink:hover .storyDetails .paraMedium {
+  color: var(--pri_light_tone);
+}
+
+.storyImg {
+  width: 30%;
+  position: absolute;
+  top: 00%;
+  left: 50%;
+}
+
+.storyArrow svg {
+  font-size: 2.8rem;
+}
