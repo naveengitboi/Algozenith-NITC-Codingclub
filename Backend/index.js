@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const potd = require("./Data/Potd");
 const oppo = require("./Data/Opportunities");
 const editorial = require("./Data/Editorials");
+const leetcode = require("./Data/Leetcode");
+const gfg = require("./Data/Gfg");
+const upcontest = require("./Data/Upcontest");
 const cors = require("cors");
 
 const app = express();
@@ -14,59 +17,58 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
 
-
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
-  if (formType === "potd") {
-    if (formdata.name === "leetcode") {
-      var lc = formdata;
-    }
-    if (formdata.name === "gfg") {
-      var gfg = formdata;
-    }
+  if (formType === "leetcode") {
     const datenow = new Date();
-    const date = datenow.toDateString();
-    const result = await potd.findOne({ date: date });
-    if (result) {
-      const v = Object.entries(result);
-      const f = Object.entries(v[2][1]);
-      console.log(f.length);
-      if (f.length == 5) {
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    leetcode.findOne({date:date})
+    .then(found => {
+      if(found){
         res.json("Question already exists");
-        return;
       }
-      if (f[2][0] == "leetcode") {
-        try {
-          await potd.updateOne(
-            { date: date },
-            { $set: { geeksforgeeks: gfg } }
-          );
-          res.json("Posted");
-          console.log("gfgposted");
-        } catch (err) {
-          console.log(err);
-          res
-            .status(500)
-            .json({ message: "Error updating geeksforgeeks data" });
-          return;
-        }
-      } else if (f[2][0] == "geeksforgeeks") {
-        try {
-          await potd.updateOne({ date: date }, { $set: { leetcode: lc } });
-          res.json("Posted");
-          console.log("lcposted");
-        } catch (err) {
-          console.log(err);
-          res
-            .status(500)
-            .json({ message: "Error updating geeksforgeeks data" });
-          return;
-        }
+      else
+      {
+         leetcode.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
       }
-    } else {
-      await potd.create({ date: date, geeksforgeeks: gfg, leetcode: lc });
-      res.json("Posted");
-    }
+    })
+    .catch((err)=>res.json("Error")) 
+  } else if (formType === "gfg") {
+    const datenow = new Date();
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    gfg.findOne({date:date})
+    .then(found => {
+      if(found){
+        res.json("Question already exists");
+      }
+      else
+      {
+         gfg.create({
+          date: date,
+          question: formdata.question,
+          quesname: formdata.quesname,
+          concept: formdata.concept,
+          companies: formdata.companies,
+          level: formdata.level,
+          solution: formdata.solution,
+        })
+        .then(()=>res.json("Posted"))
+        .catch((err)=>res.json("Error"));
+      }
+    })
+    .catch((err)=>res.json("Error"))
   } else if (formType === "oppo") {
     await oppo.create({
       companyname: formdata.companyname,
@@ -82,12 +84,20 @@ app.post("/admin", async (req, res) => {
   } else if (formType === "editorials") {
     await editorial.create({
       platformname: formdata.platformname,
-      constestnumber: formdata.constestnumber,
+      contestnumber: formdata.contestnumber,
       date: formdata.date,
       contestlink: formdata.contestlink,
       solutionlink: formdata.solutionlink,
     });
     res.json("editorial posted");
+  }else if(formType === "upcontest"){
+    await upcontest.create({
+      upplatform: formdata.upplatform,
+      contesttype: formdata.contesttype,
+      update: formdata.update,
+      uplink: formdata.uplink,  
+    });
+    res.json("upcontest posted");
   } else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });
@@ -121,9 +131,19 @@ app.delete("/admin", async (req, res) => {
   }
 });
 
-app.get("/potd", async (req, res) => {
+app.get("/gfg", async (req, res) => {
   try {
-    const result = await potd.find();
+    const result = await gfg.find();
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/leetcode", async (req, res) => {
+  try {
+    const result = await leetcode.find();
     res.json(result);
   } catch (err) {
     console.error(err);
@@ -145,6 +165,16 @@ app.get("/editorials", async (req, res) => {
   try {
     const editdata = await editorial.find();
     res.json(editdata);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/upcontest", async (req, res) => {
+  try {
+    const upcontestdata = await upcontest.find();
+    res.json(upcontestdata);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });

@@ -29,11 +29,11 @@ function App() {
       level,
       solution,
     };
-
+    const typed = name === "leetcode" ? "leetcode" : "gfg";
     axios
       .post(url + "/admin", {
         formdata: potd_details,
-        formType: "potd",
+        formType: typed,
       })
       .then((result) => {
         if (result.data === "Posted") {
@@ -105,7 +105,7 @@ function App() {
   };
 
   const [platformname, setplatformname] = useState();
-  const [constestnumber, setcontestnumber] = useState();
+  const [contestnumber, setcontestnumber] = useState();
   const [date, setdate] = useState();
   const [contestlink, setcontestlink] = useState();
   const [solutionlink, setsolutionlink] = useState();
@@ -117,7 +117,7 @@ function App() {
 
     const editorials = {
       platformname,
-      constestnumber,
+      contestnumber,
       date,
       contestlink,
       solutionlink,
@@ -143,6 +143,30 @@ function App() {
     }, 1500);
 
     return () => clearTimeout(timer);
+  };
+
+  const [upplatform, setupplatform] = useState();
+  const [contesttype, setcontesttype] = useState();
+  const [update, setupdate] = useState();
+  const [uplink, setuplink] = useState();
+  const upcomingsubmit = (e) => {
+    e.preventDefault();
+
+    const upcontest = {
+      upplatform,
+      contesttype,
+      update,
+      uplink,
+    };
+
+    axios
+      .post(url + "/admin", { formdata: upcontest, formType: "upcontest" })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const deletepotd = (e) => {
@@ -392,6 +416,46 @@ function App() {
             </div>
           </form>
           {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>}
+        </div>
+
+        <div className="w-64 bg-slate-200 ml-5">
+          <h1 className="ml-8 font-bold mt-2">Upcoming Contests</h1>
+          <form className="space-y-4 space-x-8 py-2" onSubmit={upcomingsubmit}>
+            <input
+              type="text"
+              placeholder="Platform Name"
+              className="ml-8 outline-none"
+              onChange={(e) => setupplatform(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Contest type or number"
+              onChange={(e) => setcontesttype(e.target.value)}
+              className="outline-none"
+            />
+            <input type="date" onChange={(e) => setupdate(e.target.value)} />
+            <input
+              type="url"
+              placeholder="Contest Link"
+              onChange={(e) => setuplink(e.target.value)}
+              className="outline-none"
+            />
+            <div className="flex space-x-5">
+              <button
+                type="submit"
+                className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+              >
+                Submit
+              </button>
+              <button
+                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                onClick={deleteeditorial}
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+          {/* {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>} */}
         </div>
       </div>
     </div>
