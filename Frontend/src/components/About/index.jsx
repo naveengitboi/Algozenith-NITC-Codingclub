@@ -197,7 +197,10 @@ function About() {
           >
             <motion.div drag='x'  
                  dragConstraints={{left:-clubPillarDrag, right:0}}
-            className="imagesInner">
+            className="imagesInner"
+             onMouseEnter={() => {dispatch(withCursor('drag'))}}
+             onMouseLeave={() => {dispatch(removeCursorChange())}}
+            >
                 {
                     clubPillars.map((mem, idx) => {
                         return(
