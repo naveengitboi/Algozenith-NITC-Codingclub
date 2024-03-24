@@ -5,6 +5,7 @@ const oppo = require("./Data/Opportunities");
 const editorial = require("./Data/Editorials");
 const leetcode = require("./Data/Leetcode");
 const gfg = require("./Data/Gfg");
+const upcontest = require("./Data/Upcontest");
 const cors = require("cors");
 
 const app = express();
@@ -83,12 +84,20 @@ app.post("/admin", async (req, res) => {
   } else if (formType === "editorials") {
     await editorial.create({
       platformname: formdata.platformname,
-      constestnumber: formdata.constestnumber,
+      contestnumber: formdata.contestnumber,
       date: formdata.date,
       contestlink: formdata.contestlink,
       solutionlink: formdata.solutionlink,
     });
     res.json("editorial posted");
+  }else if(formType === "upcontest"){
+    await upcontest.create({
+      upplatform: formdata.upplatform,
+      contesttype: formdata.contesttype,
+      update: formdata.update,
+      uplink: formdata.uplink,  
+    });
+    res.json("upcontest posted");
   } else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });
@@ -156,6 +165,16 @@ app.get("/editorials", async (req, res) => {
   try {
     const editdata = await editorial.find();
     res.json(editdata);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/upcontest", async (req, res) => {
+  try {
+    const upcontestdata = await upcontest.find();
+    res.json(upcontestdata);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
