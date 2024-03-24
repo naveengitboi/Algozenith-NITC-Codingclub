@@ -125,7 +125,11 @@ function LinkItem({ talk }) {
 function PlacementTalks() {
   return (
     <div className="pagePadding commonPadding">
-      <div className="linksContainer">
+      <div className="linksContainer gapBwSections">
+          <div className="aboutHeader">
+          <h1 className="paraLarge">Inspirations</h1>
+          <div className="gradOneSidePurpleLine"></div>
+        </div>
         {placementTalksData.map((item, idx) => {
           return (
             <div className="talkItem" key={idx}>

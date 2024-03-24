@@ -1,3 +1,7 @@
+.aboutTopContainer {
+  margin-top: 4rem;
+}
+
 .aboutHeader {
   display: flex;
   justify-content: center;
@@ -54,9 +58,6 @@
   color: var(--pri_light_tone);
 }
 
-.clubMem {
-  margin: 4rem 0;
-}
 .clubMem .guides {
   margin: 2rem 0;
 }
