@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const potd = require("./Data/Potd");
-const oppo = require("./Data/Opportunities");
-const editorial = require("./Data/Editorials");
-const leetcode = require("./Data/Leetcode");
-const gfg = require("./Data/Gfg");
-const upcontest = require("./Data/Upcontest");
+const potd = require("./models/potd.model");
+const oppo = require("./models/opportunities.model");
+const editorial = require("./models/editorials.model");
+const leetcode = require("./models/leetcode.model");
+const gfg = require("./models/gfg.model");
+const upcontest = require("./models/upcontests.model");
 const cors = require("cors");
 
 const app = express();

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 
 const gfg = new mongoose.Schema({
@@ -29,5 +29,5 @@ const primary = new mongoose.Schema({
 
 
 const potd = mongoose.model("potd",primary);  
-
-module.exports = potd;
+ 
+export default potd;

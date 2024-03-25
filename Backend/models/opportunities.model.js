@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const oppo = new mongoose.Schema({
+const opportunitiesSchema = new mongoose.Schema({
   companyname: { type: String },
   logo: { type: String },
   jobtype: { type: String },
@@ -11,6 +11,6 @@ const oppo = new mongoose.Schema({
   apply: { type: String },
 });
 
-const opportunities = mongoose.model("oppo", oppo);
+const opportunitiesModel = mongoose.model("Opportunitie", opportunitiesSchema);
 
-module.exports = opportunities;
+export default opportunitiesModel;

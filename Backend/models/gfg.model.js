@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const gf = new mongoose.Schema({
+const gfgSchema = new mongoose.Schema({
     date:{type:String},
     question:{type:String},
     quesname:{type:String},
@@ -11,6 +11,6 @@ const gf = new mongoose.Schema({
 })
 
 
-const gfg = mongoose.model("gfg",gf);  
+const gfgModel = mongoose.model("Gfg", gfgSchema);  
 
-module.exports = gfg;
+export default gfgModel;
