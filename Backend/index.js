@@ -18,10 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin:["http://localhost:5173"],
-  credentials:true
-}));
+app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");

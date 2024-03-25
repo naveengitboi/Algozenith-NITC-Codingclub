@@ -30,6 +30,8 @@ function Potd() {
   const [lcdata, setLcData] = useState([]);
   const [gfgdata, setgfgdata] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndexec, setHoveredIndexec] = useState(null);
+  const [hoveredIndexuc, setHoveredIndexuc] = useState(null);
   const [flippedIndex, setFlippedIndex] = useState(null);
   const [hoveredIndexgfg, setHoveredIndexgfg] = useState(null);
   const [flippedIndexgfg, setFlippedIndexgfg] = useState(null);
@@ -75,7 +77,6 @@ function Potd() {
       .get(url + "/upcontest")
       .then((res) => {
         setUCdata(res.data);
-        // console.log(UCdata[0].upplatform);
       })
       .catch((err) => console.error(err));
 
@@ -109,30 +110,6 @@ function Potd() {
     "December",
   ];
 
-  const handleMouseEnter = (index) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
-
-  const handleCardClick = (index) => {
-    setFlippedIndex(index === flippedIndex ? null : index);
-  };
-
-  const handleMouseEntergfg = (index) => {
-    setHoveredIndexgfg(index);
-  };
-
-  const handleMouseLeavegfg = () => {
-    setHoveredIndexgfg(null);
-  };
-
-  const handleCardClickgfg = (index) => {
-    setFlippedIndexgfg(index === flippedIndexgfg ? null : index);
-  };
-
   const Customprev = ({ onClick }) => (
     <div className="custom-arrow custom-prev-arrow" onClick={onClick}>
       <FontAwesomeIcon icon={faChevronLeft} />
@@ -151,43 +128,7 @@ function Potd() {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 2,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
-  var setting = {
-    swipeToSlide: true,
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
@@ -330,9 +271,7 @@ function Potd() {
       </div>
       <div className="flex flex-col items-center">
         <div className="w-3/4">
-          <h1 className="text-[#003f7e] font-bold text-xl mt-5">
-            LEETCODE
-          </h1>
+          <h1 className="text-[#003f7e] font-bold text-xl mt-5">LEETCODE</h1>
         </div>
       </div>
       <div className="flex flex-col items-center">
@@ -351,9 +290,11 @@ function Potd() {
               >
                 <div
                   key="front"
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={() => handleCardClick(index)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() =>
+                    setFlippedIndex(index === flippedIndex ? null : index)
+                  }
                   className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
                 >
                   <div className="flex flex-col items-center ml-2 mt-4">
@@ -382,8 +323,8 @@ function Potd() {
                 <div
                   key="back"
                   onMouseLeave={() => {
-                    handleMouseLeave();
-                    handleCardClick(index);
+                    setHoveredIndex(null);
+                    setFlippedIndex(index === flippedIndex ? null : index);
                   }}
                   className="h-40 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
                 >
@@ -439,7 +380,7 @@ function Potd() {
       <div className="flex flex-col items-end">
         <div className="w-1/4">
           <h1 className="text-[#003f7e] font-bold text-xl mt-10 ">
-          GEEKSFORGEEKS
+            GEEKSFORGEEKS
           </h1>
         </div>
       </div>
@@ -458,9 +399,11 @@ function Potd() {
               >
                 <div
                   key="front"
-                  onMouseEnter={() => handleMouseEntergfg(index)}
-                  onMouseLeave={handleMouseLeavegfg}
-                  onClick={() => handleCardClickgfg(index)}
+                  onMouseEnter={() => setHoveredIndexgfg(index)}
+                  onMouseLeave={() => setHoveredIndexgfg(null)}
+                  onClick={() =>
+                    setFlippedIndexgfg(index === flippedIndexgfg ? null : index)
+                  }
                   className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]"
                 >
                   <div className="flex flex-col items-center ml-2 mt-4">
@@ -493,8 +436,10 @@ function Potd() {
                 <div
                   key="back"
                   onMouseLeave={() => {
-                    handleMouseLeavegfg();
-                    handleCardClickgfg(index);
+                    setHoveredIndexgfg(null);
+                    setFlippedIndexgfg(
+                      index === flippedIndexgfg ? null : index
+                    );
                   }}
                   className="h-40 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
                 >
@@ -567,7 +512,7 @@ function Potd() {
       <div className="flex flex-col mx-20 items-center">
         <div className="w-11/12  mt-5 bg-white/10 mb-5">
           <Slider
-            {...setting}
+            {...settings}
             prevArrow={<Customprev />}
             nextArrow={<Customnext />}
           >
@@ -575,11 +520,35 @@ function Potd() {
               <ReactCardFlip key={index}>
                 <div
                   key={index}
-                  className="flex w-52 h-60 mx-4 shadow-xl rounded-2xl bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
+                  onMouseEnter={() => setHoveredIndexuc(index)}
+                  onMouseLeave={() => setHoveredIndexuc(null)}
+                  onClick={() => handleCardClick(index)}
+                  className="flex ucdata w-52 h-60 mx-4 shadow-xl rounded-2xl bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
                 >
-                  <div className="absolute ml-16 ">
-                    <img src={lcdark} className="h-44" />
-                  </div>
+                  {data.upplatform === "Leetcode" ||
+                  data.upplatform === "leetcode" ? (
+                    <div className="absolute ml-16 ">
+                      <img
+                        src={hoveredIndexuc === index ? lclight : lcdark}
+                        className="h-44"
+                      />
+                    </div>
+                  ) : data.upplatform === "Codeforces" ||
+                    data.upplatform === "codeforces" ? (
+                    <div className="absolute ml-16 mt-14 ">
+                      <img
+                        src={hoveredIndexuc === index ? cflight : cfdark}
+                        className="h-24"
+                      />
+                    </div>
+                  ) : (
+                    <div className="absolute ml-[75px] ">
+                      <img
+                        src={hoveredIndexuc === index ? cclight : ccdark}
+                        className="h-44"
+                      />
+                    </div>
+                  )}
                   <div className="absolute w-52 border-b h-16 rounded-xl bg-opacity-100 backdrop-filter backdrop-blur-sm">
                     <div className="flex mt-1 text-white justify-between mx-2">
                       <h1 className="font-extrabold text-2xl">
@@ -610,9 +579,13 @@ function Potd() {
                   </div>
                   <div className=" w-28">
                     <div className="flex mt-52">
-                      <h4 className="ml-8 text-white font-bold font-mono text-sm">
+                      <a
+                        href={data.uplink}
+                        target="_blank"
+                        className="ml-8 text-white font-bold font-mono text-sm"
+                      >
                         REGISTER
-                      </h4>
+                      </a>
                       <FontAwesomeIcon
                         icon={faArrowRight}
                         className="mt-0.5 text-white ml-1.5"
@@ -637,16 +610,42 @@ function Potd() {
       <div className="flex flex-col mx-20 items-center">
         <div className="w-11/12 mt-5 mb-10 bg-white/10">
           <Slider
-            {...setting}
+            {...settings}
             prevArrow={<Customprev />}
             nextArrow={<Customnext />}
           >
             {ECdata.map((data, index) => (
               <ReactCardFlip key={index}>
-                <div className=" w-52 h-60 mx-4 shadow-xl rounded-2xl my-1 bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]">
-                  <div className="absolute ml-16 mt-14 ">
-                    <img src={cfdark} className="h-24" />
-                  </div>
+                <div
+                  key={index}
+                  onMouseEnter={() => setHoveredIndexec(index)}
+                  onMouseLeave={() => setHoveredIndexec(null)}
+                  className=" w-52 h-60 ecdata mx-4 shadow-xl rounded-2xl my-1 bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
+                >
+                  {data.platformname === "Leetcode" ||
+                  data.platformname === "leetcode" ? (
+                    <div className="absolute ml-16 ">
+                      <img
+                        src={hoveredIndexec === index ? lclight : lcdark}
+                        className="h-44"
+                      />
+                    </div>
+                  ) : data.platformname === "Codeforces" ||
+                    data.platformname === "codeforces" ? (
+                    <div className="absolute ml-16 mt-14 ">
+                      <img
+                        src={hoveredIndexec === index ? cflight : cfdark}
+                        className="h-24"
+                      />
+                    </div>
+                  ) : (
+                    <div className="absolute ml-[75px] ">
+                      <img
+                        src={hoveredIndexec === index ? cclight : ccdark}
+                        className="h-44"
+                      />
+                    </div>
+                  )}
                   <div className="absolute w-52 border-b h-16 rounded-xl bg-opacity-100 backdrop-filter backdrop-blur-sm">
                     <div className="flex mt-1 text-white justify-between mx-2">
                       <h1 className="font-extrabold text-2xl">
@@ -671,14 +670,33 @@ function Potd() {
                         {data.date.substring(2, 4)}
                       </h5>
                     </div>
-                    <div className="w-28 mt-52 flex">
-                      <h4 className="ml-6 text-white font-bold font-mono text-sm">
-                        EDITORIAL
-                      </h4>
-                      <FontAwesomeIcon
-                        icon={faArrowRight}
-                        className="mt-0.5 text-white ml-1.5"
-                      />
+                    <div>
+                      <div className="w-28 mt-[185px] flex">
+                        <a
+                          href={data.contestlink}
+                          target="_blank"
+                          className="ml-4 text-white font-bold font-mono text-sm"
+                        >
+                          ContestLink
+                        </a>
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          className="mt-0.5 text-white ml-1.5"
+                        />
+                      </div>
+                      <div className="w-28 mt-2 flex">
+                        <a
+                          href={data.solutionlink}
+                          target="_blank"
+                          className="ml-8 text-white font-bold font-mono text-sm"
+                        >
+                          EDITORIAL
+                        </a>
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          className="mt-0.5 text-white ml-1.5"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
