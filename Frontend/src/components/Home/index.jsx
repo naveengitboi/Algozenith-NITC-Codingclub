@@ -4,7 +4,6 @@ import "./index.css";
 import Counter from "../../elements/Counter";
 import JobsHome from "../homeElements/JobsHome";
 import GridEffect from "../homeElements/GridEffect";
-import NumberAnimator from "../../customHooks/NumberAnimator";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
 // import { motion, animate, useMotionValue, useTransform, } from "framer-motion";

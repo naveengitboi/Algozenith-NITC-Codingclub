@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import {motion,animate, useMotionValue, useTransform} from 'framer-motion'
 import NumberAnimator from "../customHooks/NumberAnimator";
 
 
 
 function Counter(props) {
+  useEffect(() => {
+    
+  }, [])
   
   return (
     <div className="counter">
