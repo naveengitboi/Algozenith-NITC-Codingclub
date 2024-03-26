@@ -9,16 +9,15 @@ function JobCard({ job }) {
           <div className="type svg">{job.through}</div>
         </div>
         <div className="details">
-          <h1 className="thickFont">{job.companyName}</h1>
-          <div className="batcheAndRole">
-            <p className="paraSmall batches">{job.batches}</p>
-            <p className="paraSmall jbRole">{job.jobRole}</p>
-          </div>
-
-          <div className="locationAndPay">
-            <p className="paraSmall">{job.location}</p>
-            <p className="paraSmall">{job.pay}</p>
-          </div>
+          <h1 className="thickFont">JP Morgan and Chase</h1>
+          <p className="paraMedium">{job.jobRole}</p>
+        </div>
+        <div className="">
+          <p className="">{job.location}</p>
+          <p className="">{job.pay}</p>
+        </div>
+        <div className="">
+          <p className="">{job.batches}</p>
         </div>
       </div>
       <div className="jobAction">

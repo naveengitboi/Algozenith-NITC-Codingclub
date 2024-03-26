@@ -21,6 +21,7 @@ import ccdark from "../Pics/ccdark.png";
 import cclight from "../Pics/cclight.png";
 import cfdark from "../Pics/cfdark.png";
 import cflight from "../Pics/cflight.png";
+import errorpage from "../Pics/nodatafound.png";
 import "../Potd/potd.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -36,6 +37,7 @@ function Potd() {
   const [hoveredIndexgfg, setHoveredIndexgfg] = useState(null);
   const [flippedIndexgfg, setFlippedIndexgfg] = useState(null);
   const [openfilter, setopenfilter] = useState(false);
+  const [notfound, setnotfound] = useState(false);
 
   const datenow = new Date();
   const datt = datenow.toDateString().substring(4, 7);
@@ -54,9 +56,11 @@ function Potd() {
       .get(url + "/leetcode")
       .then((res) => {
         setLcData(res.data.reverse());
+        setnotfound(false);
       })
       .catch((err) => {
         console.error(err);
+        setnotfound(true);
       });
 
     axios
@@ -159,12 +163,18 @@ function Potd() {
   };
 
   return (
-    <div className="pagePadding ">
+    <>
+    {notfound && 
+        <div className="pagePadding commonPadding">
+          <img src={errorpage} className=""/>
+        </div>
+      }
+    {!notfound && <div className="pagePadding ">
       <div className="flex flex-col items-center mt-5">
         <div className="w-3/4 flex justify-between">
-          <h1 className="text-[#003f7e] font-bold text-2xl">
+          <p className="text-[#003f7e] font-bold text-2xl">
             Problem Of The Day
-          </h1>
+          </p>
           <div>
             <FontAwesomeIcon
               icon={faBarsStaggered}
@@ -706,7 +716,8 @@ function Potd() {
           </Slider>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 }
 
