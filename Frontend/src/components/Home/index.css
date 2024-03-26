@@ -20,6 +20,7 @@
   text-transform: uppercase;
   color: var(--pri_light_tone);
 }
+
 .heroDetails .paraText {
   font-weight: 400;
 }
@@ -45,6 +46,7 @@
   text-align: center;
 }
 
+
 .heroImg {
   min-width: 50%;
   height: 100vh;
@@ -68,4 +70,3 @@
   background-repeat: no-repeat;
   margin: var(--top_gap) 0;
 }
-

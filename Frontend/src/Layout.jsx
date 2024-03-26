@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import dragImg from "./assets/hoverimg/drag.svg";
 import ScrollToTop from "./elements/ScrollToTop";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-
+import { ScrollRestoration } from "react-router-dom";
 const cursorVarient = {
   default: {
     width: 20,
@@ -57,15 +57,22 @@ function Layout() {
   return (
     <>
       <ReactLenis root>
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            const paths = ['/mission', '/vission'];
+            return paths.includes(location.pathname) ? location.pathname : location.key
+          }}
+        />
         <motion.div
           className="cursor"
           style={{ left: mouseCursor.x, top: mouseCursor.y }}
           variants={cursorVarient}
           animate={changeCursor}
         ></motion.div>
-        <ScrollToTop />
         <Navbar />
         <Outlet />
+        {/* <ScrollToTop /> */}
+        
         <Footer />
       </ReactLenis>
     </>
