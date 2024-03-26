@@ -6,16 +6,135 @@ const editorial = require("./models/editorials.model");
 const leetcode = require("./models/leetcode.model");
 const gfg = require("./models/gfg.model");
 const upcontest = require("./models/upcontests.model");
+const UserModel = require("./Data/Login");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const nodemailer = require('nodemailer');
+
+
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
+
+/*** for login page ****/
+
+// Create a transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'rakesh.punugubati123@gmail.com',  //add algo zenith email id
+      pass: 'qcgf vruc eqbx mrqp' // create a pass key and add here
+  }
+});
+// Function to send password email
+function sendPasswordEmail(password, recipient) {
+  // Create the email options
+  const mailOptions = {
+      from: 'rakesh.punugubati123@gmail.com',  //add algo mail here
+      to: 'rakesh.punugubati123@gmail.com',    // 
+      subject: 'Your Password',
+      text: `Your password is: ${password}`
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.error('Error occurred:', error);
+      } else {
+          console.log('Email sent:', info.response);
+      }
+  });
+}
+
+app.post('/login', (req, res) => {
+  const { type, data } = req.body; 
+  if (type === 'handleSubmit') {
+      const { email, password } = data; 
+      console.log(email, password);
+      UserModel.findOne({ email, password })
+      .then(function (user) {
+          if (user) {
+              const accessToken = jwt.sign({email: email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
+              const refreshToken = jwt.sign({email: email}, "jwt-refresh-token-secret-key", {expiresIn: '30m'});
+
+              res.cookie('accessToken', accessToken, {maxAge: 60000})
+
+              res.cookie('refreshToken' , refreshToken, {maxAge:1800000 , httpOnly: true , secure: true , sameSite:'strict'})
+              res.json({ message: 'Valid user' });
+          } else {
+              res.json({ message: 'Invalid user' });
+          }
+      })
+      .catch(function (err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
+  } else if (type === 'togglepopup') {
+      const { checkEmail } = data;
+      console.log(checkEmail);
+      UserModel.findOne({ email: checkEmail }) 
+      .then(function (user) {
+          if (user) {
+              sendPasswordEmail(user.password, checkEmail);
+              res.json({ message: 'Valid user' });
+          } else {
+              res.json({ message: 'Invalid user' });
+          }
+      })
+      .catch(function (err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
+  }
+});
+
+const verfyUser = (req, res, next) => {
+  const accesstoken = req.cookies.accessToken;
+  if(!accesstoken){
+    if(renewToken(req, res)){
+      next();
+    }
+  }else{
+    jwt.verify(accesstoken ,"jwt-access-token-secret-key" ,(err , decoded) => {
+      if(err){
+        return res.json({valid :false, message: "Invalid Token"})
+      }else{
+        req.email = decoded.email;
+        next()
+      }
+    })
+  }
+}
+
+const renewToken = (req , res) => {
+  const refreshtoken = req.cookies.refreshToken;
+  let exist = false;
+  if(!refreshtoken){
+    return res.json({valid : false, message:"No refresh token"})
+  }else{
+    jwt.verify(refreshtoken ,"jwt-refresh-token-secret-key" ,(err , decoded) => {
+      if(err){
+        return res.json({valid :false, message: "Invalid Refresh Token"})
+      }else{
+        const accessToken = jwt.sign({email: decoded.email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
+        res.cookie('accessToken', accessToken, {maxAge: 60000})
+        exist = true;
+      }
+    })
+  }
+  return exist;
+}
+
+app.get("/admin" ,verfyUser, (req, res) => {
+  return res.json({valid: true, message: "autorized"})
+})
 
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;

@@ -19,9 +19,9 @@ export const jobsPosts = [
     companyName: "Accenture",
     batches: "B-23,24 ",
     jobRole: "SDE 1",
-    location: "OnSite",
+    location: "bengaluru, hyderabad",
     pay: "Rs 25000/-",
-    type: "internship",
+    type: "Fulltime",
     through: <FaLinkedin />,
     link: "https://www.figma.com/",
   },
@@ -49,7 +49,7 @@ export const jobsPosts = [
 
 function JobPosts() {
   return (
-    <div className="pagePadding commonPadding">
+    <div className="pagePadding mx-10">
       <div className="jobsHeader">
         <div className="titles">
           <p className="paraLarge">Jobs and Interns</p>
