@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const lc = new mongoose.Schema({
+const leetcodeSchema = new mongoose.Schema({
     date:{type:String},
     question:{type:String},
     quesname:{type:String},
@@ -11,6 +11,6 @@ const lc = new mongoose.Schema({
 })
 
 
-const leetcode = mongoose.model("leetcode",lc);  
+const leetcodeModel = mongoose.model("Leetcode", leetcodeSchema);  
 
-module.exports = leetcode;
+export default leetcodeModel;
