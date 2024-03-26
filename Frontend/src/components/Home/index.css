@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .heroDetails,
@@ -46,12 +46,20 @@
 }
 
 .heroImg {
+  min-width: 50%;
+  height: 100vh;
+  width: max-content;
+  background-image: url("/images/algogri.png");
+  background-size: contain;
+  background-position: center;
   position: relative;
+  background-repeat: no-repeat;
 }
 
 .heroImg img {
-  max-width: 145%;
-  transform: rotate(-30deg) translateY(-15%);
+  position: absolute;
+  min-width: 150%;
+  transform: rotate(-30deg) translateY(-150px);
 }
 
 .gridLinesEffect {
@@ -60,3 +68,4 @@
   background-repeat: no-repeat;
   margin: var(--top_gap) 0;
 }
+

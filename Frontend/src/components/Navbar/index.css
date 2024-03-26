@@ -10,10 +10,13 @@
   font-family: var(--primary_font);
   font-weight: 600;
   color: var(--pri_dark_tone);
-  padding: 0.5rem var(--lr_padding);
+  padding: 0.85rem var(--lr_padding);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  background-image: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.472),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 .logo {
@@ -28,4 +31,66 @@
 
 .navLinks li a {
   padding: 0.25rem 1.5rem;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+@media screen and (max-width: 1025px) {
+  .logo {
+    width: 40px;
+  }
+  .navLinks li a {
+    padding: 0.25rem 1.3rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .navbar {
+    z-index: 150;
+  }
+  .hamburgerMenu {
+    display: block;
+    --size: 30px;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--pri_dark_tone);
+    border-radius: 50%;
+  }
+  .hamActive {
+    border: 4px solid var(--pri_dark_tone);
+    background-color: transparent;
+  }
+  .navLinks {
+    flex-direction: column;
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    left: 100%;
+    top: 0;
+    font-weight: normal;
+    background-image: linear-gradient(#9d94ff, #9d94fff7);
+    color: var(--white_color);
+    font-size: 2rem;
+    justify-content: space-evenly;
+    z-index: -1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.5s ease;
+  }
+  .navActive {
+    left: 0;
+  }
+  .navLinks li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  .navLinks li a {
+    display: block;
+    width: 100%;
+    padding: 2rem 0;
+  }
 }

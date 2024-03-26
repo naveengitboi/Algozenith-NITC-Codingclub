@@ -48,9 +48,14 @@ export default function Home() {
             <Counter data={counterData[2]} duration={5} />
           </div>
         </div>
+
+
         <div className="heroImg">
-          <img src="/images/algogrid.png" alt="algoclubgrid" />
+          <img src="/images/algogrid.png" alt="algogrid"
+          
+          />
         </div>
+
       </div>
 
       {/* <div className="gradMidLine"></div> */}
