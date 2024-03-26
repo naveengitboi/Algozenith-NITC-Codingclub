@@ -3,34 +3,38 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { motion, useMotionValue } from "framer-motion";
-import readTalk from './assets/hoverimg/readTalk.svg'
-import {  useSelector } from "react-redux";
-import dragImg from './assets/hoverimg/drag.svg'
+import readTalk from "./assets/hoverimg/readTalk.svg";
+import { useSelector } from "react-redux";
+import dragImg from "./assets/hoverimg/drag.svg";
+import ScrollToTop from "./elements/ScrollToTop";
+import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 
 const cursorVarient = {
-
-    default:{
-      width:20,
-      height:20,
-      backgroundImage:`url(none)`,
-    },
-    viewTalkImg:{
-      width:80,
-      height:80,
-      backgroundImage:`url(${readTalk})`,
-      backgroundSize:`cover`,
-    },
-    draggerImage:{
-      width:80,
-      height:80,
-      backgroundImage:`url(${dragImg})`,
-      backgroundSize:`cover`
-    }
-  }
+  default: {
+    width: 20,
+    height: 20,
+    backgroundImage: `url(none)`,
+  },
+  viewTalkImg: {
+    width: 80,
+    height: 80,
+    backgroundImage: `url(${readTalk})`,
+    backgroundSize: `cover`,
+  },
+  draggerImage: {
+    width: 80,
+    height: 80,
+    backgroundImage: `url(${dragImg})`,
+    backgroundSize: `cover`,
+  },
+};
 
 function Layout() {
-  
-  const changeCursor = useSelector((state) => state.viewTalk.value)
+  const lenis = useLenis(({ scroll }) => {
+    // called every scroll
+  });
+
+  const changeCursor = useSelector((state) => state.viewTalk.value);
   const mouseCursor = {
     x: useMotionValue(0),
     y: useMotionValue(0),
@@ -42,24 +46,28 @@ function Layout() {
     mouseCursor.y.set(clientY);
   };
 
-  useEffect(()=> {
-    window.addEventListener('mousemove' , mouseMoveHandler)
+  useEffect(() => {
+    window.addEventListener("mousemove", mouseMoveHandler);
 
-    return () => {window.removeEventListener('mousemove', mouseMoveHandler)}
-  })
-
+    return () => {
+      window.removeEventListener("mousemove", mouseMoveHandler);
+    };
+  });
 
   return (
-  
     <>
-      <motion.div className="cursor"
-        style={{left:mouseCursor.x, top:mouseCursor.y}}
-        variants={cursorVarient}
-        animate={changeCursor}
-      ></motion.div>
-      <Navbar />
-      <Outlet  />
-      <Footer  />
+      <ReactLenis root>
+        <motion.div
+          className="cursor"
+          style={{ left: mouseCursor.x, top: mouseCursor.y }}
+          variants={cursorVarient}
+          animate={changeCursor}
+        ></motion.div>
+        <ScrollToTop />
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </ReactLenis>
     </>
   );
 }
