@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const editorial = new mongoose.Schema({
   platformname: { type: String },
-  contestnumber: { type: String },
+  constestnumber: { type: String },
   date: { type: String },
   contestlink: { type: String },
   solutionlink: { type: String },

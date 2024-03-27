@@ -4,7 +4,6 @@ import "./index.css";
 import Counter from "../../elements/Counter";
 import JobsHome from "../homeElements/JobsHome";
 import GridEffect from "../homeElements/GridEffect";
-import NumberAnimator from "../../customHooks/NumberAnimator";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
 // import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
@@ -28,7 +27,7 @@ export default function Home() {
 
 
   return (
-    <div className="pagePadding commonPadding">
+    <div className="pagePadding px-32">
       <div className="homeHeroContainer">
         <div className="heroDetails">
 
@@ -48,9 +47,14 @@ export default function Home() {
             <Counter data={counterData[2]} duration={5} />
           </div>
         </div>
+
+
         <div className="heroImg">
-          <img src="/images/algogrid.png" alt="algoclubgrid" />
+          <img src="/images/algogrid.png" alt="algogrid"
+          
+          />
         </div>
+
       </div>
 
       {/* <div className="gradMidLine"></div> */}

@@ -32,8 +32,8 @@
 }
 
 .jobCard {
-  min-width: 330px;
-  max-width: 350px;
+  min-width: 360px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -67,30 +67,29 @@
 }
 .typeAndFrom .paraMedium {
   border-radius: 0 var(--bradius) var(--bradius) 0;
-  padding: 0.5rem 1.65rem;
+  padding: 0.2rem 1.5rem;
 }
 .typeAndFrom .svg {
-  border-radius: var(--bradius) 0 0 var(--bradius);
-  padding: 0.5rem 1rem;
+  border-radius: 10px 0 0 10px;
+  padding: 0rem 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.typeAndFrom .svg svg {
+.typeAndFrom {
   font-size: 1.5rem;
 }
 .details {
-  padding: 0.5rem 1.55rem;
-  flex-grow: 2;
+  padding: 0rem 0.8rem;
+  /* flex-grow: 2; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
 }
 .details .thickFont {
   font-size: var(--small_lsize);
-  font-weight: bold;
-  text-transform: uppercase;
+  font-weight: var(--size);
   text-align: center;
 }
 .batcheAndRole,
@@ -139,3 +138,21 @@
   justify-content: space-around;
   margin: 2rem 0;
 }
+
+.scrollableText {
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* animation: scroll 20s linear infinite; */
+}
+
+.scrollableText::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+

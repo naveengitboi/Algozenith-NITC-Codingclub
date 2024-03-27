@@ -1,14 +1,22 @@
-import React from 'react'
-import Admin from './components/Admin'
-import Login from './components/Login'
+import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 
-function App() {
+const IconWithSpring = ({ icon }) => {
+  const [hovered, setHovered] = useState(false);
+
+  const springProps = useSpring({
+    transform: hovered ? 'scale(1.2)' : 'scale(1)', // Adjust the scale factor for the spring animation
+  });
+
   return (
-    <>
-    <Admin/>
-    <Login/>
-    </>
-  )
-}
+    <animated.div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={springProps}
+    >
+      {icon}
+    </animated.div>
+  );
+};
 
-export default App
+export default IconWithSpring;

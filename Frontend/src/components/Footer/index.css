@@ -10,11 +10,14 @@
   flex-direction: column;
   align-items: center;
 }
+
 .logoSection .thickFont {
   font-size: var(--para_larger_size);
   font-weight: bold;
   color: var(--pri_dark_tone);
+ 
 }
+
 
 .logoSection .paraSmall {
   font-weight: 600;

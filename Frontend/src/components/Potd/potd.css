@@ -103,6 +103,16 @@
     transition: transform 0.3s ease;
   }
 
+  .ecdata:hover {
+    transform: scale(1.05);
+    transition: transform 0.4s ease;
+  }
+
+  .ucdata:hover {
+    transform: scale(1.04);
+    transition: transform 0.4s ease;
+  }
+
 
   
   
