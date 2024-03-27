@@ -7,7 +7,7 @@
 
 .heroDetails,
 .heroImg {
-  width: 50%;
+  width: 45%;
   color: var(--pri_dark_tone);
   font-weight: 600;
 }

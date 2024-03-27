@@ -1,16 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const potd = require("./models/potd.model");
-const oppo = require("./models/opportunities.model");
-const editorial = require("./models/editorials.model");
-const leetcode = require("./models/leetcode.model");
-const gfg = require("./models/gfg.model");
-const upcontest = require("./models/upcontests.model");
-const UserModel = require("./Data/Login");
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-const nodemailer = require('nodemailer');
+import express from"express";
+import mongoose from "mongoose";
+import potd from "./models/potd.model.js";
+import oppo from "./models/opportunities.model.js";
+import editorial from "./models/editorials.model.js";
+import leetcode from "./models/Leetcode.model.js";
+import gfg from "./models/gfg.model.js";
+import upcontest from "./models/upcontests.model.js";
+import UserModel from "./Data/Login.js";
+import cors from "cors";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
+import nodemailer from "nodemailer";
 
 
 

@@ -81,6 +81,7 @@ function Potd() {
       .get(url + "/upcontest")
       .then((res) => {
         setUCdata(res.data);
+        console.log(UCdata);
       })
       .catch((err) => console.error(err));
 

@@ -7,6 +7,6 @@ const upComingContestSchema = new mongoose.Schema({
   link: { type: String },
 });
 
-const UpcomingcontestModel = mongoose.model("Upcomingcontest", upComingContestSchema);
+const UpcomingcontestModel = mongoose.model("upcontest", upComingContestSchema);
 
 export default UpcomingcontestModel;

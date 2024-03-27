@@ -32,8 +32,8 @@
 }
 
 .jobCard {
-  min-width: 330px;
-  max-width: 350px;
+  min-width: 360px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -71,12 +71,12 @@
 }
 .typeAndFrom .svg {
   border-radius: 10px 0 0 10px;
-  padding: 0.9rem 1.5rem;
+  padding: 0rem 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.typeAndFrom .svg svg {
+.typeAndFrom {
   font-size: 1.5rem;
 }
 .details {
@@ -138,3 +138,21 @@
   justify-content: space-around;
   margin: 2rem 0;
 }
+
+.scrollableText {
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* animation: scroll 20s linear infinite; */
+}
+
+.scrollableText::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
