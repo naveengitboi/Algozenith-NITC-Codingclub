@@ -21,12 +21,12 @@ function MVision() {
       </div>
       <div className="action">
         <div className="tabs">
-          <NavLink to="/mission" className="application" style={loc == "/" || loc =='/mission' ? {backgroundColor:"#003f7e", color:"white"}: {backgroundColor:"#3a597b"}}>
+          <NavLink preventScrollReset={true} to="/mission" className="application" style={loc == "/" || loc =='/mission' ? {backgroundColor:"#003f7e", color:"white"}: {backgroundColor:"#3a597b"}}>
             <FaRankingStar />
             <p className="paraSmall">Mission</p>
             <IoMdClose />
           </NavLink>
-          <NavLink to="/vission" className="application"
+          <NavLink preventScrollReset={true} to="/vission" className="application"
             style={loc =='/vission' ? {backgroundColor:"#003f7e", color:"white"}: {backgroundColor:"#3a597b"}}
           >
             <FaRankingStar />

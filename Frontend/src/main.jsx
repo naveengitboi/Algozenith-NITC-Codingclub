@@ -21,6 +21,7 @@ import { store } from "./Redux/Store.js";
 import { Provider } from "react-redux";
 import Mission from "./components/homeElements/Mission.jsx";
 import Vission from "./components/homeElements/Vission.jsx";
+import ScrollToTop from "./elements/ScrollToTop.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
