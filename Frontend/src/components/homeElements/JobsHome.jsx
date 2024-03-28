@@ -3,7 +3,6 @@ import axios from "axios";
 import url from "../url.js";
 import "../JobPosts/index.css";
 import { Link } from "react-router-dom";
-import { FaLinkedin } from "react-icons/fa6";
 import { LiaArrowRightSolid } from "react-icons/lia";
 
 // import { jobsPosts } from "../JobPosts";
