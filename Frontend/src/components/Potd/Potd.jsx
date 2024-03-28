@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import axios from "axios";
 import UCCard from "../../elements/UCCard.jsx";
+import ECCard from "../../elements/ECCard.jsx";
+import LCCard from "../../elements/LCCard.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import url from "../url.js";
 import {
@@ -27,6 +29,9 @@ import "../Potd/potd.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import GFGCard from "../../elements/GFGCard.jsx";
+
+
 
 function Potd() {
   const [lcdata, setLcData] = useState([]);
@@ -297,100 +302,17 @@ function Potd() {
                 nextArrow={<Customnext />}
               >
                 {monthdata.map((data, index) => (
-                  <ReactCardFlip
-                    key={index}
-                    flipDirection="vertical"
-                    isFlipped={index === flippedIndex}
-                    className="card"
-                  >
-                    <div
-                      key="front"
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                      onClick={() =>
-                        setFlippedIndex(index === flippedIndex ? null : index)
-                      }
-                      className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
-                    >
-                      <div className="flex flex-col items-center ml-2 mt-4">
-                        <h1
-                          className={`font-bold ${
-                            hoveredIndex === index
-                              ? "text-[#EBA340]"
-                              : "text-white"
-                          } text-8xl`}
-                        >
-                          {data.date.substring(4, 6)}
-                        </h1>
-                        <h1
-                          className={`${
-                            hoveredIndex === index
-                              ? "text-[#EBA340]"
-                              : "text-white"
-                          } text-sm font-bold`}
-                        >
-                          {data.date.substring(0, 3).toUpperCase()}
-                        </h1>
-                      </div>
-                      <div>
-                        <img
-                          src={hoveredIndex === index ? lclight : lcdark}
-                          className="h-32 mt-2 ml-6 mr-2"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      key="back"
-                      onMouseLeave={() => {
-                        setHoveredIndex(null);
-                        setFlippedIndex(index === flippedIndex ? null : index);
-                      }}
-                      className="h-40 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
-                    >
-                      <div className="p-2 text-sm font-semibold flex flex-col space-y-2 text-white">
-                        <a className="flex" href={data.question}>
-                          Question:
-                          {
-                            <div className="ml-1 flex">
-                              <h1>{data.quesname}</h1>
-                              <FontAwesomeIcon
-                                icon={faSquareArrowUpRight}
-                                className="mt-1.5 ml-1"
-                              />
-                            </div>
-                          }
-                        </a>
-                        <h1>Concepts: {data.concept}</h1>
-                        <h1>Companies: {data.companies}</h1>
-                        <p>
-                          Difficulty level:
-                          {data.level === "Easy" || data.level === "easy" ? (
-                            <span className="bg-green-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Easy
-                            </span>
-                          ) : data.level === "Medium" ||
-                            data.level === "medium" ? (
-                            <span className="bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Medium
-                            </span>
-                          ) : (
-                            <span className="bg-red-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Hard
-                            </span>
-                          )}
-                        </p>
-                        <a href={data.solution}>
-                          Solution: Click Here
-                          {
-                            <FontAwesomeIcon
-                              icon={faSquareArrowUpRight}
-                              className="mt-0 ml-1"
-                            />
-                          }
-                        </a>
-                      </div>
-                    </div>
-                  </ReactCardFlip>
+                  <LCCard 
+                  key={index}
+                  index={index}
+                  data={data}
+                  flippedIndex = {flippedIndex}
+                  setFlippedIndex = {setFlippedIndex}
+                  hoveredIndex={hoveredIndex}
+                  setHoveredIndex={setHoveredIndex}
+                  
+                  />
+                  
                 ))}
               </Slider>
             </div>
@@ -412,103 +334,16 @@ function Potd() {
                 nextArrow={<Customnext />}
               >
                 {monthdatagfg.map((data, index) => (
-                  <ReactCardFlip
-                    key={index}
-                    flipDirection="vertical"
-                    isFlipped={index === flippedIndexgfg}
-                  >
-                    <div
-                      key="front"
-                      onMouseEnter={() => setHoveredIndexgfg(index)}
-                      onMouseLeave={() => setHoveredIndexgfg(null)}
-                      onClick={() =>
-                        setFlippedIndexgfg(
-                          index === flippedIndexgfg ? null : index
-                        )
-                      }
-                      className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]"
-                    >
-                      <div className="flex flex-col items-center ml-2 mt-4">
-                        <h1
-                          className={`font-bold ${
-                            hoveredIndexgfg === index
-                              ? "text-[#2F8D46]"
-                              : "text-white"
-                          } text-8xl`}
-                        >
-                          {data.date.substring(4, 6)}
-                        </h1>
-                        <h1
-                          className={`${
-                            hoveredIndexgfg === index
-                              ? "text-[#2F8D46]"
-                              : "text-white"
-                          } text-sm font-bold`}
-                        >
-                          {data.date.substring(0, 3).toUpperCase()}
-                        </h1>
-                      </div>
-                      <div>
-                        <img
-                          src={hoveredIndexgfg === index ? gfglight : gfgdark}
-                          className="h-20 mt-8"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      key="back"
-                      onMouseLeave={() => {
-                        setHoveredIndexgfg(null);
-                        setFlippedIndexgfg(
-                          index === flippedIndexgfg ? null : index
-                        );
-                      }}
-                      className="h-40 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
-                    >
-                      <div className="p-2 text-sm font-semibold flex flex-col space-y-2 text-white">
-                        <a className="flex" href={data.question}>
-                          Question:
-                          {
-                            <div className="ml-1 flex">
-                              <h1>{data.quesname}</h1>
-                              <FontAwesomeIcon
-                                icon={faSquareArrowUpRight}
-                                className="mt-1.5 ml-1"
-                              />
-                            </div>
-                          }
-                        </a>
-                        <h1>Concepts: {data.concept}</h1>
-                        <h1>Companies: {data.companies}</h1>
-                        <p>
-                          Difficulty level:
-                          {data.level === "Easy" || data.level === "easy" ? (
-                            <span className="bg-green-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Easy
-                            </span>
-                          ) : data.level === "Medium" ||
-                            data.level === "medium" ? (
-                            <span className="bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Medium
-                            </span>
-                          ) : (
-                            <span className="bg-red-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
-                              Hard
-                            </span>
-                          )}
-                        </p>
-                        <a href={data.solution}>
-                          Solution: Click Here
-                          {
-                            <FontAwesomeIcon
-                              icon={faSquareArrowUpRight}
-                              className="mt-0 ml-1"
-                            />
-                          }
-                        </a>
-                      </div>
-                    </div>
-                  </ReactCardFlip>
+                  <GFGCard 
+                  key={index}
+                  index={index}
+                  data={data}
+                  flippedIndexgfg = {flippedIndexgfg}
+                  setFlippedIndexgfg = {setFlippedIndexgfg}
+                  hoveredIndexgfg={hoveredIndexgfg}
+                  setHoveredIndexgfg={setHoveredIndexgfg}
+                  />
+                  
                 ))}
               </Slider>
             </div>
@@ -570,97 +405,14 @@ function Potd() {
                 nextArrow={<Customnext />}
               >
                 {ECdata.map((data, index) => (
-                  <ReactCardFlip key={index}>
-                    <div
-                      key={index}
-                      onMouseEnter={() => setHoveredIndexec(index)}
-                      onMouseLeave={() => setHoveredIndexec(null)}
-                      className=" w-52 h-60 ecdata mx-4 shadow-xl rounded-2xl my-1 bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
-                    >
-                      {data.platformname === "Leetcode" ||
-                      data.platformname === "leetcode" ? (
-                        <div className="absolute ml-16 ">
-                          <img
-                            src={hoveredIndexec === index ? lclight : lcdark}
-                            className="h-44"
-                          />
-                        </div>
-                      ) : data.platformname === "Codeforces" ||
-                        data.platformname === "codeforces" ? (
-                        <div className="absolute ml-16 mt-14 ">
-                          <img
-                            src={hoveredIndexec === index ? cflight : cfdark}
-                            className="h-24"
-                          />
-                        </div>
-                      ) : (
-                        <div className="absolute ml-[75px] ">
-                          <img
-                            src={hoveredIndexec === index ? cclight : ccdark}
-                            className="h-44"
-                          />
-                        </div>
-                      )}
-                      <div className="absolute w-52 border-b h-16 rounded-xl bg-opacity-100 backdrop-filter backdrop-blur-sm">
-                        <div className="flex mt-1 text-white justify-between mx-2">
-                          <h1 className="font-extrabold text-2xl">
-                            {data.contestnumber}
-                          </h1>
-                          <h6 className="font-bold text-xs mt-3">4 Ques</h6>
-                        </div>
-                        <div className="flex text-white justify-between mx-2 mt-1.5">
-                          <h1 className="font-bold font-mono text-sm">
-                            {data.platformname}
-                          </h1>
-                          <h1 className="font-medium text-xs">Beginner lvl</h1>
-                        </div>
-                      </div>
-                      <div className="flex">
-                        <div className="mt-40 ml-2">
-                          <h5 className="text-white font-sans font-extrabold text-6xl">
-                            {data.date.substring(8)}
-                          </h5>
-                          <h5 className="text-white font-sans font-semibold text-xs">
-                            {
-                              monthconversion[
-                                parseInt(data.date.substring(5, 7))
-                              ]
-                            }{" "}
-                            {data.date.substring(2, 4)}
-                          </h5>
-                        </div>
-                        <div>
-                          <div className="w-28 mt-[185px] flex">
-                            <a
-                              href={data.contestlink}
-                              target="_blank"
-                              className="ml-4 text-white font-bold font-mono text-sm"
-                            >
-                              ContestLink
-                            </a>
-                            <FontAwesomeIcon
-                              icon={faArrowRight}
-                              className="mt-0.5 text-white ml-1.5"
-                            />
-                          </div>
-                          <div className="w-28 mt-2 flex">
-                            <a
-                              href={data.solutionlink}
-                              target="_blank"
-                              className="ml-8 text-white font-bold font-mono text-sm"
-                            >
-                              EDITORIAL
-                            </a>
-                            <FontAwesomeIcon
-                              icon={faArrowRight}
-                              className="mt-0.5 text-white ml-1.5"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div></div>
-                  </ReactCardFlip>
+                  <ECCard
+                  key={index}
+                  index={index}
+                  data={data}
+                  hoveredIndexec={hoveredIndexec}
+                  setHoveredIndexec={setHoveredIndexec}
+                  monthconversion={monthconversion}
+                />
                 ))}
               </Slider>
             </div>
