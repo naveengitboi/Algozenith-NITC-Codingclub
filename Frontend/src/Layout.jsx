@@ -6,13 +6,12 @@ import { motion, useMotionValue } from "framer-motion";
 import readTalk from "./assets/hoverimg/readTalk.svg";
 import { useSelector } from "react-redux";
 import dragImg from "./assets/hoverimg/drag.svg";
-import ScrollToTop from "./elements/ScrollToTop";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { ScrollRestoration } from "react-router-dom";
 const cursorVarient = {
   default: {
-    width: 20,
-    height: 20,
+    width: 0,
+    height: 0,
     backgroundImage: `url(none)`,
   },
   viewTalkImg: {
@@ -71,7 +70,6 @@ function Layout() {
         ></motion.div>
         <Navbar />
         <Outlet />
-        {/* <ScrollToTop /> */}
         
         <Footer />
       </ReactLenis>
