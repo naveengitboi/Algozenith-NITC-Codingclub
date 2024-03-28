@@ -22,6 +22,7 @@ import { Provider } from "react-redux";
 import Mission from "./components/homeElements/Mission.jsx";
 import Vission from "./components/homeElements/Vission.jsx";
 import ScrollToTop from "./elements/ScrollToTop.jsx";
+import NotFound from "./components/NotFound/index.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="/about" element={<About />} >
        
       </Route>
-      <Route path="*" element={<div>Not Found</div>} />
+      <Route path="*" element={<NotFound/>} />
     </Route>
   )
 );

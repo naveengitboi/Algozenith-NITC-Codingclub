@@ -32,6 +32,7 @@ const platforms = [
         link: 'www.leetcode.com'
     },
 ]
+
 const youtubeChannels = [
     {
         type:'svg',
@@ -59,7 +60,7 @@ const youtubeChannels = [
 ]
 
 function ResourceItem({item}){
-    
+
     return(
         <a href={item.link} target='_blank' className='resourceLinkItem'>
             <div className='itemImg'>
