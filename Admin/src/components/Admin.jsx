@@ -16,17 +16,40 @@ function App() {
   const [time, settime] = useState(false);
   const navigate =useNavigate();
   axios.defaults.withCredentials = true;
+  const handleLogout = (e) => {
+    e.preventDefault(); 
+  
+    axios.post(url + "/logout")
+      .then(res => {
+        console.log(res.data.message);
+        navigate('/');
+      })
+      .catch(error => {
+        console.error("Logout failed:", error);
+      });
+  }
+   
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(url + "/admin")
-    .then(res =>{
-      if(res.data.valid){
-        console.log(res.data.message)
-      }else{
-        navigate('/');
-      }
-    })
-  })
-
+      .then(res => {
+        if (!res.data.valid) {
+          console.log(res.data.message);
+          navigate('/'); 
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        navigate('/'); 
+      })
+      .finally(() => {
+        setLoading(false); // Set loading state to false when the authentication check is completed
+      });
+  }, []);
+  if (loading) {
+    // Render a loading indicator while the authentication status is being checked
+    return <div>Loading...</div>;
+  }
   const onsubhand = (e) => {
     e.preventDefault();
 
@@ -248,9 +271,15 @@ function App() {
 
   return (
     <div>
-      <div className="flex justify-center w-1/3 ml-50 mt-10 font-bold bg-blue-600 text-white py-2 rounded-r-full">
-        ALGOZENITH ADMIN PAGE
+      <div className="flex justify-between">
+        <div className="flex justify-center w-1/3  ml-50 mt-10 font-bold bg-blue-600 text-white py-2 rounded-r-full">
+          ALGOZENITH ADMIN PAGE
+        </div>
+        <div>
+          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={() => handleLogout}>Logout</button>
+        </div>
       </div>
+      
       <div className="flex justify-center p-10">
         <div className="w-64 rounded-lg bg-slate-300">
           <h1 className="ml-8 font-bold mt-2">POTD</h1>

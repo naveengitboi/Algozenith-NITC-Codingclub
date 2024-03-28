@@ -18,7 +18,21 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173'];
+
+// CORS middleware
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 
 mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
@@ -52,6 +66,12 @@ function sendPasswordEmail(password, recipient) {
       }
   });
 }
+app.post("/logout", (req, res) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+  console.log("logout successful");
+  res.json({ message: "Logout successful" });
+});
 
 app.post('/login', (req, res) => {
   const { type, data } = req.body; 
@@ -107,7 +127,7 @@ const verfyUser = (req, res, next) => {
         return res.json({valid :false, message: "Invalid Token"})
       }else{
         req.email = decoded.email;
-        next()
+        next();
       }
     })
   }
@@ -132,8 +152,8 @@ const renewToken = (req , res) => {
   return exist;
 }
 
-app.get("/admin" ,verfyUser, (req, res) => {
-  return res.json({valid: true, message: "autorized"})
+app.get("/admin" , verfyUser, (req, res) => {
+  return res.json({valid: true, message: "authorized"})
 })
 
 app.post("/admin", async (req, res) => {

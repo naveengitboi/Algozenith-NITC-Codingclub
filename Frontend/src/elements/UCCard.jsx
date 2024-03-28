@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactCardFlip from "react-card-flip";
 import ccdark from ".././components/Pics/ccdark.png";
 import cclight from ".././components/Pics/cclight.png";
@@ -7,16 +7,7 @@ import lclight from ".././components/Pics/lclight.png";
 import cfdark from ".././components/Pics/cfdark.png";
 import cflight from ".././components/Pics/cflight.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faArrowRight,
-  faBarsStaggered,
-  faChevronCircleRight,
-  faChevronLeft,
-  faChevronRight,
-  faSquareArrowUpRight,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import {  faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 
 function UCCard({index, data , hoveredIndexuc, setHoveredIndexuc, monthconversion}) {
