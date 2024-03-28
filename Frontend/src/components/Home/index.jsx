@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import "./index.css";
 import Counter from "../../elements/Counter";
 import JobsHome from "../homeElements/JobsHome";
+import UCHome from "../homeElements/UCHome";
 import GridEffect from "../homeElements/GridEffect";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
@@ -65,6 +66,10 @@ export default function Home() {
 
       <div className="jobsHomePageContainer gapBwSections">
         <JobsHome />
+      </div>
+
+      <div className="gapBwSections">
+        <UCHome/>
       </div>
 
       <div className="gridLinesEffect gapBwSections">
