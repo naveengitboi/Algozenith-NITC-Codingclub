@@ -8,7 +8,7 @@ function JobCard({ job }) {
       <div className="jobInfoContainer">
         <div className="typeAndFrom">
           <p className="type paraMedium">{job.jobtype}</p>
-          <img src={job.logo} className="type svg h-16"/>
+          <img src={job.logo || "https://icons.veryicon.com/png/o/business/oa-attendance-icon/company-27.png"} className="type svg h-16"/>
         </div>
         <div className="details overflow-x-hidden">
           <h1 className="thickFont scrollableText">{job.companyname}</h1>
