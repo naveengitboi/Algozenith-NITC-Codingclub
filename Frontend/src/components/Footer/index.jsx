@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
-import { FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaInstagram, FaGithub, FaWhatsapp } from "react-icons/fa6";
 import { FaDiscord, FaLinkedinIn } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -11,8 +11,8 @@ export default function Footer() {
       <div className="gradMidLine"></div>
       <footer className="commonPadding">
         <div className="logoSection">
-          <p className="thickFont">Algozenith</p>
-          <p className="paraSmall">Chapter NITC</p>
+          <p className="thickFont">AlgoZenith</p>
+          <p className="paraSmall">NIT Calicut</p>
           <p className="tinySize">All Copy Rights Reserved.</p>
         </div>
         <div className="socialLinks">
@@ -27,6 +27,9 @@ export default function Footer() {
           </a>
           <a href="" target="_blank">
             <FaDiscord />
+          </a>
+          <a href="" target="_blank">
+            <FaWhatsapp/>
           </a>
         </div>
         <div className="navigateBtn">
