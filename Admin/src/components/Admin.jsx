@@ -16,9 +16,8 @@ function App() {
   const [time, settime] = useState(false);
   const navigate =useNavigate();
   axios.defaults.withCredentials = true;
-  const handleLogout = (e) => {
-    e.preventDefault(); 
-  
+
+  const handleLogout = () => { 
     axios.post(url + "/logout")
       .then(res => {
         console.log(res.data.message);
@@ -28,7 +27,7 @@ function App() {
         console.error("Logout failed:", error);
       });
   }
-   
+
   useEffect(() => {
     axios.get(url + "/admin")
       .then(res => {
@@ -42,6 +41,7 @@ function App() {
         navigate('/'); 
       });
   });
+
   const onsubhand = (e) => {
     e.preventDefault();
 
@@ -268,7 +268,7 @@ function App() {
           ALGOZENITH ADMIN PAGE
         </div>
         <div>
-          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={() => handleLogout}>Logout</button>
+          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={handleLogout}>Logout</button>
         </div>
       </div>
       
