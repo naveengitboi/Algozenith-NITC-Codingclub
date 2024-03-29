@@ -16,9 +16,8 @@ function App() {
   const [time, settime] = useState(false);
   const navigate =useNavigate();
   axios.defaults.withCredentials = true;
-  const handleLogout = (e) => {
-    e.preventDefault(); 
-  
+
+  const handleLogout = () => { 
     axios.post(url + "/logout")
       .then(res => {
         console.log(res.data.message);
@@ -28,28 +27,20 @@ function App() {
         console.error("Logout failed:", error);
       });
   }
-   
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(url + "/admin")
-      .then(res => {
-        if (!res.data.valid) {
-          console.log(res.data.message);
-          navigate('/'); 
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        navigate('/'); 
-      })
-      .finally(() => {
-        setLoading(false); // Set loading state to false when the authentication check is completed
-      });
-  }, []);
-  if (loading) {
-    // Render a loading indicator while the authentication status is being checked
-    return <div>Loading...</div>;
-  }
+    .then(res =>{
+      if(res.data.valid){
+        console.log(res.data.message)
+      }else{
+        navigate('/');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
+
   const onsubhand = (e) => {
     e.preventDefault();
 
@@ -276,7 +267,7 @@ function App() {
           ALGOZENITH ADMIN PAGE
         </div>
         <div>
-          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={() => handleLogout}>Logout</button>
+          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={handleLogout}>Logout</button>
         </div>
       </div>
       
