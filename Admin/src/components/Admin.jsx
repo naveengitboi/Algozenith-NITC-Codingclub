@@ -29,7 +29,6 @@ function App() {
       });
   }
    
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(url + "/admin")
       .then(res => {
@@ -41,15 +40,8 @@ function App() {
       .catch(error => {
         console.error("Error:", error);
         navigate('/'); 
-      })
-      .finally(() => {
-        setLoading(false); // Set loading state to false when the authentication check is completed
       });
-  }, []);
-  if (loading) {
-    // Render a loading indicator while the authentication status is being checked
-    return <div>Loading...</div>;
-  }
+  });
   const onsubhand = (e) => {
     e.preventDefault();
 
