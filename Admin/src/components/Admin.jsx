@@ -27,20 +27,19 @@ function App() {
         console.error("Logout failed:", error);
       });
   }
-
   useEffect(() => {
     axios.get(url + "/admin")
-      .then(res => {
-        if (!res.data.valid) {
-          console.log(res.data.message);
-          navigate('/'); 
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        navigate('/'); 
-      });
-  });
+    .then(res =>{
+      if(res.data.valid){
+        console.log(res.data.message)
+      }else{
+        navigate('/');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
 
   const onsubhand = (e) => {
     e.preventDefault();
