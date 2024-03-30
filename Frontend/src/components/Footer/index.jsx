@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./index.css";
 import { FaInstagram, FaGithub} from "react-icons/fa6";
 import { FaDiscord, FaLinkedinIn } from "react-icons/fa";
-import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -16,7 +15,7 @@ export default function Footer() {
           <p className="tinySize">All Copy Rights Reserved.</p>
         </div>
         <div className="socialLinks">
-          <a href="" target="_blank">
+          <a href="https://github.com/AlgoZenithNITC" target="_blank">
             <FaGithub />
           </a>
           <a href="" target="_blank">
@@ -30,9 +29,9 @@ export default function Footer() {
           </a>
         </div>
         <div className="navigateBtn">
-          <Link to="/about" className="paraSmall">
-            About
-          </Link>
+          <a href="https://drive.google.com/drive/folders/1w0gSw7rI5rZpOMb2E-VNcYHVpPpccbg6?usp=sharing" target="_blank"  className="paraSmall">
+            Resources
+          </a>
         </div>
       </footer>
     </div>
