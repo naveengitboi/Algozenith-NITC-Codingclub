@@ -79,14 +79,14 @@ function Potd() {
     axios
       .get(url + "/editorials")
       .then((res) => {
-        setECdata(res.data);
+        setECdata(res.data.reverse());
       })
       .catch((err) => console.error(err));
 
     axios
       .get(url + "/upcontest")
       .then((res) => {
-        setUCdata(res.data);
+        setUCdata(res.data.reverse());
         console.log(UCdata);
       })
       .catch((err) => console.error(err));

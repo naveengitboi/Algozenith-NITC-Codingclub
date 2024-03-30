@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
-import { FaInstagram, FaGithub, FaWhatsapp } from "react-icons/fa6";
+import { FaInstagram, FaGithub} from "react-icons/fa6";
 import { FaDiscord, FaLinkedinIn } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -27,9 +27,6 @@ export default function Footer() {
           </a>
           <a href="" target="_blank">
             <FaDiscord />
-          </a>
-          <a href="" target="_blank">
-            <FaWhatsapp/>
           </a>
         </div>
         <div className="navigateBtn">

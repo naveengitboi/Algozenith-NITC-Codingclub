@@ -11,7 +11,7 @@ function JobPosts() {
     axios
       .get(url + "/opportunities")
       .then((res) => {
-        setjobsdata(res.data);
+        setjobsdata(res.data.reverse());
       })
       .catch((err) => {
         console.error(err);

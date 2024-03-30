@@ -16,7 +16,7 @@ function JobsHome() {
   useEffect (() => {
     axios.get(url + "/opportunities")
     .then((res) =>{
-      setjobsdata(res.data);
+      setjobsdata(res.data.reverse());
       console.log(res.data[0]);
 
     })

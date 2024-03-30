@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const url = "http://localhost:8000";
   // const url = "https://algozenith-nitc-codingclub-2.onrender.com";
@@ -12,34 +14,34 @@ function App() {
   const [companies, setcom] = useState();
   const [level, setlvl] = useState();
   const [solution, sets] = useState("");
-  const [notify, setNotify] = useState("");
-  const [time, settime] = useState(false);
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
-  const handleLogout = () => { 
-    axios.post(url + "/logout")
-      .then(res => {
+  const handleLogout = () => {
+    axios
+      .post(url + "/logout")
+      .then((res) => {
         console.log(res.data.message);
-        navigate('/');
+        navigate("/");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Logout failed:", error);
       });
-  }
+  };
   useEffect(() => {
-    axios.get(url + "/admin")
-    .then(res =>{
-      if(res.data.valid){
-        console.log(res.data.message)
-      }else{
-        navigate('/');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  })
+    axios
+      .get(url + "/admin")
+      .then((res) => {
+        if (res.data.valid) {
+          console.log(res.data.message);
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   const onsubhand = (e) => {
     e.preventDefault();
@@ -61,24 +63,17 @@ function App() {
       })
       .then((result) => {
         if (result.data === "Posted") {
-          setNotify("Posted question");
+          toast.success("Posted question");
         } else if (result.data === "Question already exists") {
-          setNotify("Question already posted");
+          toast.info("Question already posted");
         } else {
           console.log(result);
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error while posting question");
       });
-
-    settime(true);
-
-    const timer = setTimeout(() => {
-      settime(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
   };
 
   const [companyname, setcompanyname] = useState("Company name");
@@ -112,24 +107,16 @@ function App() {
         formType: "oppo",
       })
       .then((res) => {
-        console.log(res);
-        setNotify2("Job opportunity posted");
+        toast.success("Job opportunity posted");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error in posting job opportunity");
       });
-
-    settime2(true);
-
-    const timer = setTimeout(() => {
-      settime2(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
   };
 
   const [platformname, setplatformname] = useState();
-  const [constestnumber, setcontestnumber] = useState();
+  const [contestnumber, setcontestnumber] = useState();
   const [date, setdate] = useState();
   const [contestlink, setcontestlink] = useState();
   const [solutionlink, setsolutionlink] = useState();
@@ -141,7 +128,7 @@ function App() {
 
     const editorials = {
       platformname,
-      constestnumber,
+      contestnumber,
       date,
       contestlink,
       solutionlink,
@@ -153,20 +140,12 @@ function App() {
         formType: "editorials",
       })
       .then((result) => {
-        setNotify3("Editorial Posted");
-        console.log(result);
+        toast.success("Editorial Posted");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error in posting editorial");
       });
-
-    settime3(true);
-
-    const timer = setTimeout(() => {
-      settime3(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
   };
 
   const [upplatform, setupplatform] = useState();
@@ -186,33 +165,48 @@ function App() {
     axios
       .post(url + "/admin", { formdata: upcontest, formType: "upcontest" })
       .then((result) => {
-        console.log(result);
+        if(result.data === "upcontest posted")
+        toast.success("Posted Upcoming contest")
       })
       .catch((err) => {
         console.error(err);
+        toast.error("Error in posting upcoming contest")
       });
   };
 
-  const deletepotd = (e) => {
+  const deletelc = (e) => {
     e.preventDefault();
 
     axios
-      .delete(url + "/admin", { data: { meta: "potd" } })
+      .delete(url + "/admin", { data: { meta: "leetcode" } })
       .then((res) => {
-        if (res.data == "potd del") setNotify("Deleted Today's POTD's");
-        console.log(res.data);
+        if (res.data == "leetcode del")
+          toast.success("Deleted today's Leetcode potd");
+        else if (res.data == "Not posted leetcode potd yet")
+          toast.info("Not posted leetcode potd yet");
+        else toast.error("Error in deleting (Backend)");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error in deleting (Frontend)");
       });
+  };
 
-    settime(true);
+  const deletegfg = (e) => {
+    e.preventDefault();
 
-    const timer = setTimeout(() => {
-      settime(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
+    axios
+      .delete(url + "/admin", { data: { meta: "gfg" } })
+      .then((res) => {
+        if (res.data == "gfg del") toast.success("Deleted today's GFG potd");
+        else if (res.data == "Not posted gfg potd yet")
+          toast.info("Not posted gfg potd yet");
+        else toast.error("Error in deleting (Backend)");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error in deleting (Frontend)");
+      });
   };
 
   const deleteoppo = (e) => {
@@ -221,20 +215,12 @@ function App() {
     axios
       .delete(url + "/admin", { data: { meta: "oppo" } })
       .then((res) => {
-        if (res.data === "oppo del") setNotify2("Deleted Previous JOB");
-        console.log(res);
+        if (res.data === "oppo del") toast.success("Deleted Previous JOB");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error in deleting job");
       });
-
-    settime2(true);
-
-    const timer = setTimeout(() => {
-      settime2(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
   };
 
   const deleteeditorial = (e) => {
@@ -244,20 +230,27 @@ function App() {
       .delete(url + "/admin", { data: { meta: "editorial" } })
       .then((res) => {
         if (res.data === "editorial del")
-          setNotify3("Deleted Previous Editorial");
+          toast.success("Deleted Previously Posted Editorial");
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
 
-    settime3(true);
+  const deleteupcontest = (e) => {
+    e.preventDefault();
 
-    const timer = setTimeout(() => {
-      settime3(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
+    axios
+      .delete(url + "/admin", { data: { meta: "upcoming" } })
+      .then((res) => {
+        if (res.data === "upcoming contest del")
+          toast.success("Deleted Upcoming contest");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -267,72 +260,82 @@ function App() {
           ALGOZENITH ADMIN PAGE
         </div>
         <div>
-          <button className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full" onClick={handleLogout}>Logout</button>
+          <button
+            className="flex justify-center ml-50 mt-10 font-bold bg-blue-600 text-white px-4 py-2 rounded-l-full"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </div>
-      
+
       <div className="flex justify-center p-10">
         <div className="w-64 rounded-lg bg-slate-300">
           <h1 className="ml-8 font-bold mt-2">POTD</h1>
-          <form className="space-y-5 space-x-8 py-2 " onSubmit={onsubhand}>
+          <form className="space-y-5 space-x-6 py-2  " onSubmit={onsubhand}>
             <input
               type="text"
               placeholder="Platform name"
               onChange={(e) => setn(e.target.value)}
-              className="ml-8 outline-none"
+              className="ml-6 outline-none w-52"
             />
             <input
               type="url"
               placeholder="Question Link"
               onChange={(e) => setq(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
             <input
               type="text"
               placeholder="Question name"
               onChange={(e) => setqn(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
             <input
               type="text"
               placeholder="Concepts and topics"
               onChange={(e) => setc(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
             <input
               type="text"
               placeholder="Companies"
               onChange={(e) => setcom(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
             <input
               type="text"
               placeholder="Difficulty Level"
               onChange={(e) => setlvl(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
             <input
               type="url"
               placeholder="Solution Link"
               onChange={(e) => sets(e.target.value)}
-              className="outline-none"
+              className="outline-none w-52"
             />
-            <div className="flex space-x-5">
+            <div className="flex ml-52">
               <button
                 type="submit"
-                className="block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded"
+                className=" ml-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-16 rounded"
               >
                 Submit
               </button>
-              <button
-                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-                onClick={deletepotd}
-              >
-                Delete
-              </button>
             </div>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+              onClick={deletelc}
+            >
+              Delete LC
+            </button>
+            <button
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-1 rounded"
+              onClick={deletegfg}
+            >
+              Delete GFG
+            </button>
           </form>
-          {time && <h1 className="text-purple-500 mx-10">{notify}</h1>}
         </div>
         <div className="w-64 bg-slate-200 ml-5">
           <h1 className="ml-8 font-bold mt-2">Job Opportunities</h1>
@@ -479,7 +482,7 @@ function App() {
               </button>
               <button
                 className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-                onClick={deleteeditorial}
+                onClick={deleteupcontest}
               >
                 Delete
               </button>
@@ -488,6 +491,19 @@ function App() {
           {/* {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>} */}
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+        transition:Bounce
+      />
     </div>
   );
 }

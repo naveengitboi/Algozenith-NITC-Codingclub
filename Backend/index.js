@@ -1,6 +1,5 @@
-import express from"express";
+import express from "express";
 import mongoose from "mongoose";
-import potd from "./models/potd.model.js";
 import oppo from "./models/opportunities.model.js";
 import editorial from "./models/editorials.model.js";
 import leetcode from "./models/Leetcode.model.js";
@@ -12,23 +11,21 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 
-
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173'];
+const allowedOrigins = ["http://localhost:5174", "http://localhost:5173"];
 // CORS middleware
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -40,29 +37,29 @@ mongoose.connect("mongodb://localhost:27017/algo");
 
 // Create a transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
-      user: 'rakesh.punugubati123@gmail.com',  //add algo zenith email id
-      pass: 'qcgf vruc eqbx mrqp' // create a pass key and add here
-  }
+    user: "rakesh.punugubati123@gmail.com", //add algo zenith email id
+    pass: "qcgf vruc eqbx mrqp", // create a pass key and add here
+  },
 });
 // Function to send password email
 function sendPasswordEmail(password, recipient) {
   // Create the email options
   const mailOptions = {
-      from: 'rakesh.punugubati123@gmail.com',  //add algo mail here
-      to: 'rakesh.punugubati123@gmail.com',    // 
-      subject: 'Your Password',
-      text: `Your password is: ${password}`
+    from: "rakesh.punugubati123@gmail.com", //add algo mail here
+    to: "rakesh.punugubati123@gmail.com", //
+    subject: "Your Password",
+    text: `Your password is: ${password}`,
   };
 
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          console.error('Error occurred:', error);
-      } else {
-          console.log('Email sent:', info.response);
-      }
+    if (error) {
+      console.error("Error occurred:", error);
+    } else {
+      console.log("Email sent:", info.response);
+    }
   });
 }
 app.post("/logout", (req, res) => {
@@ -72,88 +69,105 @@ app.post("/logout", (req, res) => {
   res.json({ message: "Logout successful" });
 });
 
-app.post('/login', (req, res) => {
-  const { type, data } = req.body; 
-  if (type === 'handleSubmit') {
-      const { email, password } = data; 
-      console.log(email, password);
-      UserModel.findOne({ email, password })
+app.post("/login", (req, res) => {
+  const { type, data } = req.body;
+  if (type === "handleSubmit") {
+    const { email, password } = data;
+    console.log(email, password);
+    UserModel.findOne({ email, password })
       .then(function (user) {
-          if (user) {
-              const accessToken = jwt.sign({email: email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
-              const refreshToken = jwt.sign({email: email}, "jwt-refresh-token-secret-key", {expiresIn: '30m'});
+        if (user) {
+          const accessToken = jwt.sign(
+            { email: email },
+            "jwt-access-token-secret-key",
+            { expiresIn: "1m" }
+          );
+          const refreshToken = jwt.sign(
+            { email: email },
+            "jwt-refresh-token-secret-key",
+            { expiresIn: "60m" }
+          );
 
-              res.cookie('accessToken', accessToken, {maxAge: 60000})
+          res.cookie("accessToken", accessToken, { maxAge: 60000 });
 
-              res.cookie('refreshToken' , refreshToken, {maxAge:1800000 , httpOnly: true , secure: true , sameSite:'strict'})
-              res.json({ message: 'Valid user' });
-          } else {
-              res.json({ message: 'Invalid user' });
-          }
+          res.cookie("refreshToken", refreshToken, {
+            maxAge: 3600000,
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+          });
+          res.json({ message: "Valid user" });
+        } else {
+          res.json({ message: "Invalid user" });
+        }
       })
       .catch(function (err) {
-          console.log(err);
-          res.status(500).send("Error occurred");
+        console.log(err);
+        res.status(500).send("Error occurred");
       });
-  } else if (type === 'togglepopup') {
-      const { checkEmail } = data;
-      console.log(checkEmail);
-      UserModel.findOne({ email: checkEmail }) 
+  } else if (type === "togglepopup") {
+    const { checkEmail } = data;
+    console.log(checkEmail);
+    UserModel.findOne({ email: checkEmail })
       .then(function (user) {
-          if (user) {
-              sendPasswordEmail(user.password, checkEmail);
-              res.json({ message: 'Valid user' });
-          } else {
-              res.json({ message: 'Invalid user' });
-          }
+        if (user) {
+          sendPasswordEmail(user.password, checkEmail);
+          res.json({ message: "Valid user" });
+        } else {
+          res.json({ message: "Invalid user" });
+        }
       })
       .catch(function (err) {
-          console.log(err);
-          res.status(500).send("Error occurred");
+        console.log(err);
+        res.status(500).send("Error occurred");
       });
   }
 });
 
 const verfyUser = (req, res, next) => {
   const accesstoken = req.cookies.accessToken;
-  if(!accesstoken){
-    if(renewToken(req, res)){
+  if (!accesstoken) {
+    if (renewToken(req, res)) {
       next();
     }
-  }else{
-    jwt.verify(accesstoken ,"jwt-access-token-secret-key" ,(err , decoded) => {
-      if(err){
-        return res.json({valid :false, message: "Invalid Token"})
-      }else{
+  } else {
+    jwt.verify(accesstoken, "jwt-access-token-secret-key", (err, decoded) => {
+      if (err) {
+        return res.json({ valid: false, message: "Invalid Token" });
+      } else {
         req.email = decoded.email;
         next();
       }
-    })
+    });
   }
-}
+};
 
-const renewToken = (req , res) => {
+const renewToken = (req, res) => {
   const refreshtoken = req.cookies.refreshToken;
   let exist = false;
-  if(!refreshtoken){
-    return res.json({valid : false, message:"No refresh token"})
-  }else{
-    jwt.verify(refreshtoken ,"jwt-refresh-token-secret-key" ,(err , decoded) => {
-      if(err){
-        return res.json({valid :false, message: "Invalid Refresh Token"})
-      }else{
-        const accessToken = jwt.sign({email: decoded.email}, "jwt-access-token-secret-key", {expiresIn: '1m'});
-        res.cookie('accessToken', accessToken, {maxAge: 60000})
+  if (!refreshtoken) {
+    return res.json({ valid: false, message: "No refresh token" });
+  } else {
+    jwt.verify(refreshtoken, "jwt-refresh-token-secret-key", (err, decoded) => {
+      if (err) {
+        return res.json({ valid: false, message: "Invalid Refresh Token" });
+      } else {
+        const accessToken = jwt.sign(
+          { email: decoded.email },
+          "jwt-access-token-secret-key",
+          { expiresIn: "1m" }
+        );
+        res.cookie("accessToken", accessToken, { maxAge: 60000 });
         exist = true;
       }
-    })
+    });
   }
   return exist;
-}
+};
 
-app.get("/admin" , verfyUser, (req, res) => {
-  return res.json({valid: true, message: "authorized"})
-})
+app.get("/admin", verfyUser, (req, res) => {
+  return res.json({ valid: true, message: "authorized" });
+});
 
 app.post("/admin", async (req, res) => {
   const { formdata, formType } = req.body;
@@ -161,52 +175,52 @@ app.post("/admin", async (req, res) => {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    leetcode.findOne({date:date})
-    .then(found => {
-      if(found){
-        res.json("Question already exists");
-      }
-      else
-      {
-         leetcode.create({
-          date: date,
-          question: formdata.question,
-          quesname: formdata.quesname,
-          concept: formdata.concept,
-          companies: formdata.companies,
-          level: formdata.level,
-          solution: formdata.solution,
-        })
-        .then(()=>res.json("Posted"))
-        .catch((err)=>res.json("Error"));
-      }
-    })
-    .catch((err)=>res.json("Error")) 
+    leetcode
+      .findOne({ date: date })
+      .then((found) => {
+        if (found) {
+          res.json("Question already exists");
+        } else {
+          leetcode
+            .create({
+              date: date,
+              question: formdata.question,
+              quesname: formdata.quesname,
+              concept: formdata.concept,
+              companies: formdata.companies,
+              level: formdata.level,
+              solution: formdata.solution,
+            })
+            .then(() => res.json("Posted"))
+            .catch((err) => res.json("Error"));
+        }
+      })
+      .catch((err) => res.json("Error"));
   } else if (formType === "gfg") {
     const datenow = new Date();
     const dat = datenow.toDateString();
     const date = dat.substring(4);
-    gfg.findOne({date:date})
-    .then(found => {
-      if(found){
-        res.json("Question already exists");
-      }
-      else
-      {
-         gfg.create({
-          date: date,
-          question: formdata.question,
-          quesname: formdata.quesname,
-          concept: formdata.concept,
-          companies: formdata.companies,
-          level: formdata.level,
-          solution: formdata.solution,
-        })
-        .then(()=>res.json("Posted"))
-        .catch((err)=>res.json("Error"));
-      }
-    })
-    .catch((err)=>res.json("Error"))
+    gfg
+      .findOne({ date: date })
+      .then((found) => {
+        if (found) {
+          res.json("Question already exists");
+        } else {
+          gfg
+            .create({
+              date: date,
+              question: formdata.question,
+              quesname: formdata.quesname,
+              concept: formdata.concept,
+              companies: formdata.companies,
+              level: formdata.level,
+              solution: formdata.solution,
+            })
+            .then(() => res.json("Posted"))
+            .catch((err) => res.json("Error"));
+        }
+      })
+      .catch((err) => res.json("Error"));
   } else if (formType === "oppo") {
     await oppo.create({
       companyname: formdata.companyname,
@@ -228,12 +242,12 @@ app.post("/admin", async (req, res) => {
       solutionlink: formdata.solutionlink,
     });
     res.json("editorial posted");
-  }else if(formType === "upcontest"){
+  } else if (formType === "upcontest") {
     await upcontest.create({
       upplatform: formdata.upplatform,
       contesttype: formdata.contesttype,
       update: formdata.update,
-      uplink: formdata.uplink,  
+      uplink: formdata.uplink,
     });
     res.json("upcontest posted");
   } else {
@@ -242,30 +256,79 @@ app.post("/admin", async (req, res) => {
   }
 });
 
-app.delete("/admin", async (req, res) => {
+app.delete("/admin", (req, res) => {
   const meta = req.body.meta;
   console.log(meta);
-  if (meta === "potd") {
+  if (meta === "leetcode") {
     const datenow = new Date();
-    const date = datenow.toDateString();
-    await potd.deleteOne({ date: date });
-    res.send("potd del");
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    leetcode
+      .deleteOne({ date: date })
+      .then((result) => {
+        if (result.deletedCount === 1) res.json("leetcode del");
+        else res.json("Not posted leetcode potd yet");
+      })
+      .catch((err) => {
+        console.error("Error occurred while deleting:", err);
+        res.json({ error: "An error occurred while deleting data." });
+      });
+  } else if (meta === "gfg") {
+    const datenow = new Date();
+    const dat = datenow.toDateString();
+    const date = dat.substring(4);
+    gfg
+      .deleteOne({ date: date })
+      .then((result) => {
+        if (result.deletedCount === 1) res.json("gfg del");
+        else res.json("Not posted gfg potd yet");
+      })
+      .catch((err) => {
+        console.error("Error occurred while deleting:", err);
+        res.json({ error: "An error occurred while deleting data" });
+      });
   } else if (meta === "oppo") {
-    const latest = await oppo.findOneAndDelete({}, { sort: { _id: -1 } });
-    if (latest) {
-      res.send("oppo del");
-    } else {
-      console.log("No document found for deletion");
-      res.status(404).send("404");
-    }
+    oppo
+      .findOneAndDelete({}, { sort: { _id: -1 } })
+      .then((latest) => {
+        if (latest) {
+          res.send("oppo del");
+        } else {
+          res.send("404 Error");
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred while deleting document:", error);
+        res.send("Internal Server Error");
+      });
   } else if (meta === "editorial") {
-    const latest = await editorial.findOneAndDelete({}, { sort: { _id: -1 } });
-    if (latest) {
-      res.send("editorial del");
-    } else {
-      console.log("No document found for deletion");
-      res.status(404).send("404 ok");
-    }
+    editorial
+      .findOneAndDelete({}, { sort: { _id: -1 } })
+      .then((latest) => {
+        if (latest) {
+          res.send("editorial del");
+        } else {
+          res.send("404 Error");
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred while deleting document:", error);
+        res.send("Internal Server Error");
+      });
+  } else if (meta === "upcoming") {
+    upcontest
+      .findOneAndDelete({}, { sort: { _id: -1 } })
+      .then((latest) => {
+        if (latest) {
+          res.send("upcoming contest del");
+        } else {
+          res.send("404 Error");
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred while deleting document:", error);
+        res.send("Internal Server Error");
+      });
   }
 });
 
