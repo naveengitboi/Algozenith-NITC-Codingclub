@@ -31,7 +31,7 @@ function Navbar() {
         </div>
         <ul ref={navLinksRef}  className={isActive ? 'navLinks navActive':'navLinks'}>
             <li><NavLink to='/'>Home</NavLink></li>
-            <li><NavLink to='/placementTalks'>Placement Talks</NavLink></li>
+            <li><NavLink to='/placementtalks'>Placement Talks</NavLink></li>
             {/* <li><NavLink to='/events'>Events</NavLink></li> */}
             <li><NavLink to='/opportunities'>Job Posts</NavLink></li>
             <li><NavLink to='/potd'>PotD, E&C</NavLink></li>
