@@ -8,6 +8,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate
 } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Home from "./components/Home";
@@ -21,8 +22,8 @@ import { store } from "./Redux/Store.js";
 import { Provider } from "react-redux";
 import Mission from "./components/homeElements/Mission.jsx";
 import Vission from "./components/homeElements/Vission.jsx";
-import ScrollToTop from "./elements/ScrollToTop.jsx";
 import NotFound from "./components/NotFound/index.jsx";
+import FullTalk from "./components/FullTalk/index.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,15 +34,17 @@ const router = createBrowserRouter(
          <Route path="vission" element={<Vission/>} />
       </Route>
       <Route path="home" element={<Home />} />
-      <Route path="/opportunities" element={<JobPosts />} />
-      <Route path="/placementtalks" element={<PlacementTalks />} />
-      <Route path="/potd" element={<Potd />} />
-      <Route path="/editorials" element={<Editorials />} />
-      {/* <Route path='/members' element={<Members/>}/> */}
-      <Route path="/about" element={<About />} >
-       
+      <Route path="opportunities" element={<JobPosts />} />
+      <Route path="placementtalks" element={<PlacementTalks />} >
       </Route>
-      <Route path="*" element={<NotFound/>} />
+      <Route path="placementtalks/fulltalk/:id" element={<FullTalk/>} />
+    
+      <Route path="potd" element={<Potd />} />
+      <Route path="editorials" element={<Editorials />} />
+      {/* <Route path='/members' element={<Members/>}/> */}
+      <Route path="about" element={<About />} />
+       <Route path="notfound" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/notfound" replace />} />
     </Route>
   )
 );
