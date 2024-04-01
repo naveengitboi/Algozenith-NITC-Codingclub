@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const upComingContestSchema = new mongoose.Schema({
-  platform: { type: String },
+  upplatform: { type: String },
   contesttype: { type: String },
-  date: { type: String },
-  link: { type: String },
+  update: { type: String },
+  uplink: { type: String },
 });
 
-const UpcomingcontestModel = mongoose.model("Upcomingcontest", upComingContestSchema);
+const UpcomingcontestModel = mongoose.model("upcontest", upComingContestSchema);
 
 export default UpcomingcontestModel;

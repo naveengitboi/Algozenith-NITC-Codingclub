@@ -7,7 +7,7 @@
 
 .heroDetails,
 .heroImg {
-  width: 50%;
+  width: 40%;
   color: var(--pri_dark_tone);
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
 
 
 .heroImg {
-  min-width: 50%;
+  min-width: 47%;
   height: 100vh;
   width: max-content;
   background-image: url("/images/algogri.png");
@@ -56,11 +56,12 @@
   background-position: center;
   position: relative;
   background-repeat: no-repeat;
+  margin-left: 50px;
 }
 
 .heroImg img {
   position: absolute;
-  min-width: 150%;
+  min-width: 140%;
   transform: rotate(-30deg) translateY(-150px);
 }
 

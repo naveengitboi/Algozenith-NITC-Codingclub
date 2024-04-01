@@ -3,48 +3,106 @@ import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
 import "./index.css";
 import { motion } from "framer-motion";
-import { useDispatch} from 'react-redux'
-import { withCursor, removeCursorChange } from '../../Redux/ImageHoverSlicer'
+import { useDispatch } from "react-redux";
+import { withCursor, removeCursorChange } from "../../Redux/ImageHoverSlicer";
 
-const placementTalksData = [
+export const placementTalksData = [
   {
     image: "/images/clubMem.png",
     candidName: "Ravan",
+    candidCourse: "CS Engineering",
+    candidUniversity: "NIT, Calicut",
+    company: "Google",
+    roleInCompany: "Associate",
     heading: "Story Talks",
     description: "Story Description",
+    type: "placement",
+    questions: ["Academics", "Academics"],
+    answers: [
+      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
+      "Following the announcement of Stadia’s",
+    ],
+    overview:
+      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
   {
     image: "/images/clubMem.png",
     heading: "Story Talks",
     candidName: "Ravan",
+    candidCourse: "CS Engineering",
+    candidUniversity: "NIT, Calicut",
+    company: "Google",
+    roleInCompany: "Associate",
     description: "Story Description",
+    type: "placement",
+    questions: ["Academics", "Academics"],
+    answers: [
+      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
+      "Following the announcement of Stadia’s",
+    ],
+    overview:
+      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
   {
     image: "/images/clubMem.png",
     heading: "Story Talks",
     candidName: "Ravan",
+    candidCourse: "CS Engineering",
+    candidUniversity: "NIT, Calicut",
+    company: "Google",
+    roleInCompany: "Associate",
     description: "Story Description",
+    type: "placement",
+    questions: ["Academics", "Academics"],
+    answers: [
+      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
+      "Following the announcement of Stadia’s",
+    ],
+    overview:
+      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
   {
     image: "/images/clubMem.png",
     heading: "Story Talks",
     candidName: "Ravan",
+    candidCourse: "CS Engineering",
+    candidUniversity: "NIT, Calicut",
+    company: "Google",
+    roleInCompany: "Associate",
     description: "Story Description",
+    type: "placement",
+    questions: ["Academics", "Academics"],
+    answers: [
+      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
+      "Following the announcement of Stadia’s",
+    ],
+    overview:
+      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
   {
     image: "/images/clubMem.png",
     heading: "Story Talks",
     candidName: "Ravan",
+    candidCourse: "CS Engineering",
+    candidUniversity: "NIT, Calicut",
+    company: "Google",
+    roleInCompany: "Associate",
     description: "Story Description",
+    type: "placement",
+    questions: ["Academics", "Academics"],
+    answers: [
+      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
+      "Following the announcement of Stadia’s",
+    ],
+    overview:
+      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
 ];
 
-function LinkItem({ talk }) {
-
-    const dispatch = useDispatch()
-
+function LinkItem({ talk, uniq }) {
+  const dispatch = useDispatch();
   return (
-    <Link to="/placementtalks/2">
+    <Link to={`/placementtalks/fulltalk/${uniq+1}`}>
       <motion.div
         className="storyLink"
         initial="initial"
@@ -96,11 +154,11 @@ function LinkItem({ talk }) {
             },
           }}
           transition={{ duration: 1, type: "spring" }}
-          onMouseEnter={() => dispatch(withCursor('viewTalk'))} 
-          onMouseLeave={() => dispatch(removeCursorChange())} 
+          onMouseEnter={() => dispatch(withCursor("viewTalk"))}
+          onMouseLeave={() => dispatch(removeCursorChange())}
           onClick={() => dispatch(removeCursorChange())}
         />
- 
+
         <motion.div
           variants={{
             initial: {
@@ -126,14 +184,14 @@ function PlacementTalks() {
   return (
     <div className="pagePadding commonPadding">
       <div className="linksContainer gapBwSections">
-          <div className="aboutHeader">
+        <div className="aboutHeader">
           <h1 className="paraLarge">Inspirations</h1>
           <div className="gradOneSidePurpleLine"></div>
         </div>
         {placementTalksData.map((item, idx) => {
           return (
-            <div className="talkItem" key={idx}>
-              <LinkItem talk={item} />
+            <div className="talkItem" key={idx} >
+              <LinkItem talk={item} uniq={idx} />
               <div className="gradCompleteLine"></div>
             </div>
           );

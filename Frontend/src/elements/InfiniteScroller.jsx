@@ -43,7 +43,7 @@ const youtubeChannels = [
     {
         type:'svg',
         image: <SiGeeksforgeeks/>,
-        name: 'LeetCode',
+        name: 'GeeksforGeeks',
         link: 'www.leetcode.com'
     },{
         type:'svg',
