@@ -7,7 +7,9 @@
   justify-content: center;
   align-items: center;
 }
-
+.aboutHeader .paraLarge {
+  min-width: max-content;
+}
 .aboutHeader .gradOneSidePurpleLine {
   width: 80%;
   margin-left: 1rem;
@@ -59,7 +61,7 @@
 }
 
 .clubMem .guides {
-  margin: 2rem 0;
+  margin: 5rem 0;
 }
 
 .guides .aboutHeader {
@@ -67,16 +69,19 @@
 }
 .imagesInner {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.imagesOuter {
-  overflow-x: hidden;
-  cursor: grab;
-}
+
 .memContainer {
   margin: 0 0.85rem;
+  width: 250px;
 }
 .imageContainer {
-  min-width: 350px;
+  width: 250px;
+  overflow: hidden;
+  border-radius: 0.25rem;
 }
 .imageContainer img {
   aspect-ratio: 4/5;
@@ -90,10 +95,15 @@
   align-items: center;
   font-weight: 500;
   color: var(--pri_dark_tone);
+  line-height: 1;
+  padding: 0.5rem 0;
 }
 .personProf .tinySize {
   font-family: var(--primary_font);
   font-weight: 600;
+}
+.personProf .tinySize:nth-child(2) {
+  text-align: right;
 }
 .batchDet {
   display: flex;
@@ -111,10 +121,6 @@
 
 .roleDet span {
   color: var(--sec_color);
-}
-
-.clubPillars .imageContainer {
-  min-width: 250px;
 }
 
 .joinUsPage {
@@ -144,6 +150,10 @@
   padding: 2.85rem;
   border-radius: 0 var(--bradius) var(--bradius);
 }
+.contributeText .paraLarge {
+  color: var(--white_color);
+  padding: 1rem 0;
+}
 
 .actionsDiv {
   display: flex;
@@ -166,4 +176,155 @@
 .actionsDiv button svg {
   font-size: 1.5rem;
   margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 1025px) {
+  .aboutTopContainer {
+    margin-top: 2rem;
+  }
+  .aboutHeader .gradOneSidePurpleLine {
+    margin-left: 0.5rem;
+  }
+  .goalsContainer {
+    gap: 5px;
+  }
+  .goalImg {
+    margin: 0.5rem 0 1.2rem;
+  }
+  .clubMem .guides {
+    margin: 4rem 0;
+  }
+  .guides .aboutHeader {
+    margin: 0.85rem 0;
+  }
+  .memContainer {
+    --widthSize: 220px;
+    margin: 0 0.85rem;
+    width: var(--widthSize);
+  }
+  .imageContainer {
+    width: var(--widthSize);
+  }
+  .personProf .batchDet span {
+    --size: 5px;
+    margin: 0 0.45rem;
+  }
+
+  .action {
+    --bradius: 0.75rem;
+    padding: 1.85rem 0;
+  }
+  .application {
+    width: 270px;
+  }
+  .contributeText {
+    background-color: var(--pri_dark_tone);
+    padding: 2.85rem;
+    border-radius: 0 var(--bradius) var(--bradius);
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .aboutTopContainer {
+    margin-top: 1rem;
+  }
+
+  .aboutHeader .gradOneSidePurpleLine {
+    margin-left: 0.5rem;
+  }
+  .goalsContainer {
+    gap: 5px;
+  }
+  .goalImg {
+    margin: 0.5rem 0 1.2rem;
+  }
+
+  .memContainer {
+    --widthSize: 200px;
+    margin: 0 0.45rem;
+    width: var(--widthSize);
+  }
+  .imageContainer {
+    width: var(--widthSize);
+  }
+  .personProf .batchDet span {
+    --size: 5px;
+    margin: 0 0.45rem;
+  }
+
+  .action {
+    --bradius: 0.75rem;
+    padding: 1.85rem 0;
+  }
+  .application {
+    width: 270px;
+  }
+  .contributeText {
+    background-color: var(--pri_dark_tone);
+    padding: 2.85rem;
+    border-radius: 0 var(--bradius) var(--bradius);
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .aboutTopContainer {
+    margin-top: 3rem;
+  }
+
+  .aboutHeader .gradOneSidePurpleLine {
+    margin-left: 0.5rem;
+  }
+  .goalsContainer {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+
+  .goalImg {
+    margin: 0.5rem 0 1.2rem;
+  }
+
+  .memContainer {
+    --widthSize: 300px;
+    margin: 0 0.45rem;
+    width: var(--widthSize);
+  }
+  .imageContainer {
+    width: var(--widthSize);
+  }
+  .personProf .tinySize {
+    font-size: 0.75rem;
+  }
+  .personProf .batchDet span {
+    --size: 6px;
+    margin: 0 0.45rem;
+  }
+
+  .action {
+    --bradius: 0.75rem;
+    padding: 1.25rem 0;
+  }
+  .application {
+    width: 100%;
+    box-shadow: 0 2px 20px 20px white;
+  }
+  .contributeText {
+    background-color: var(--pri_dark_tone);
+    padding: 2.15rem;
+    border-radius: 0 0 var(--bradius);
+    text-align: center;
+  }
+  .actionsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .actionsDiv .paraSmall {
+    padding: 1rem 0;
+  }
+  .actionsDiv button {
+    padding: 0.85rem;
+    text-align: center;
+    justify-content: center;
+  }
 }

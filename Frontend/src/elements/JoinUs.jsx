@@ -17,7 +17,7 @@ function JoinUs() {
           <IoMdClose />
         </div>
         <div className="contributeText">
-          <h1 className="smallLSize">Contribute To Your Peers Growth!</h1>
+          <h1 className="paraLarge">Contribute To Your Peers Growth!</h1>
           <div className="actionsDiv">
             <p className="paraSmall">
               Send you Resume to Our Club Mail Id and be Part of us!
