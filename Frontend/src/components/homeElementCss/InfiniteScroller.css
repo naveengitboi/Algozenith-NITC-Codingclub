@@ -4,14 +4,21 @@
 }
 .scrollContainer {
   display: flex;
-  --durat : 14s;
+  --durat: 25s;
   flex-wrap: nowrap;
   width: fit-content;
   animation: scrollLeft var(--durat) linear infinite;
   border: 3px solid var(--pri_dark_tone);
   margin: 2rem 0;
-
 }
+
+.scrollContainer a .paraMedium {
+  display: block;
+  width: max-content;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 @keyframes scrollLeft {
   to {
     transform: translateX(-50%);
@@ -41,7 +48,7 @@
   background-color: rgb(219, 219, 219);
 }
 .resourceLinkItem .itemImg {
-  width: 60px;
+  width: 50px;
 }
 
 .resourceLinkItem .itemImg .resourceImg {
@@ -51,10 +58,5 @@
 
 .resourceLinkItem svg {
   display: inline-block;
-  font-size: 45px;
-}
-.resourceLinkItem .paraLarge {
-  font-weight: 700;
-  text-transform: uppercase;
-  color: rgb(28, 26, 26);
+  font-size: 35px;
 }

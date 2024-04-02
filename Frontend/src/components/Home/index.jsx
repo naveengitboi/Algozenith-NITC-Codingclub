@@ -28,7 +28,7 @@ export default function Home() {
 
 
   return (
-    <div className="pagePadding px-32">
+    <div className="pagePadding  commonPadding">
       <div className="homeHeroContainer">
         <div className="heroDetails">
 

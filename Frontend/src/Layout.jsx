@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import { motion, useMotionValue } from "framer-motion";
 import readTalk from "./assets/hoverimg/readTalk.svg";
 import { useSelector } from "react-redux";
-import dragImg from "./assets/hoverimg/drag.svg";
+import linkedIn from "./assets/hoverimg/linkedin.svg";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { ScrollRestoration } from "react-router-dom";
 const cursorVarient = {
@@ -15,15 +15,15 @@ const cursorVarient = {
     backgroundImage: `url(none)`,
   },
   viewTalkImg: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     backgroundImage: `url(${readTalk})`,
     backgroundSize: `cover`,
   },
   draggerImage: {
-    width: 80,
-    height: 80,
-    backgroundImage: `url(${dragImg})`,
+    width: 60,
+    height: 60,
+    backgroundImage: `url(${linkedIn})`,
     backgroundSize: `cover`,
   },
 };

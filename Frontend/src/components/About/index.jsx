@@ -1,114 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
-import { useDispatch } from "react-redux";
-import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
 
-const goalsData = [
-  {
-    goalImg: "/images/goals/ideas.png",
-    fLine: "Elevate Your",
-    sLine: "Ideas",
-  },
-  {
-    goalImg: "/images/goals/community.png",
-    fLine: "Grow With",
-    sLine: "Group",
-  },
-  {
-    goalImg: "/images/goals/success.png",
-    fLine: "Fuel Your",
-    sLine: "Path",
-  },
-];
+import { goalsData, b22mem, b21mem, b20mem } from "./membersData";
+import Members from "./Members";
 
-const clubGuides = [
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-    position: "Head",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-    position: "Head",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-    position: "Head",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-    position: "Head",
-  },
-];
-
-const clubPillars = [
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-  {
-    image: "/images/clubMem.png",
-    name: "J Naveen",
-    role: "Graphic Designer",
-    batch: "B21",
-  },
-];
 
 function About() {
-  const dispatch = useDispatch();
 
-  const [dragWidth, setDragWidth] = useState(0);
-  const [clubPillarDrag, setClubPillarDrag] = useState(0);
-  const clubGuidesRef = useRef();
-  const clubPillarsRef = useRef();
-
-  useEffect(() => {
-    setDragWidth(
-      clubGuidesRef.current.scrollWidth - clubGuidesRef.current.offsetWidth
-    );
-    setClubPillarDrag(
-      clubPillarsRef.current.scrollWidth - clubPillarsRef.current.offsetWidth
-    );
-  }, []);
 
   return (
     <div className="pagePadding commonPadding">
@@ -152,83 +52,11 @@ function About() {
       </div>
 
       <div className="clubMem gapBwSections">
-        <div className="guides">
-          <div className="aboutHeader">
-            <h1 className="paraLarge">Club Guides</h1>
-            <div className="gradOneSidePurpleLine"></div>
-          </div>
-
-          <motion.div ref={clubGuidesRef} className="imagesOuter">
-            <motion.div
-              drag="x"
-              dragConstraints={{ left: -dragWidth, right: 0 }}
-              className="imagesInner"
-              onMouseEnter={() => {
-                dispatch(withCursor("drag"));
-              }}
-              onMouseLeave={() => {
-                dispatch(removeCursorChange());
-              }}
-            >
-              {clubGuides.map((mem, idx) => {
-                return (
-                  <motion.div className="memContainer">
-                    <div className="imageContainer">
-                      <img src={mem.image} alt={mem.name} />
-                    </div>
-                    <div className="personProf">
-                      <p className="tinySize batchDet">
-                        {idx + 1 < 10 ? `0${idx + 1}` : `${idx}`} <span></span>{" "}
-                        {mem.batch}
-                      </p>
-                      <p className="tinySize roleDet">
-                        {mem.role} <span>{mem.position}</span>
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        <div className="guides">
-          <div className="aboutHeader">
-            <h1 className="paraLarge">Club Pillars</h1>
-            <div className="gradOneSidePurpleLine"></div>
-          </div>
-
-          <motion.div ref={clubPillarsRef} className="imagesOuter">
-            <motion.div
-              drag="x"
-              dragConstraints={{ left: -clubPillarDrag, right: 0 }}
-              className="imagesInner"
-              onMouseEnter={() => {
-                dispatch(withCursor("drag"));
-              }}
-              onMouseLeave={() => {
-                dispatch(removeCursorChange());
-              }}
-            >
-              {clubPillars.map((mem, idx) => {
-                return (
-                  <motion.div className="memContainer clubPillars">
-                    <div className="imageContainer">
-                      <img src={mem.image} alt={mem.name} />
-                    </div>
-                    <div className="personProf">
-                      <p className="tinySize batchDet">
-                        {idx + 1 < 10 ? `0${idx + 1}` : `${idx}`} <span></span>{" "}
-                        {mem.batch}{" "}
-                      </p>
-                      <p className="tinySize roleDet">{mem.role}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
+      
+        <Members batch={b22mem} batchYear={'Our B22'} />
+        <Members batch={b21mem} batchYear={'Our B21'} />
+        <Members batch={b20mem} batchYear={'Our B20'} />
+      
       </div>
 
       <div className="joinUsContainer gapBwSections">
