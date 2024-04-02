@@ -5,6 +5,7 @@ import editorial from "./models/editorials.model.js";
 import leetcode from "./models/Leetcode.model.js";
 import gfg from "./models/gfg.model.js";
 import upcontest from "./models/upcontests.model.js";
+import talks from "./models/talks.model.js";
 import UserModel from "./Data/Login.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -329,6 +330,21 @@ app.delete("/admin", (req, res) => {
         console.error("Error occurred while deleting document:", error);
         res.send("Internal Server Error");
       });
+  } else if (meta === "expired") {
+    const today = new Date().toISOString().slice(0, 10);
+    console.log(today);
+    upcontest
+      .deleteMany({ update: { $lt: today } })
+      .then((result) => {
+        res.json("Success");
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json("Error deleting records");
+      });
+  }
+  else if(meta === "talks"){
+
   }
 });
 
