@@ -25,6 +25,14 @@
   }
 }
 
+.platformScroller:hover {
+  animation-play-state: paused;
+}
+
+.youtubesScroller:hover {
+  animation-play-state: paused;
+}
+
 .youtubesScroller {
   animation: scrollRight var(--durat) linear infinite;
 }
