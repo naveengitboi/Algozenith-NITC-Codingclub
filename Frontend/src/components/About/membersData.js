@@ -249,16 +249,16 @@ export const b20mem = [
         name: "K Kowshiq",
         role: "Algozenith Lead",
         position: "Head",
-        batch: "B21",
-        linkedIn: "https://www.linkedin.com/in/venkata-sai-vedurupaka/"
+        batch: "B20",
+        linkedIn: "https://in.linkedin.com/in/kattamurikowshiq"
     },
     {
         image: "/images/clubmem/b20/rahul_b20.jpg",
         name: "D Rahul",
         role: "Algozenith DSA Lead",
         position: "Head",
-        batch: "B21",
-        linkedIn: "https://www.linkedin.com/in/venkata-sai-vedurupaka/"
+        batch: "B20",
+        linkedIn: "https://in.linkedin.com/in/dasari-rahul-7a0830219"
     }
     ,
     {
@@ -266,8 +266,8 @@ export const b20mem = [
         name: "D Rahul",
         role: "Snr Web Dev",
         position: "Head",
-        batch: "B21",
-        linkedIn: "https://www.linkedin.com/in/venkata-sai-vedurupaka/"
+        batch: "B20",
+        linkedIn: "https://in.linkedin.com/in/harsha-vardhan-bavigadda-99054721b"
     }
 
 

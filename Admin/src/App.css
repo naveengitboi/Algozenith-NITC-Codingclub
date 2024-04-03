@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+}
+
+:root {
+  --greenBg: rgb(48, 116, 48);
+  --orangeBg: rgb(216, 141, 0);
+  --redBg: rgb(203, 46, 46);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.pageHeading {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0 2rem;
+}
+.pageFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commonForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 2px 2px rgb(239, 239, 239);
+  padding: 3rem 4rem;
+}
+
+.commonForm input {
+  padding: 0.5rem;
+  font-size: 1.15rem;
+  border: 2px solid rgb(150, 150, 150);
+  border-radius: 0.25rem;
+  min-width: 500px;
+  margin: 0.5rem 0;
+  outline: none;
+}
+
+.commonForm .inputSection {
+  width: 100%;
+}
+
+.inputSection select {
+  margin-left: 1rem;
+  border: 2px solid rgb(226, 226, 226);
+  padding: 0.5rem;
+}
+
+.commonForm input:active {
+  outline: none;
+}
+
+.button {
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+.green {
+  background-color: var(--greenBg);
+  color: white;
+}
+
+.addedContents {
+  margin: 4rem 0;
+}
+
+.listHeader {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 10px;
+  margin: 0.85rem 0;
+}
+
+.questionName {
+  grid-column: 2 / span 4;
+}
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.listContent {
+  display: flex;
+}
+.listHeading {
+  margin-left: 0.5rem;
+  text-align: center;
+}
+
+.actionsBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.actionsBtn button {
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  margin: 0 0.25rem;
+  border-radius: 0.15rem;
+}
+.orange {
+  background-color: var(--orangeBg);
+  color: white;
+}
+
+.red {
+  background-color: var(--redBg);
+  color: white;
+}
+
+.labelAndInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+.labelAndInput label {
+  width: 100%;
+}
+.labelAndInput .answerText {
+  width: 100%;
+  border: 2px solid rgb(172, 172, 172);
+  padding: 0.5rem;
+}
+.addBtn {
+  padding: 0.5rem 1.5rem;
+}
