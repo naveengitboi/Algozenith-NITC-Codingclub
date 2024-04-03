@@ -1,0 +1,11 @@
+.homePage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.links a {
+  padding: 1rem 2rem;
+  border: 2px solid gray;
+}
