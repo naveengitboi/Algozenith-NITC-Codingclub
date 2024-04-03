@@ -253,6 +253,20 @@ function App() {
       });
   };
 
+  const deleteexpired = (e) => {
+    e.preventDefault();
+
+    axios.delete(url + "/admin" , {data: {meta: "expired"}})
+    .then((res)=>{
+      if(res.data === "Success")
+      toast.success("Deleted all expired contests")
+    })
+    .catch((err) => {
+      console.log(err)
+      toast.error("Error in deleting expired contests")
+    })
+  }
+
   return (
     <div>
       <div className="flex justify-between">
@@ -487,6 +501,12 @@ function App() {
                 Delete
               </button>
             </div>
+            <button
+                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                onClick={deleteexpired}
+              >
+                Delete Expired
+              </button>
           </form>
           {/* {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>} */}
         </div>
