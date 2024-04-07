@@ -45,7 +45,7 @@ function LCCard({index, data ,flippedIndex, setFlippedIndex, hoveredIndex, setHo
                       <div>
                         <img
                           src={hoveredIndex === index ? lclight : lcdark}
-                          className="h-32 mt-2 ml-6 mr-2"
+                          className="h-40 ml-6 mr-2"
                         />
                       </div>
                     </div>

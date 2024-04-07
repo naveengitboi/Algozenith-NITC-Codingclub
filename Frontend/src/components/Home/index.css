@@ -71,3 +71,15 @@
   background-repeat: no-repeat;
   margin: var(--top_gap) 0;
 }
+@keyframes bounce-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px); /* Adjust the distance of the bounce */
+  }
+}
+
+.animate-bounce-right {
+  animation: bounce-right 2s infinite;
+}

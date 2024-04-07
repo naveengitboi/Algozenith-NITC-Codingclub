@@ -180,7 +180,7 @@ function Potd() {
         <div className="pagePadding ">
           <div className="flex flex-col items-center mt-5">
             <div className="w-3/4 flex justify-between">
-              <p className="text-[#003f7e] font-bold text-2xl">
+              <p className="text-[#003f7e] font-bold paraLarge text-3xl">
                 Problem Of The Day
               </p>
               <div>
@@ -193,7 +193,7 @@ function Potd() {
                 />
                 <div className="flex justify-end">
                   {openfilter && (
-                    <div className="absolute py-0 z-10 w-52 h-36 flex flex-col justify-center bg-slate-100 rounded-xl ">
+                    <div className="absolute py-0 z-10 w-52 h-36 mt-[-38px] flex flex-col justify-center bg-slate-100 rounded-xl ">
                       <div className="flex mx-2 justify-between">
                         <h1 className="text-[#2167ac] font-bold">
                           Choose by Month
@@ -285,17 +285,18 @@ function Potd() {
                 </div>
               </div>
             </div>
-            <hr className="h-0.5 w-3/4 bg-gradient-to-r from-[#4E6378] to-[#CCE4FF] mt-0.5 rounded-full"></hr>
+            <div className="w-3/4 gradCompleteLine"></div>
+            {/* <hr className="h-0.5 w-3/4 bg-gradient-to-r from-[#4E6378] to-[#CCE4FF] mt-0.5 rounded-full"></hr> */}
           </div>
           <div className="flex flex-col items-center">
             <div className="w-3/4">
-              <h1 className="text-[#003f7e] font-bold text-xl mt-5">
-                LEETCODE
+              <h1 className="text-[#003f7e] font-bold paraSmall text-xl mt-5">
+                Leetcode
               </h1>
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="w-11/12 mt-5 bg-white">
+            <div className="w-11/12 mt-5">
               <Slider
                 {...settings}
                 prevArrow={<Customprev />}
@@ -319,10 +320,10 @@ function Potd() {
             {/* <hr className="h-0.5 mt-8 w-3/4 bg-gradient-to-r via-[#4E6378] from-[#CCE4FF] to-[#CCE4FF] rounded-full"></hr> */}
           </div>
 
-          <div className="flex flex-col items-end">
-            <div className="w-1/4">
+          <div className="flex flex-col ml-44 ">
+            <div className="">
               <h1 className="text-[#003f7e] font-bold text-xl mt-10 ">
-                GEEKSFORGEEKS
+                GeeksforGeeks
               </h1>
             </div>
           </div>
@@ -352,16 +353,17 @@ function Potd() {
 
           <div className="flex flex-col items-center mt-20">
             <div className="w-3/4 flex justify-between">
-              <h1 className="text-[#003f7e] font-bold text-2xl">
+              <h1 className="text-[#003f7e] font-bold paraLarge text-3xl">
                 Contests and Editorials
               </h1>
             </div>
-            <hr className="h-0.5 w-3/4 bg-gradient-to-r from-[#4E6378] to-[#CCE4FF] mt-0.5 rounded-full"></hr>
+            <div className="w-3/4 h-[2.5px] gradCompleteLine"></div>
+            {/* <hr className="h-0.5 w-3/4 bg-gradient-to-r from-[#4E6378] to-[#CCE4FF] mt-0.5 rounded-full"></hr> */}
           </div>
 
           <div className="flex flex-col items-center">
             <div className="w-3/4">
-              <h1 className="text-[#003f7e] font-bold text-lg mt-5">
+              <h1 className="text-[#003f7e] paraSmall font-bold text-lg mt-5">
                 Upcoming Contests
               </h1>
             </div>
@@ -392,7 +394,7 @@ function Potd() {
 
           <div className="flex flex-col items-center">
             <div className="w-3/4">
-              <h1 className="text-[#003f7e] font-bold text-lg mt-5">
+              <h1 className="text-[#003f7e] paraSmall font-bold text-lg mt-5">
                 Previous Contests and Editorials
               </h1>
             </div>

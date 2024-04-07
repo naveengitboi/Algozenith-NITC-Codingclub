@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const opportunitiesSchema = new mongoose.Schema({
+  postdate: {type : String},
   companyname: { type: String },
   logo: { type: String },
   jobtype: { type: String },
