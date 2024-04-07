@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
-
+import LazyLoad from "react-lazy-load";
 function Members({ batch, batchYear }) {
-
   const dispatch = useDispatch();
 
   return (
@@ -25,13 +24,14 @@ function Members({ batch, batchYear }) {
                   onMouseLeave={() => {
                     dispatch(removeCursorChange());
                   }}
-                 
                   href={mem.linkedIn}
                   onClick={() => dispatch(removeCursorChange())}
                   target="_blank"
                 >
                   <div className="imageContainer">
-                    <img src={mem.image} alt={mem.name} />
+                    <LazyLoad>
+                      <img height={762} offset={300} src={mem.image} alt={mem.name} />
+                    </LazyLoad>
                   </div>
                 </a>
                 <div className="personProf">

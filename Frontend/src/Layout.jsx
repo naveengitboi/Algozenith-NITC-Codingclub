@@ -7,7 +7,10 @@ import readTalk from "./assets/hoverimg/readTalk.svg";
 import { useSelector } from "react-redux";
 import linkedIn from "./assets/hoverimg/linkedin.svg";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-import { ScrollRestoration ,useLocation } from "react-router-dom";
+import { ScrollRestoration, useLocation } from "react-router-dom";
+import Loader from "./elements/Loader";
+
+
 const cursorVarient = {
   default: {
     width: 0,
@@ -31,23 +34,23 @@ export const animatePresenceVarients = {
   initial: { opacity: 0, y: 50 },
   animate: {
     opacity: 1,
-    y:0,
+    y: 0,
     transition: {
       ease: "easeInOut",
-      duration:0.45
+      duration: 0.45,
     },
   },
   exit: {
     opacity: 0,
-    y:-50,
+    y: -50,
     transition: {
       ease: "easeInOut",
-      duration:0.25
+      duration: 0.25,
     },
   },
 };
 function Layout() {
-  const location = useLocation()
+  const location = useLocation();
   const lenis = useLenis(({ scroll }) => {
     // called every scroll
   });
@@ -77,7 +80,7 @@ function Layout() {
       <ReactLenis root>
         <ScrollRestoration
           getKey={(location, matches) => {
-            const paths = ["/mission", "/vission", '/placementtalks'];
+            const paths = ["/mission", "/vission", "/placementtalks"];
             return paths.includes(location.pathname)
               ? location.pathname
               : location.key;
@@ -91,10 +94,10 @@ function Layout() {
         ></motion.div>
         <Navbar />
         <AnimatePresence mode={"wait"}>
-          <motion.div
-            key={location.key}
-          >
-            <Outlet />
+          <motion.div key={location.key}>
+            <React.Suspense fallback={<Loader />}>
+              <Outlet />
+            </React.Suspense>
           </motion.div>
         </AnimatePresence>
 
