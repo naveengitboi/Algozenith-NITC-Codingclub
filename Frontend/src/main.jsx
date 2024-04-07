@@ -15,7 +15,6 @@ import { store } from "./Redux/Store.js";
 import { Provider } from "react-redux";
 import Mission from "./components/homeElements/Mission.jsx";
 import Vission from "./components/homeElements/Vission.jsx";
-import Loader from "./elements/Loader.jsx";
 
 //route splitting
 
@@ -28,7 +27,7 @@ const Potd = React.lazy(() => import("./components/Potd/Potd.jsx"));
 const JobPosts = React.lazy(() => import("./components/JobPosts/index.jsx"));
 const PlacementTalks = React.lazy(() => import("./components/PlacementTalks/"));
 const FullTalk = React.lazy(() => import("./components/FullTalk/index.jsx"));
-const NotFound = React.lazy(() => import("./components/FullTalk/index.jsx"));
+const NotFound = React.lazy(() => import("./components/NotFound"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
