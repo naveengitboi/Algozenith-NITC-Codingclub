@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import "./index.css";
 import Counter from "../../elements/Counter";
@@ -9,6 +9,11 @@ import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
 import { motion } from "framer-motion";
 import { animatePresenceVarients } from "../../Layout";
+import axios from "axios";
+import url from "../url";
+import LCCardHome from "../../components/homeElements/LCCardHome";
+// import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
+
 const counterData = [
   {
     count: 30,
@@ -52,6 +57,9 @@ export default function Home() {
 
         <div className="heroImg">
           <img src="/images/algogrid.png" alt="algogrid" />
+        </div>
+        <div className="fixed bottom-4 right-0 z-50">
+          <LCCardHome />
         </div>
       </div>
 

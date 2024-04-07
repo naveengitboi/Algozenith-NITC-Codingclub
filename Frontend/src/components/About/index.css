@@ -75,8 +75,9 @@
 }
 
 .memContainer {
-  margin: 0 0.85rem;
-  width: 250px;
+  margin: 1rem 1rem;
+  width: 150px;
+  /* background-color: aqua; */
 }
 .imageContainer {
   width: 250px;
@@ -84,14 +85,16 @@
   border-radius: 0.25rem;
 }
 .imageContainer img {
-  aspect-ratio: 4/5;
+  /* aspect-ratio: 0.5/0.5; */
+  width: 150px;
+  height: 200px;
   object-fit: cover;
   pointer-events: none;
 }
 
 .personProf {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   font-weight: 500;
   color: var(--pri_dark_tone);
@@ -326,4 +329,12 @@
     text-align: center;
     justify-content: center;
   }
+}
+.founder {
+  color: var(--pri_dark_tone);
+  line-height: 1;
+  padding: 0.5rem 0;
+  font-family: var(--primary_font);
+  font-weight: 600;
+  font-size: medium;
 }

@@ -5,6 +5,9 @@ import React from "react";
 function JobCard({ job }) {
   return (
     <div className="jobCard">
+      <p className="text-xs text-white absolute mt-0.5 px-2 italic">
+        *Posted on {job.postdate}
+        </p>
       <div className="jobInfoContainer">
         <div className="typeAndFrom">
           <p className="type paraMedium">{job.jobtype}</p>

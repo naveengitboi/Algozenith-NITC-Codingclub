@@ -244,6 +244,52 @@ export const b21mem = [
 
 export const b20mem = [
 
+    // {
+    //     image: "/images/clubmem/b20/kowshiq_b20.jpg",
+    //     name: "K Kowshiq",
+    //     role: "Algozenith Lead",
+    //     position: "Head",
+    //     batch: "B20",
+    //     linkedIn: "https://in.linkedin.com/in/kattamurikowshiq"
+    // },
+    // {
+    //     image: "/images/clubmem/b20/rahul_b20.jpg",
+    //     name: "D Rahul",
+    //     role: "Algozenith DSA Lead",
+    //     position: "Head",
+    //     batch: "B20",
+    //     linkedIn: "https://in.linkedin.com/in/dasari-rahul-7a0830219"
+    // }
+    // ,
+    {
+        image: "/images/clubmem/b20/Harsha_b20.jpg",
+        name: "B Harshavardhan",
+        role: "Senior Web Developer",
+        position: "Head",
+        batch: "B20",
+        linkedIn: "https://in.linkedin.com/in/harsha-vardhan-bavigadda-99054721b"
+    },
+    {
+        image: "/images/clubmem/b20/Rakesh_b20.jpg",
+        name: "P Rakesh",
+        role: "Web Developer",
+        position: "Head",
+        batch: "B20",
+        linkedIn: "https://www.linkedin.com/in/rakesh-punugubati"
+    },
+    {
+        image: "/images/clubmem/b20/Rahulb_b20.jpeg",
+        name: "P Rahul",
+        role: "Senior Social Media Handler",
+        position: "Head",
+        batch: "B20",
+        linkedIn: "https://www.linkedin.com/in/rahul0724"
+    }
+]
+
+
+export const founders = [
+
     {
         image: "/images/clubmem/b20/kowshiq_b20.jpg",
         name: "K Kowshiq",
@@ -260,16 +306,4 @@ export const b20mem = [
         batch: "B20",
         linkedIn: "https://in.linkedin.com/in/dasari-rahul-7a0830219"
     }
-    ,
-    {
-        image: "/images/clubmem/b20/harshvardha_b20.jpg",
-        name: "D Rahul",
-        role: "Snr Web Dev",
-        position: "Head",
-        batch: "B20",
-        linkedIn: "https://in.linkedin.com/in/harsha-vardhan-bavigadda-99054721b"
-    }
-
-
-
 ]

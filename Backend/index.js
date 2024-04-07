@@ -86,13 +86,13 @@ app.post("/login", (req, res) => {
           const refreshToken = jwt.sign(
             { email: email },
             "jwt-refresh-token-secret-key",
-            { expiresIn: "60m" }
+            { expiresIn: "30m" }
           );
 
           res.cookie("accessToken", accessToken, { maxAge: 60000 });
 
           res.cookie("refreshToken", refreshToken, {
-            maxAge: 3600000,
+            maxAge: 1800000,
             httpOnly: true,
             secure: true,
             sameSite: "strict",
@@ -224,6 +224,7 @@ app.post("/admin", async (req, res) => {
       .catch((err) => res.json("Error"));
   } else if (formType === "oppo") {
     await oppo.create({
+      postdate: formdata.postdate,
       companyname: formdata.companyname,
       logo: formdata.logo,
       jobtype: formdata.jobtype,

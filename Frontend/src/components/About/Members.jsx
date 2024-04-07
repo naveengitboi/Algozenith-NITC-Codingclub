@@ -17,13 +17,22 @@ function Members({ batch, batchYear }) {
           {batch.map((mem, idx) => {
             return (
               <div className="memContainer">
-                <a
+                <div className="personProf">
+                  <p className="tinySize batchDet">
+                    {idx + 1 < 10 ? `0${idx + 1}` : `${idx}`} <span></span>{" "}
+                    {mem.name}{" "}
+                  </p>
+                </div>
+                
+                  <div className="imageContainer">
+                  <a
                   onMouseEnter={() => {
                     dispatch(withCursor("drag"));
                   }}
                   onMouseLeave={() => {
                     dispatch(removeCursorChange());
                   }}
+                 
                   href={mem.linkedIn}
                   onClick={() => dispatch(removeCursorChange())}
                   target="_blank"
@@ -34,12 +43,10 @@ function Members({ batch, batchYear }) {
                     </LazyLoad>
                   </div>
                 </a>
+                </div>
+              
                 <div className="personProf">
-                  <p className="tinySize batchDet">
-                    {idx + 1 < 10 ? `0${idx + 1}` : `${idx}`} <span></span>{" "}
-                    {mem.name}{" "}
-                  </p>
-                  <p className="tinySize roleDet">{mem.role}</p>
+                  <h1 className="tinySize roleDet">{mem.role}</h1>
                 </div>
               </div>
             );
