@@ -177,7 +177,8 @@ function Potd() {
         </div>
       )}
       {!notfound && (
-        <div className="pagePadding ">
+        <div className="pagePadding "
+          >
           <div className="flex flex-col items-center mt-5">
             <div className="w-3/4 flex justify-between">
               <p className="text-[#003f7e] font-bold paraLarge text-3xl">

@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
+import { animatePresenceVarients } from "../../Layout";
 import { useDispatch } from "react-redux";
 import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
 
@@ -11,6 +12,11 @@ import Members from "./Members";
 function About() {
   const dispatch = useDispatch();
   return (
+    <motion.div className="pagePadding commonPadding"
+       variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit">
     <div className="pagePadding px-24">
       <div className="aboutTopContainer">
         <div className="aboutHeader">
@@ -132,7 +138,7 @@ function About() {
       <div className="joinUsContainer gapBwSections">
         <JoinUs />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

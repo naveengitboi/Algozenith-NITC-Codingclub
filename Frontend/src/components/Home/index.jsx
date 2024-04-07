@@ -7,6 +7,8 @@ import UCHome from "../homeElements/UCHome";
 import GridEffect from "../homeElements/GridEffect";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
+import { motion } from "framer-motion";
+import { animatePresenceVarients } from "../../Layout";
 import axios from "axios";
 import url from "../url";
 import LCCardHome from "../../components/homeElements/LCCardHome";
@@ -29,7 +31,12 @@ const counterData = [
 
 export default function Home() {
   return (
-    <div className="pagePadding  commonPadding">
+    <motion.div className="pagePadding  commonPadding"
+      variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <div className="homeHeroContainer">
         <div className="heroDetails">
           <h1 className="medLSize">
@@ -81,6 +88,6 @@ export default function Home() {
       <div className="resourcesPage gapBwSections">
         <InfiniteScroller />
       </div>
-    </div>
+    </motion.div>
   );
 }

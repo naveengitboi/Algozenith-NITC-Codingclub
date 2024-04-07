@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 import readTalk from "./assets/hoverimg/readTalk.svg";
 import { useSelector } from "react-redux";
 import linkedIn from "./assets/hoverimg/linkedin.svg";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration ,useLocation } from "react-router-dom";
 const cursorVarient = {
   default: {
     width: 0,
@@ -27,8 +27,27 @@ const cursorVarient = {
     backgroundSize: `cover`,
   },
 };
-
+export const animatePresenceVarients = {
+  initial: { opacity: 0, y: 50 },
+  animate: {
+    opacity: 1,
+    y:0,
+    transition: {
+      ease: "easeInOut",
+      duration:0.45
+    },
+  },
+  exit: {
+    opacity: 0,
+    y:-50,
+    transition: {
+      ease: "easeInOut",
+      duration:0.25
+    },
+  },
+};
 function Layout() {
+  const location = useLocation()
   const lenis = useLenis(({ scroll }) => {
     // called every scroll
   });
@@ -58,8 +77,10 @@ function Layout() {
       <ReactLenis root>
         <ScrollRestoration
           getKey={(location, matches) => {
-            const paths = ['/mission', '/vission'];
-            return paths.includes(location.pathname) ? location.pathname : location.key
+            const paths = ["/mission", "/vission", '/placementtalks'];
+            return paths.includes(location.pathname)
+              ? location.pathname
+              : location.key;
           }}
         />
         <motion.div
@@ -69,8 +90,14 @@ function Layout() {
           animate={changeCursor}
         ></motion.div>
         <Navbar />
-        <Outlet />
-        
+        <AnimatePresence mode={"wait"}>
+          <motion.div
+            key={location.key}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
+
         <Footer />
       </ReactLenis>
     </>

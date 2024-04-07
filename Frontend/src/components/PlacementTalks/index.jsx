@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
 import "./index.css";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { withCursor, removeCursorChange } from "../../Redux/ImageHoverSlicer";
-
+import { animatePresenceVarients } from "../../Layout";
 export const placementTalksData = [
   {
     image: "/images/clubMem.png",
@@ -99,10 +99,33 @@ export const placementTalksData = [
   },
 ];
 
+export const listItemVarients = {
+  initial: {
+    opacity: 0,
+    y:100
+  },
+  animate: {
+    opacity: 1,
+    y:0,
+    transition:{
+      duration:0.5,
+      ease:"easeInOut"
+    }
+  },
+  exit: {
+    opacity: 0,
+    x: -100,
+    transition:{
+      duration:1,
+      ease:"easeInOut"
+    }
+  },
+};
+
 function LinkItem({ talk, uniq }) {
   const dispatch = useDispatch();
   return (
-    <Link to={`/placementtalks/fulltalk/${uniq+1}`}>
+    <Link to={`/placementtalks/fulltalk/${uniq + 1}`}>
       <motion.div
         className="storyLink"
         initial="initial"
@@ -182,7 +205,13 @@ function LinkItem({ talk, uniq }) {
 
 function PlacementTalks() {
   return (
-    <div className="pagePadding commonPadding">
+    <motion.div
+      className="pagePadding commonPadding"
+      variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <div className="linksContainer gapBwSections">
         <div className="aboutHeader">
           <h1 className="paraLarge">Inspirations</h1>
@@ -190,14 +219,18 @@ function PlacementTalks() {
         </div>
         {placementTalksData.map((item, idx) => {
           return (
-            <div className="talkItem" key={idx} >
-              <LinkItem talk={item} uniq={idx} />
-              <div className="gradCompleteLine"></div>
-            </div>
+            
+              <div
+                className="talkItem"
+                key={idx}>
+                <LinkItem talk={item} uniq={idx} />
+                <div className="gradCompleteLine"></div>
+              </div>
+          
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

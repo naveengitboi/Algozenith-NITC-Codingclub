@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import JobCard from "../../elements/JobCard";
 import url from "../url.js";
-
+import {motion} from 'framer-motion'
+import { animatePresenceVarients } from "../../Layout.jsx";
 function JobPosts() {
   const [jobsdata, setjobsdata] = useState([]);
   const [jobtype, setjobstype] = useState("All");
@@ -24,7 +25,12 @@ function JobPosts() {
       : jobsdata.filter((job) => job.jobtype === jobtype);
 
   return (
-    <div className="pagePadding mx-16 md:mx-28">
+    <motion.div className="pagePadding mx-16 md:mx-28" 
+       variants={animatePresenceVarients}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+    >
       <div className="jobsHeader mt-5">
         <div className="titles">
           <p className="paraLarge">Jobs and Interns</p>
@@ -71,7 +77,7 @@ function JobPosts() {
           return <JobCard key={idx} job={item} />;
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

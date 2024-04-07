@@ -15,9 +15,7 @@
   font-size: var(--para_larger_size);
   font-weight: bold;
   color: var(--pri_dark_tone);
- 
 }
-
 
 .logoSection .paraSmall {
   font-weight: 600;
@@ -51,4 +49,59 @@
 .navigateBtn .paraSmall {
   font-weight: 600;
   color: var(--pri_dark_tone);
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .footerContainer footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .footerContainer footer div {
+    padding: 1rem;
+  }
+  .laptopOnly {
+    display: none;
+  }
+  .logoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .mobileOnly {
+    display: block;
+  }
+  .navLinksMobileOnly {
+    text-align: center;
+    color: var(--pri_dark_tone);
+    font-weight: 500;
+  }
+  .navLinksMobileOnly ul li a {
+    padding: 0.5rem 1.5rem;
+  }
+  footer .tinySize {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .footerContainer footer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+  .navLinksMobileOnly ul li {
+    line-height: 3;
+    font-weight: bold;
+  }
+  footer .tinySize {
+    line-height: 3;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
 }
