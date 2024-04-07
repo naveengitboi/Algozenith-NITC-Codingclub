@@ -77,7 +77,7 @@ function Layout() {
       <ReactLenis root>
         <ScrollRestoration
           getKey={(location, matches) => {
-            const paths = ["/mission", "/vission"];
+            const paths = ["/mission", "/vission", '/placementtalks'];
             return paths.includes(location.pathname)
               ? location.pathname
               : location.key;
