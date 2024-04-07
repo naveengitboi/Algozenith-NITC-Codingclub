@@ -3,20 +3,21 @@ import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
 import { animatePresenceVarients } from "../../Layout";
+import { useDispatch } from "react-redux";
+import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
 
 import { goalsData, b22mem, b21mem, b20mem } from "./membersData";
 import Members from "./Members";
 
-
 function About() {
-
-
+  const dispatch = useDispatch();
   return (
     <motion.div className="pagePadding commonPadding"
        variants={animatePresenceVarients}
       initial="initial"
       animate="animate"
       exit="exit">
+    <div className="pagePadding px-24">
       <div className="aboutTopContainer">
         <div className="aboutHeader">
           <h1 className="paraLarge">Our Goals</h1>
@@ -56,12 +57,82 @@ function About() {
         </div>
       </div>
 
-      <div className="clubMem gapBwSections">
-      
-        <Members batch={b22mem} batchYear={'Our B22'} />
-        <Members batch={b21mem} batchYear={'Our B21'} />
-        <Members batch={b20mem} batchYear={'Our B20'} />
-      
+      <div className="aboutHeader aboutTopContainer px-11">
+        <h1 className="paraLarge">Faculty Co-ordinator</h1>
+        <div className="gradOneSidePurpleLine"></div>
+      </div>
+
+      <div className=" gapBwSections">
+        <Members batch={b22mem} batchYear={"Our B22"} />
+        <Members batch={b21mem} batchYear={"Our B21"} />
+        <Members batch={b20mem} batchYear={"Our B20"} />
+        {/* <Members batch={founders} batchYear={"Founder's"}/> */}
+        <div className="aboutHeader ml-4">
+          <h1 className="paraLarge">Founder's</h1>
+          <div className="gradOneSidePurpleLine"></div>
+        </div>
+        <div className="flex px-10 justify-center space-x-8">
+          <div className="mt-5 flex">
+            <a
+              href="https://in.linkedin.com/in/kattamurikowshiq"
+              target="_blank"
+              onMouseEnter={() => {
+                dispatch(withCursor("drag"));
+              }}
+              onMouseLeave={() => {
+                dispatch(removeCursorChange());
+              }}
+              onClick={() => dispatch(removeCursorChange())}
+            >
+              <img
+                src="/images/clubmem/b20/kowshiq_b20.jpg"
+                className="h-[220px] rounded-md"
+              />
+              <div className="personProf">
+                  <h1 className="roleDet text-sm">Algozenith Lead</h1>
+                </div>
+            </a>
+            <div className="w-[320px]">
+              <h1 className="founder ml-5"> K Kowshiq</h1>
+              <p className="paraSmall text-sm px-2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+                voluptatem debitis eaque laboriosam aut esse nemo culpa dolore
+                consequuntur mollitia neque vitae unde sunt exercitationem
+                reiciendis harum, fugiat consequatur illum!
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 flex">
+            <div className="w-[320px] ">
+              <h1 className="founder ml-5">D Rahul</h1>
+              <p className="paraSmall text-sm">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+                voluptatem debitis eaque laboriosam aut esse nemo culpa dolore
+                consequuntur mollitia neque vitae unde sunt exercitationem
+                reiciendis harum, fugiat consequatur illum!
+              </p>
+            </div>
+            <a
+              href="https://in.linkedin.com/in/dasari-rahul-7a0830219"
+              target="_blank"
+              onMouseEnter={() => {
+                dispatch(withCursor("drag"));
+              }}
+              onMouseLeave={() => {
+                dispatch(removeCursorChange());
+              }}
+              onClick={() => dispatch(removeCursorChange())}
+            >
+              <img
+                src="/images/clubmem/b20/rahul_b20.jpg"
+                className="h-[220px] w-[180px] rounded-md"
+              />
+              <div className="personProf">
+                  <h1 className="roleDet text-sm">Algozenith DSA Lead</h1>
+                </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className="joinUsContainer gapBwSections">

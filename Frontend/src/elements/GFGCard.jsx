@@ -21,7 +21,7 @@ function GFGCard({index, data ,flippedIndexgfg, setFlippedIndexgfg, hoveredIndex
                           index === flippedIndexgfg ? null : index
                         )
                       }
-                      className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]"
+                      className="h-40 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]/90"
                     >
                       <div className="flex flex-col items-center ml-2 mt-4">
                         <h1
@@ -46,7 +46,7 @@ function GFGCard({index, data ,flippedIndexgfg, setFlippedIndexgfg, hoveredIndex
                       <div>
                         <img
                           src={hoveredIndexgfg === index ? gfglight : gfgdark}
-                          className="h-20 mt-8"
+                          className="h-28 mt-5 w-40"
                         />
                       </div>
                     </div>

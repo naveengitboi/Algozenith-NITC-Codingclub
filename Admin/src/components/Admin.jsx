@@ -90,7 +90,12 @@ function App() {
   const companysubmit = (e) => {
     e.preventDefault();
 
+    const datenow = new Date();
+    const options = { day: "2-digit", month: "long", year: "numeric" };
+    const postdate = datenow.toLocaleDateString("en-IN", options);
+
     const companydetails = {
+      postdate,
       companyname,
       logo,
       jobtype,
@@ -165,12 +170,12 @@ function App() {
     axios
       .post(url + "/admin", { formdata: upcontest, formType: "upcontest" })
       .then((result) => {
-        if(result.data === "upcontest posted")
-        toast.success("Posted Upcoming contest")
+        if (result.data === "upcontest posted")
+          toast.success("Posted Upcoming contest");
       })
       .catch((err) => {
         console.error(err);
-        toast.error("Error in posting upcoming contest")
+        toast.error("Error in posting upcoming contest");
       });
   };
 
@@ -256,16 +261,17 @@ function App() {
   const deleteexpired = (e) => {
     e.preventDefault();
 
-    axios.delete(url + "/admin" , {data: {meta: "expired"}})
-    .then((res)=>{
-      if(res.data === "Success")
-      toast.success("Deleted all expired contests")
-    })
-    .catch((err) => {
-      console.log(err)
-      toast.error("Error in deleting expired contests")
-    })
-  }
+    axios
+      .delete(url + "/admin", { data: { meta: "expired" } })
+      .then((res) => {
+        if (res.data === "Success")
+          toast.success("Deleted all expired contests");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error in deleting expired contests");
+      });
+  };
 
   return (
     <div>
@@ -502,11 +508,11 @@ function App() {
               </button>
             </div>
             <button
-                className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
-                onClick={deleteexpired}
-              >
-                Delete Expired
-              </button>
+              className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+              onClick={deleteexpired}
+            >
+              Delete Expired
+            </button>
           </form>
           {/* {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>} */}
         </div>

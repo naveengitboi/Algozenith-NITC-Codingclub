@@ -112,3 +112,15 @@
     transform: scale(1.04);
     transition: transform 0.4s ease;
   }
+
+  .scrollableText {
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* animation: scroll 20s linear infinite; */
+  }
+  
+  .scrollableText::-webkit-scrollbar {
+    display: none;
+  }
