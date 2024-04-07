@@ -5,7 +5,7 @@ import "./index.css";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { withCursor, removeCursorChange } from "../../Redux/ImageHoverSlicer";
-
+import { animatePresenceVarients } from "../../Layout";
 export const placementTalksData = [
   {
     image: "/images/clubMem.png",
@@ -182,7 +182,11 @@ function LinkItem({ talk, uniq }) {
 
 function PlacementTalks() {
   return (
-    <div className="pagePadding commonPadding">
+    <motion.div className="pagePadding commonPadding"
+       variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit">
       <div className="linksContainer gapBwSections">
         <div className="aboutHeader">
           <h1 className="paraLarge">Inspirations</h1>
@@ -197,7 +201,7 @@ function PlacementTalks() {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
+import { animatePresenceVarients } from "../../Layout";
 
 import { goalsData, b22mem, b21mem, b20mem } from "./membersData";
 import Members from "./Members";
@@ -11,7 +12,11 @@ function About() {
 
 
   return (
-    <div className="pagePadding commonPadding">
+    <motion.div className="pagePadding commonPadding"
+       variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit">
       <div className="aboutTopContainer">
         <div className="aboutHeader">
           <h1 className="paraLarge">Our Goals</h1>
@@ -62,7 +67,7 @@ function About() {
       <div className="joinUsContainer gapBwSections">
         <JoinUs />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -7,8 +7,8 @@ import UCHome from "../homeElements/UCHome";
 import GridEffect from "../homeElements/GridEffect";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
-// import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
-
+import { motion } from "framer-motion";
+import { animatePresenceVarients } from "../../Layout";
 const counterData = [
   {
     count: 30,
@@ -25,13 +25,15 @@ const counterData = [
 ];
 
 export default function Home() {
-
-
   return (
-    <div className="pagePadding  commonPadding">
+    <motion.div className="pagePadding  commonPadding"
+      variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <div className="homeHeroContainer">
         <div className="heroDetails">
-
           <h1 className="medLSize">
             Stop <br /> <span className="largerSize">Chaos</span> roadmaps
           </h1>
@@ -42,26 +44,21 @@ export default function Home() {
           </p>
 
           <div className="numbersCount">
-
             <Counter data={counterData[0]} />
             <Counter data={counterData[1]} />
             <Counter data={counterData[2]} duration={5} />
           </div>
         </div>
 
-
         <div className="heroImg">
-          <img src="/images/algogrid.png" alt="algogrid"
-          
-          />
+          <img src="/images/algogrid.png" alt="algogrid" />
         </div>
-
       </div>
 
       {/* <div className="gradMidLine"></div> */}
 
       <div className="gapBwSections">
-          <MVision/>
+        <MVision />
       </div>
 
       <div className="jobsHomePageContainer gapBwSections">
@@ -69,7 +66,7 @@ export default function Home() {
       </div>
 
       <div className="gapBwSections">
-        <UCHome/>
+        <UCHome />
       </div>
 
       <div className="gridLinesEffect gapBwSections">
@@ -81,8 +78,8 @@ export default function Home() {
       </div>
 
       <div className="resourcesPage gapBwSections">
-          <InfiniteScroller/>
+        <InfiniteScroller />
       </div>
-    </div>
+    </motion.div>
   );
 }

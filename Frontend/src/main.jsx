@@ -25,6 +25,7 @@ import Vission from "./components/homeElements/Vission.jsx";
 import NotFound from "./components/NotFound/index.jsx";
 import FullTalk from "./components/FullTalk/index.jsx";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -52,7 +53,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store} >
-      <RouterProvider router={router} />
+
+        <RouterProvider router={router}  />
+
     </Provider>
   </React.StrictMode>
 );
