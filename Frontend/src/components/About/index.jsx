@@ -17,7 +17,7 @@ function About() {
       initial="initial"
       animate="animate"
       exit="exit">
-    <div className="pagePadding px-24">
+    <div className="pagePadding">
       <div className="aboutTopContainer">
         <div className="aboutHeader">
           <h1 className="paraLarge">Our Goals</h1>
@@ -57,12 +57,12 @@ function About() {
         </div>
       </div>
 
-      <div className="aboutHeader aboutTopContainer px-11">
+      <div className="aboutHeader aboutTopContainer">
         <h1 className="paraLarge">Faculty Co-ordinator</h1>
         <div className="gradOneSidePurpleLine"></div>
       </div>
 
-      <div className=" gapBwSections">
+      <div className="gapBwSections">
         <Members batch={b22mem} batchYear={"Our B22"} />
         <Members batch={b21mem} batchYear={"Our B21"} />
         <Members batch={b20mem} batchYear={"Our B20"} />
@@ -138,6 +138,7 @@ function About() {
       <div className="joinUsContainer gapBwSections">
         <JoinUs />
       </div>
+    </div>
     </motion.div>
   );
 }
