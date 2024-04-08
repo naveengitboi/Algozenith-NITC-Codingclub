@@ -5,6 +5,7 @@ import { FaRankingStar } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import {motion} from 'framer-motion';
 
 function MVision() {
   const location = useLocation()
@@ -14,7 +15,7 @@ function MVision() {
       setLoc(location.pathname)
   }, [location])
   return (
-    <div className="joinUsPage">
+    <motion.div  className="joinUsPage">
       <div className="aboutHeader">
         <h1 className="paraLarge">We Aim</h1>
         <div className="gradOneSidePurpleLine"></div>
@@ -38,7 +39,7 @@ function MVision() {
           <Outlet />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

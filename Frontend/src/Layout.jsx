@@ -37,7 +37,7 @@ export const animatePresenceVarients = {
     y: 0,
     transition: {
       ease: "easeInOut",
-      duration: 0.45,
+      duration: 0.15,
     },
   },
   exit: {
@@ -45,10 +45,11 @@ export const animatePresenceVarients = {
     y: -50,
     transition: {
       ease: "easeInOut",
-      duration: 0.25,
+      duration: 0.15,
     },
   },
 };
+
 function Layout() {
   const location = useLocation();
   const lenis = useLenis(({ scroll }) => {
