@@ -112,6 +112,10 @@
     transform: scale(1.04);
     transition: transform 0.4s ease;
   }
+  .popins {
+    font-family: "Poppins";
+    /* font-weight: 900; */
+  }
 
   .scrollableText {
     white-space: nowrap;
@@ -123,4 +127,9 @@
   
   .scrollableText::-webkit-scrollbar {
     display: none;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
   }

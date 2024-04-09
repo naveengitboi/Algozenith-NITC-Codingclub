@@ -190,7 +190,7 @@ function Potd() {
                   onClick={() => {
                     setopenfilter(!openfilter);
                   }}
-                  className="filtericon cursor-pointer rounded-full px-2 py-2 border border-[#003f7e]"
+                  className="filtericon mt-[-5px] cursor-pointer rounded-full px-3.5 py-3.5 border border-[#003f7e]"
                 />
                 <div className="flex justify-end">
                   {openfilter && (

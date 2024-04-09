@@ -3,16 +3,13 @@ import "./index.css";
 import { motion } from "framer-motion";
 import JoinUs from "../../elements/JoinUs";
 import { animatePresenceVarients } from "../../Layout";
-import { useDispatch } from "react-redux";
-import { removeCursorChange, withCursor } from "../../Redux/ImageHoverSlicer";
-
+import { FaLinkedinIn } from "react-icons/fa";
 import { goalsData, b22mem, b21mem, b20mem } from "./membersData";
 import Members from "./Members";
 
 function About() {
-  const dispatch = useDispatch();
   return (
-    <motion.div className="pagePadding commonPadding"
+    <motion.div className=""
        variants={animatePresenceVarients}
       initial="initial"
       animate="animate"
@@ -63,9 +60,9 @@ function About() {
       </div>
 
       <div className=" gapBwSections">
-        <Members batch={b22mem} batchYear={"Our B22"} />
-        <Members batch={b21mem} batchYear={"Our B21"} />
-        <Members batch={b20mem} batchYear={"Our B20"} />
+        <Members batch={b22mem} batchYear={"B22"} />
+        <Members batch={b21mem} batchYear={"B21"} />
+        <Members batch={b20mem} batchYear={"B20"} />
         {/* <Members batch={founders} batchYear={"Founder's"}/> */}
         <div className="aboutHeader ml-4">
           <h1 className="paraLarge">Founder's</h1>
@@ -76,17 +73,11 @@ function About() {
             <a
               href="https://in.linkedin.com/in/kattamurikowshiq"
               target="_blank"
-              onMouseEnter={() => {
-                dispatch(withCursor("drag"));
-              }}
-              onMouseLeave={() => {
-                dispatch(removeCursorChange());
-              }}
-              onClick={() => dispatch(removeCursorChange())}
             >
+              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[148px] rounded-sm rounded-bl-xl"/>
               <img
                 src="/images/clubmem/b20/kowshiq_b20.jpg"
-                className="h-[220px] rounded-md"
+                className="h-[220px] rounded-md border-gradient border-gradient-lead"
               />
               <div className="personProf">
                   <h1 className="roleDet text-sm">Algozenith Lead</h1>
@@ -115,17 +106,11 @@ function About() {
             <a
               href="https://in.linkedin.com/in/dasari-rahul-7a0830219"
               target="_blank"
-              onMouseEnter={() => {
-                dispatch(withCursor("drag"));
-              }}
-              onMouseLeave={() => {
-                dispatch(removeCursorChange());
-              }}
-              onClick={() => dispatch(removeCursorChange())}
             >
+              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[148px] rounded-sm rounded-bl-xl"/>
               <img
                 src="/images/clubmem/b20/rahul_b20.jpg"
-                className="h-[220px] w-[180px] rounded-md"
+                className="h-[220px] w-[180px] rounded-md border-gradient border-gradient-lead"
               />
               <div className="personProf">
                   <h1 className="roleDet text-sm">Algozenith DSA Lead</h1>
@@ -137,6 +122,7 @@ function About() {
 
       <div className="joinUsContainer gapBwSections">
         <JoinUs />
+      </div>
       </div>
     </motion.div>
   );

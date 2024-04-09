@@ -38,14 +38,14 @@ export const b22mem = [
     {
         image: "/images/clubmem/b22/anjalip_b22.jpg",
         name: "Anjali P",
-        role: "DSA & CP Member",
+        role: "DSA & CP member",
         position: "Head",
         batch: "B22",
         linkedIn: "https://www.linkedin.com/in/anjali-p-766b6125a/"
     },
 
     {
-        image: "/images/clubmem/b22/jyoshnavi_b22.jpg",
+        image: "/images/clubmem/b22/jyoshnavi_b22.jpeg",
         name: "Akula Jyoshnavi",
         role: "DSA & CP member",
         position: "Head",
@@ -134,7 +134,7 @@ export const b21mem = [
     {
         image: "/images/clubmem/b21/vvsai_b21.jpg",
         name: "V Venkata Sai",
-        role: "DSA & CP Member",
+        role: "DSA & CP member",
         position: "Head",
         batch: "B21",
         linkedIn: "https://www.linkedin.com/in/venkata-sai-vedurupaka/"

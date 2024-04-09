@@ -80,7 +80,6 @@
   /* background-color: aqua; */
 }
 .imageContainer {
-  width: 250px;
   overflow: hidden;
   border-radius: 0.25rem;
 }
@@ -337,4 +336,22 @@
   font-family: var(--primary_font);
   font-weight: 600;
   font-size: medium;
+}
+.border-gradient {
+  border: 10px solid;
+  padding: 1px;
+  border-image-slice: 1;
+  border-width: 5px;
+}
+.border-gradient-social {
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+}
+.border-gradient-dsacp {
+  border-image-source: linear-gradient(to left, #00C853, #B2FF59);
+}
+.border-gradient-b20 {
+  border-image-source: linear-gradient(to right, red, orange);;
+}
+.border-gradient-lead {
+  border-image-source: linear-gradient(to right, #ecc440, #ecc440, #fffa8a,#ecc440);;
 }

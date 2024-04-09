@@ -22,9 +22,11 @@ function JoinUs() {
             <p className="paraSmall">
               Send you Resume to Our Club Mail Id and be Part of us!
             </p>
+            <a href="mailto:algozenith@nitc.ac.in" target="_blank">
             <button>
               Get in Touch <MdOutgoingMail />
-            </button>
+            </button> 
+            </a>
           </div>
         </div>
       </div>
