@@ -142,5 +142,3 @@ function LCCard({
 }
 
 export default LCCard;
-
-export default LCCard;

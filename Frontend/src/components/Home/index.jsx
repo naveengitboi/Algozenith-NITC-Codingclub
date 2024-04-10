@@ -6,12 +6,6 @@ import UCHome from "../homeElements/UCHome";
 import GridEffect from "../homeElements/GridEffect";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
-import { motion } from "framer-motion";
-import { animatePresenceVarients } from "../../Layout";
-import axios from "axios";
-import url from "../url";
-import LCCardHome from "../../components/homeElements/LCCardHome";
-// import { motion, animate, useMotionValue, useTransform, } from "framer-motion";
 import PotdHome from "../homeElements/PotdHome";
 import potdlogo from "../Pics/potdlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,15 +41,7 @@ export default function Home() {
     return () => clearTimeout(timeout); // Clear timeout on component unmount
   }, []);
   return (
-    <motion.div className="pagePadding  commonPadding"
-      variants={animatePresenceVarients}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <div className="upcomingHintHome">
-          <UpcomingContest/>
-      </div>
+    <div className="pagePadding commonPadding">
       <div className="homeHeroContainer">
         <div className="heroDetails">
           <h1 className="medLSize">
@@ -116,6 +102,6 @@ export default function Home() {
       <div className="resourcesPage gapBwSections">
         <InfiniteScroller />
       </div>
-    </motion.div>
+    </div>
   );
 }
