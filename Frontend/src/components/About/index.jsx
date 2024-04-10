@@ -74,7 +74,7 @@ function About() {
               href="https://in.linkedin.com/in/kattamurikowshiq"
               target="_blank"
             >
-              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[148px] rounded-sm rounded-bl-xl"/>
+              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[136px] rounded-sm rounded-bl-xl"/>
               <img
                 src="/images/clubmem/b20/kowshiq_b20.jpg"
                 className="h-[220px] rounded-md border-gradient border-gradient-lead"
@@ -107,7 +107,7 @@ function About() {
               href="https://in.linkedin.com/in/dasari-rahul-7a0830219"
               target="_blank"
             >
-              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[148px] rounded-sm rounded-bl-xl"/>
+              <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[136px] rounded-sm rounded-bl-xl"/>
               <img
                 src="/images/clubmem/b20/rahul_b20.jpg"
                 className="h-[220px] w-[180px] rounded-md border-gradient border-gradient-lead"
