@@ -9,7 +9,7 @@ import Members from "./Members";
 
 function About() {
   return (
-    <motion.div className=""
+    <motion.div className="commonPadding"
        variants={animatePresenceVarients}
       initial="initial"
       animate="animate"
