@@ -1,4 +1,5 @@
 import React from "react";
+import React from "react";
 import ReactCardFlip from "react-card-flip";
 import lcdark from ".././components/Pics/lcdark.png";
 import lclight from ".././components/Pics/lclight.png";
@@ -139,5 +140,7 @@ function LCCard({
     </ReactCardFlip>
   );
 }
+
+export default LCCard;
 
 export default LCCard;

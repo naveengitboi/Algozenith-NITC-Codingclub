@@ -1,0 +1,40 @@
+.loaderPage
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loaderOuter
+{
+  --size: 50px;
+  width: var(--size);
+  height: var(--size);
+  background: #9d94ff;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 0.5s linear infinite;
+
+}
+
+.loaderInner
+{
+  width: var(--size);
+  height:var(--size);
+  background: white;
+  position: absolute;
+  border-radius: 50%;
+  left: -3px;
+  
+}
+
+@keyframes rotate {
+  0%{
+    transform: rotate(0deg);
+  }
+   100%{
+    transform: rotate(360deg);
+  }
+  
+}

@@ -151,4 +151,109 @@
   animation-duration: 1s; /* Adjust animation duration as needed */
   animation-iteration-count: 1;
 }
+.upcomingHintHome
+{
+  --dist:20px;
+  position: fixed;
+  bottom: var(--dist);
+  right: var(--dist);
+  cursor: pointer;
+}
 
+.ucInnerContainer
+{
+  position: relative;
+  z-index: 10000000000;
+}
+
+.ucInfoShower
+{
+  --wsize: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(226, 226, 226);
+  width: var(--wsize);
+  height: var(--wsize);
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.ucInfoShowerHoverModel
+{
+  position: absolute;
+  top: -20px;
+  opacity: 0;
+  transition: all 0.25s ease;
+  transform: translateY(20px);
+  
+}
+
+.ucInfoShower:hover .ucInfoShowerHoverModel
+{
+  
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dotPulse
+{
+  display: inline-block;
+  --size:10px;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--sec_color);
+  border-radius: 50%;
+  position: relative;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+   0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+}
+
+.ucModel
+{
+
+  position: absolute;
+  background-color: rgb(242, 242, 242);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  bottom:120%;
+  right: 0% ;
+  padding: 0.5rem 1.5rem;
+  z-index: 100;
+  transition: all 0.25s ease;
+  opacity: 0;
+}
+.ucModelOpen
+{
+  opacity: 1;
+  transition: all 0.25s ease;
+}
+
+.ucModelIitem
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.ucLinkTag
+{
+  background-color: var(--pri_light_tone);
+  padding: 0.5rem 1.25rem;
+  color: white;
+  width: 100%;
+  border-radius: 0.25rem;
+  text-align: center;
+}

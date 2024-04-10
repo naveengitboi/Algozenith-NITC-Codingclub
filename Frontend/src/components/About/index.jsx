@@ -14,7 +14,7 @@ function About() {
       initial="initial"
       animate="animate"
       exit="exit">
-    <div className="pagePadding px-24">
+    <div className="pagePadding">
       <div className="aboutTopContainer">
         <div className="aboutHeader">
           <h1 className="paraLarge">Our Goals</h1>
@@ -54,7 +54,7 @@ function About() {
         </div>
       </div>
 
-      <div className="aboutHeader aboutTopContainer px-11">
+      <div className="aboutHeader aboutTopContainer">
         <h1 className="paraLarge">Faculty Co-ordinator</h1>
         <div className="gradOneSidePurpleLine"></div>
       </div>

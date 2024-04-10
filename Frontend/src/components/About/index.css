@@ -76,19 +76,23 @@
 
 .memContainer {
   margin: 1rem 1rem;
-  width: 150px;
   /* background-color: aqua; */
+    /* border: 2px solid blue; */
+
 }
 .imageContainer {
   overflow: hidden;
   border-radius: 0.25rem;
+  /* border: 2px solid black; */
 }
 .imageContainer img {
-  /* aspect-ratio: 0.5/0.5; */
-  width: 150px;
-  height: 200px;
+  aspect-ratio: 4/5;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   pointer-events: none;
+    /* border: 2px solid red; */
+
 }
 
 .personProf {
@@ -180,6 +184,17 @@
   margin-left: 0.5rem;
 }
 
+
+.founder {
+  color: var(--pri_dark_tone);
+  line-height: 1;
+  padding: 0.5rem 0;
+  font-family: var(--primary_font);
+  font-weight: 600;
+  font-size: medium;
+}
+
+
 @media screen and (max-width: 1025px) {
   .aboutTopContainer {
     margin-top: 2rem;
@@ -200,13 +215,14 @@
     margin: 0.85rem 0;
   }
   .memContainer {
-    --widthSize: 220px;
     margin: 0 0.85rem;
-    width: var(--widthSize);
   }
-  .imageContainer {
-    width: var(--widthSize);
+  .imageContainer
+  {
+    width: 170px ;
   }
+
+ 
   .personProf .batchDet span {
     --size: 5px;
     margin: 0 0.45rem;
@@ -242,12 +258,11 @@
   }
 
   .memContainer {
-    --widthSize: 200px;
+
     margin: 0 0.45rem;
-    width: var(--widthSize);
   }
   .imageContainer {
-    width: var(--widthSize);
+    width: 160px;
   }
   .personProf .batchDet span {
     --size: 5px;
@@ -286,13 +301,13 @@
   }
 
   .memContainer {
-    --widthSize: 300px;
     margin: 0 0.45rem;
-    width: var(--widthSize);
   }
   .imageContainer {
-    width: var(--widthSize);
+    width: 200px;
+    height: 250px;
   }
+
   .personProf .tinySize {
     font-size: 0.75rem;
   }
