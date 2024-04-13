@@ -257,3 +257,60 @@
   border-radius: 0.25rem;
   text-align: center;
 }
+
+@media screen and (max-width: 769px) {
+  .heroImg {
+    min-width: 47%;
+    height: 23vh;
+    width: max-content;
+    background-image: url("/images/algogri.png");
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+    margin-left: 38px;
+  }
+  
+  .heroImg img {
+    position: absolute;
+    min-width: 180%;
+    transform: rotate(-30deg) translateY(-150px);
+  }
+  .homeHeroContainer {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    min-height: 0vh;
+    margin-top: 80px;
+  }
+  .counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    line-height: 1.15;
+  }
+  
+  .counter .paraMedium {
+    color: var(--pri_light_tone);
+    text-align: center;
+  }
+  .smallLSize {
+    font-size: 1.2rem;
+    font-weight: normal;
+  }
+  .paraMedium {
+    font-size: 0.7rem;
+    font-weight: normal;
+  }  
+  .numbersCount {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .gapBtwSection {
+    padding: 30px 0 0 0;
+  }
+}

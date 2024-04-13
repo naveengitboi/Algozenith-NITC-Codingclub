@@ -16,7 +16,7 @@ import { useEffect } from "react";
 const counterData = [
   {
     count: 30,
-    description: "Editorials & Contests",
+    description: "Editorials, Contests",
   },
   {
     count: 70,
@@ -42,12 +42,13 @@ export default function Home() {
   }, []);
   return (
     <div className="pagePadding commonPadding">
-      <div className="homeHeroContainer">
+      <div className="homeHeroContainer ">
         <div className="heroDetails">
-          <h1 className="medLSize">
-            Stop <br /> <span className="largerSize">Chaos</span> roadmaps
+          <h1 className="medLSize md:text-6xl text-2xl">
+            Stop <br /> <span className="largerSize md:text-7xl text-3xl">Chaos</span>{" "}
+            roadmaps
           </h1>
-          <p className="paraSmall paraText">
+          <p className="paraSmall w-28 md:w-auto paraText text-md">
             We believe that coding is not just about writing lines of code; it's
             about unlocking the potential to innovate, create, and
             problem-solve.
@@ -63,16 +64,17 @@ export default function Home() {
         <div className="heroImg">
           <img src="/images/algogrid.png" alt="algogrid" />
         </div>
-        <NavLink to="/potd" 
-        // className={`navLinkContainer ${bounce ? "bounceAnimation" : ""}`}
+        <NavLink
+          to="/potd"
+          // className={`navLinkContainer ${bounce ? "bounceAnimation" : ""}`}
         >
-        <img
-          src={potdlogo}
-          alt=""
-          className="hov cursor-pointer h-40 fixed bottom-16 right-10 z-50"
-          onMouseEnter={() => setShowMessage(true)}
-          onMouseLeave={() => setShowMessage(false)}
-        />
+          <img
+            src={potdlogo}
+            alt=""
+            className="hov cursor-pointer h-20 left-80 top-96 md:h-40 absolute md:left-auto md:top-[460px] md:z-50"
+            onMouseEnter={() => setShowMessage(true)}
+            onMouseLeave={() => setShowMessage(false)}
+          />
         </NavLink>
         {/* <div className="flex fixed bottom-64 right-32 z-50">
           <FontAwesomeIcon
@@ -83,23 +85,23 @@ export default function Home() {
         </div> */}
       </div>
 
-      <div className="gapBwSections">
-        <MVision />
-      </div>
-
-      <div className="jobsHomePageContainer gapBwSections">
-        <JobsHome />
-      </div>
-
-      <div className="gapBwSections">
+      <div className="gapBtwSection">
         <UCHome />
       </div>
 
-      <div className="gridLinesEffect gapBwSections">
+      <div className="jobsHomePageContainer gapBtwSection">
+        <JobsHome />
+      </div>
+
+      <div className="gapBtwSection">
+        <MVision />
+      </div>
+
+      <div className="gridLinesEffect gapBtwSection">
         <GridEffect />
       </div>
 
-      <div className="resourcesPage gapBwSections">
+      <div className="resourcesPage gapBtwSection">
         <InfiniteScroller />
       </div>
     </div>

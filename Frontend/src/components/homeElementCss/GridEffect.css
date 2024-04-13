@@ -66,3 +66,20 @@
   font-size: 2.25rem;
   color: var(--sec_color);
 }
+
+@media screen and (max-width: 769px) {
+.paraLarge {
+  font-size: small;
+}
+.gridElement {
+  --bradius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  border-radius: var(--bradius);
+  position: relative;
+  padding: 2px;
+  overflow: hidden;
+}
+}

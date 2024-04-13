@@ -48,7 +48,7 @@ function UCHome() {
         <div className="gradCompleteLine"></div>
       </div>
 
-      <div className="jobsHomesCards">
+      <div className="UCcardHome space-y-10 md:space-y-0">
         {UCdata.slice(0,4).map((item, idx) => {
           return (
             <UCCard

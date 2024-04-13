@@ -156,3 +156,22 @@
   100% { transform: translateX(-100%); }
 }
 
+.UCcardHome {
+  display: flex;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 769px) {
+  .jobsHomesCards {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+  }
+  .UCcardHome {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 2rem;
+  }
+}
+

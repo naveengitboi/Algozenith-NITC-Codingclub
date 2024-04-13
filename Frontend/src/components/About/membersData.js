@@ -50,7 +50,7 @@ export const b22mem = [
         role: "DSA & CP member",
         position: "Head",
         batch: "B22",
-        linkedIn: ""
+        linkedIn: "https://www.linkedin.com/in/akula-jyoshnavi-86a598257/"
     },
     {
         image: "/images/clubmem/b22/ramireddy_b22.jpg",
@@ -58,7 +58,7 @@ export const b22mem = [
         role: "DSA & CP member",
         position: "Head",
         batch: "B22",
-        linkedIn: ""
+        linkedIn: "https://www.linkedin.com/in/ramireddy-geetha-meenakshi-879a11257/"
     },
     {
         image: "/images/clubmem/b22/mohithsri_b22.jpg",
@@ -98,7 +98,7 @@ export const b22mem = [
         role: "Social Media Manager",
         position: "Head",
         batch: "B22",
-        linkedIn: ""
+        linkedIn: "https://www.linkedin.com/in/punarvas-sivala-121113256/"
     },
 
     {
@@ -115,7 +115,7 @@ export const b22mem = [
         role: "Social Media Manager",
         position: "Head",
         batch: "B22",
-        linkedIn: ""
+        linkedIn: "https://www.linkedin.com/in/prajna-prerana-bakshi-47a303257/"
     }, {
         image: "/images/clubmem/b22/nikitha_b22.jpg",
         name: "Nikita Behra",

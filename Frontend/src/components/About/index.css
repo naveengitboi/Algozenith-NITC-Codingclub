@@ -359,7 +359,7 @@
   border-width: 5px;
 }
 .border-gradient-social {
-  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  border-image-source: linear-gradient(to bottom , #bc26ca, #d62976, #fa7e1e, #feda75);
 }
 .border-gradient-dsacp {
   border-image-source: linear-gradient(to left, #00C853, #B2FF59);

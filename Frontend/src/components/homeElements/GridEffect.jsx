@@ -24,7 +24,7 @@ function GridEffect() {
   return (
     <div className="gridContainer" ref={gridContainer}>
       <div className="gridElement" onMouseMove={(e) => effectHandler(0, e)} >
-        <div className="gridInner">
+        <div className="gridInner ">
             <p className="paraLarge">Compete</p>
         </div>
       </div>

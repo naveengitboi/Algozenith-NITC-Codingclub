@@ -38,7 +38,7 @@ function JobsHome() {
         <div className="gradCompleteLine"></div>
       </div>
 
-      <div className="jobsHomesCards space-x-8">
+      <div className="jobsHomesCards md:space-x-8 space-x-0 md:space-y-0 space-y-12">
         {
             jobsdata.slice(0,3).map((item, idx) => {
                 return(

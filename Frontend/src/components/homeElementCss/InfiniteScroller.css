@@ -69,3 +69,34 @@
   display: inline-block;
   font-size: 35px;
 }
+
+@media screen and (max-width: 769px) {
+.scrollContainer {
+  display: flex;
+  --durat: 25s;
+  flex-wrap: nowrap;
+  width: fit-content;
+  animation: scrollLeft var(--durat) linear infinite;
+  border: 1.5px solid var(--pri_dark_tone);
+  margin: 2rem 0;
+}
+
+.scrollContainer a .paraMedium {
+  display: block;
+  width: max-content;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.youtubesScroller {
+  animation: scrollRight var(--durat) linear infinite;
+}
+
+.scrollContainer .resourceLinkItem {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+  justify-content: center;
+  color: rgb(28, 26, 26);
+}
+}
