@@ -112,9 +112,10 @@
     transform: scale(1.04);
     transition: transform 0.4s ease;
   }
-  .popins {
+  .popin {
     font-family: "Poppins";
-    /* font-weight: 900; */
+    font-weight: 600;
+    font-size: medium;
   }
 
   .scrollableText {

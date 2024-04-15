@@ -10,12 +10,12 @@ function JobCard({ job }) {
         </p>
       <div className="jobInfoContainer">
         <div className="typeAndFrom">
-          <p className="type paraMedium">{job.jobtype}</p>
+          <p className="type paraMedium job-type">{job.jobtype}</p>
           <img src={job.logo || "https://icons.veryicon.com/png/o/business/oa-attendance-icon/company-27.png"} className="type svg h-16"/>
         </div>
         <div className="details overflow-x-hidden">
-          <h1 className="thickFont scrollableText">{job.companyname}</h1>
-          <p className="paraMedium ml-2">{job.jobrole}</p>
+          <h1 className="company text-white scrollableText">{job.companyname}</h1>
+          <p className="paraMedium role ml-2">{job.jobrole}</p>
         </div>
         <div className="ml-5 space-y-2">
           <div className="flex">
@@ -30,7 +30,7 @@ function JobCard({ job }) {
         </div>
       </div>
       <div className="jobAction">
-        <a href={job.apply} target="_blank" className="paraMedium">
+        <a href={job.apply} target="_blank" className="paraMedium apply">
           Read & Apply
         </a>
       </div>

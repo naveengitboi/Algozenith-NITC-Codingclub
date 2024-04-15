@@ -78,6 +78,7 @@
     rgba(124, 126, 255, 0),
     rgba(124, 126, 255, 0),
     #7c7fff,
+    #7c7fff,
     rgba(124, 126, 255, 0),
     rgba(124, 126, 255, 0)
   );
@@ -215,6 +216,23 @@ body::-webkit-scrollbar:hover
   }
   .gapBwSections {
     margin: 13vh 0;
+  }
+  .gradMidLine {
+    height: 2px;
+    width: 100%;
+    background-image: linear-gradient(
+      to right,
+      rgba(124, 126, 255, 0),
+      rgba(124, 126, 255, 0),
+      #7c7fff,
+      #7c7fff,
+      #7c7fff,
+      #7c7fff,
+      rgba(124, 126, 255, 0),
+      rgba(124, 126, 255, 0)
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
 

@@ -33,10 +33,14 @@
 
 .jobCard {
   min-width: 360px;
-  max-width: 360px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.filter-jobs {
+  right: 200px;
 }
 
 .jobInfoContainer {
@@ -88,7 +92,7 @@
   /* align-items: center; */
 }
 .details .thickFont {
-  font-size: var(--small_lsize);
+  font-size: xx-large;
   font-weight: var(--size);
   text-align: center;
 }
@@ -160,6 +164,17 @@
   display: flex;
   margin-top: 2rem;
 }
+.popins {
+  font-family: "Poppins";
+  font-size: xx-large;
+  font-weight: 700;
+}
+.company {
+  font-size: 0.9cm;
+  text-align: center;
+  font-family: "Poppins";
+  font-weight: 600;
+}
 
 @media screen and (max-width: 769px) {
   .jobsHomesCards {
@@ -172,6 +187,29 @@
     flex-direction: column;
     margin-left: 40px;
     margin-top: 2rem;
+  }
+  .filter-jobs {
+    margin-top: 105px;
+    right: 0;
+    margin-right: 23px;
+  }
+  .popins {
+    font-family: "Poppins";
+    font-size: x-large;
+    font-weight: 700;
+  }
+  .job-type {
+    font-size: large;
+  }
+  .role {
+    font-size: large;
+  }
+  .apply {
+    font-size: large;
+  }
+  .filterk {
+    font-size: 4mm;
+    padding: 4px 8px;
   }
 }
 

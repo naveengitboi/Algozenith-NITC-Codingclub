@@ -78,7 +78,7 @@ function LCCard({
         }}
         className="h-48 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
       >
-        <div className="p-2 font-semibold flex flex-col space-y-2 text-sm popins text-white">
+        <div className="p-2 font-semibold flex flex-col space-y-2 text-xs popin text-white">
           <a className="flex scrollableText" href={data.question}>
             <h1 className="text-black font-extrabold">Question:</h1>
             {
