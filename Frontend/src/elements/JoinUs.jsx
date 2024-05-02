@@ -17,13 +17,13 @@ function JoinUs() {
           <IoMdClose />
         </div>
         <div className="contributeText">
-          <h1 className="paraLarge">Contribute To Your Peers Growth!</h1>
+          <h1 className="paraLarge contribute">Contribute To Your Peers Growth!</h1>
           <div className="actionsDiv">
-            <p className="paraSmall">
-              Send you Resume to Our Club Mail Id and be Part of us!
+            <p className="paraSmall mail-id">
+              Send your Resume to Club Mail Id and be Part of us!
             </p>
             <a href="mailto:algozenith@nitc.ac.in" target="_blank">
-            <button>
+            <button className="ml-auto">
               Get in Touch <MdOutgoingMail />
             </button> 
             </a>

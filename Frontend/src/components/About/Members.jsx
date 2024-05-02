@@ -9,19 +9,19 @@ function Members({ batch, batchYear }) {
         <div className="gradOneSidePurpleLine"></div>
       </div>
 
-      <div className="imagesOuter">
-        <div className="imagesInner">
+      <div className="">
+        <div className="flex flex-wrap md:justify-center items-center">
           {batch.map((mem, idx) => {
             return (
               <div className="memContainer">
-                <div className="personProf">
-                  <p className="tinySize batchDet">
-                    {idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`} <span></span>{" "}
+                <div className="personProf flex justify-start ml-2 md:ml-0">
+                  <p className="tinySize">
+                    <span className="mr-1">{idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`}</span>{" "}
                     {mem.name}{" "}
                   </p>
                 </div>
 
-                <div className="imageContainer">
+                <div className="imageContainer md:mx-0 mx-2">
                   <a href={mem.linkedIn} target="_blank">
                     {mem.linkedIn === "" ? (
                       ""
@@ -56,7 +56,7 @@ function Members({ batch, batchYear }) {
                     />
                   </a>
                 </div>
-                <div className="personProf">
+                <div className="personProf flex justify-center md:mb-0 mb-8">
                   <h1 className="tinySize roleDet">{mem.role}</h1>
                 </div>
               </div>

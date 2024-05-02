@@ -80,7 +80,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
   }
   
   .custom-prev-arrow {
@@ -99,6 +98,36 @@
   }
 
   .custom-next-arrow:hover {
+    transform: scale(1.3);
+    transition: transform 0.3s ease;
+  }
+
+  .custom-arrow-contest {
+    position: absolute;
+    top: 40%;
+    z-index: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-prev-arrow-contest {
+    left: -20px;
+    font-size: x-large;
+  }
+
+  .custom-prev-arrow-contest:hover {
+    transform: scale(1.3);
+    transition: transform 0.3s ease;
+  }
+  
+  .custom-next-arrow-contest {
+    right: -20px;
+    font-size: x-large;
+  }
+
+  .custom-next-arrow-contest:hover {
     transform: scale(1.3);
     transition: transform 0.3s ease;
   }
@@ -133,4 +162,64 @@
   @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
+  }
+  .slider-width {
+    width: 91.67%;
+    /* min-width: auto; */
+  }
+  .lc-slider .custom-arrow {
+    display: none;
+  }
+  .lc-slider:hover .custom-arrow {
+    display: inline;
+  }
+  .contest-slider .custom-arrow-contest {
+    display: none;
+  }
+  .contest-slider:hover .custom-arrow-contest {
+    display: inline;
+  }
+
+  @media screen and (max-width: 769px) {
+    .custom-arrow {
+      position: absolute;
+      top: -25%;
+      z-index: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .custom-prev-arrow {
+      left: 300px;
+      font-size: x-large;
+    }
+    .custom-next-arrow {
+      right: 20px;
+      font-size: x-large;
+    }
+    .lc-slider .custom-arrow {
+      display: inline;
+    }
+    .custom-arrow-contest {
+      position: absolute;
+      top: 40%;
+      z-index: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .custom-prev-arrow-contest {
+      left: -20px;
+      font-size: xx-large;
+    }
+    .custom-next-arrow-contest {
+      right: -23px;
+      font-size: xx-large;
+    }
+    .contest-slider .custom-arrow-contest {
+      display: inline;
+    }
   }

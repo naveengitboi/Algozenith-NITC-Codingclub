@@ -67,12 +67,6 @@
 .guides .aboutHeader {
   margin: 1rem 0;
 }
-.imagesInner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
 
 .memContainer {
   margin: 1rem 1rem;
@@ -97,12 +91,13 @@
 
 .personProf {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   font-weight: 500;
   color: var(--pri_dark_tone);
   line-height: 1;
   padding: 0.5rem 0;
+  /* max-width: fit-content; */
 }
 .personProf .tinySize {
   font-family: var(--primary_font);
@@ -258,7 +253,6 @@
   }
 
   .memContainer {
-
     margin: 0 0.45rem;
   }
   .imageContainer {
@@ -278,8 +272,14 @@
   }
   .contributeText {
     background-color: var(--pri_dark_tone);
-    padding: 2.85rem;
+    padding: 2rem;
     border-radius: 0 var(--bradius) var(--bradius);
+  }
+  .contribute {
+    font-size: larger;
+  }
+  .mail-id {
+    font-size: small;
   }
 }
 
@@ -301,18 +301,20 @@
   }
 
   .memContainer {
-    margin: 0 0.45rem;
+    margin: 0 0.6rem;
+    max-width: fit-content;
+
   }
   .imageContainer {
-    width: 200px;
-    height: 250px;
+    max-width: max-content;
+    max-height: max-content;
   }
 
   .personProf .tinySize {
     font-size: 0.75rem;
   }
   .personProf .batchDet span {
-    --size: 6px;
+    --size: 5px;
     margin: 0 0.45rem;
   }
 
@@ -325,23 +327,25 @@
   }
   .contributeText {
     background-color: var(--pri_dark_tone);
-    padding: 2.15rem;
+    padding: 1rem;
     border-radius: 0 0 var(--bradius);
     text-align: center;
   }
   .actionsDiv {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
   }
   .actionsDiv .paraSmall {
     padding: 1rem 0;
+    max-width: 190px;
   }
   .actionsDiv button {
     padding: 0.85rem;
     text-align: center;
     justify-content: center;
+    margin-top: 10px;
   }
 }
 .founder {

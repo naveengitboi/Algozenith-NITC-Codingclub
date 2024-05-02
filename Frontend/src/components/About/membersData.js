@@ -86,7 +86,7 @@ export const b22mem = [
     },
     {
         image: "/images/clubmem/b22/komatireddy_b22.jpg",
-        name: "Komatireddy Chanakya",
+        name: "K Chanakya",
         role: "Social Media Manager",
         position: "Head",
         batch: "B22",
