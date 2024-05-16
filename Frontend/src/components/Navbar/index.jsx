@@ -1,38 +1,28 @@
 import React, { useState, useRef } from "react";
 import "./index.css";
 import { NavLink } from "react-router-dom";
-import { FaBars, FaFont, FaLine, FaXmark } from "react-icons/fa6";
+import { FaBars, FaXmark } from "react-icons/fa6";
 
 function Navbar() {
   const [isActive, setIsActive] = useState(false);
   const navLinksRef = useRef();
 
-  const handleHamburger = () => {
-    if (!isActive) {
-      navLinksRef.current.addEventListener("click", (e) => {
-        setIsActive(false);
-      });
-    }
-    setIsActive((prev) => !prev);
-  };
-
   return (
     <div className="navbarContainer">
-      <nav className={`navbar ${isActive ? "bg-[#96bfca] nav-mobile":""}commonPadding`}>
+      <nav>
         <div className="logo">
           <NavLink to="/">
             <img src="/images/logo.png" alt="AZ logo" />
           </NavLink>
         </div>
         <div
-          className={isActive ? "hamburgerMenu hamActive" : "hamburgerMenu"}
-          onClick={handleHamburger}
+          className={"menu"}
+          onClick={() => setIsActive(!isActive)}
         >
-          {isActive ? <FaXmark className="w-10 h-7"/> : <FaBars className="w-10 h-6"/>}
+          {isActive ? <FaXmark className="w-10 h-8"/> : <FaBars className=" w-10 h-8"/>}
         </div>
         <ul
-          ref={navLinksRef}
-          className={isActive ? "navLinks navActive" : "navLinks"}
+          className={isActive ? "open" : ""}
         >
           <li>
             <NavLink to="/">Home</NavLink>
