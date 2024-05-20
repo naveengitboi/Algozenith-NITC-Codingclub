@@ -399,6 +399,10 @@ app.get("/upcontest", async (req, res) => {
   }
 });
 
+app.get("/", (req,res) => {
+  res.send("working");
+})
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log("Server started");
