@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-const allowedOrigins = ["http://localhost:5174", "http://localhost:5173", "https://algozenith-nitc-codingclub.vercel.app/"];
+const allowedOrigins = ["http://localhost:5174", "http://localhost:5173", "https://algozenith-nitc-codingclub.vercel.app", "https://algozenith-nitc-codingclub-admin.vercel.app"];
 // CORS middleware
 const corsOptions = {
   origin: function (origin, callback) {
