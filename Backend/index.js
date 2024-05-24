@@ -71,6 +71,12 @@ function sendPasswordEmail(password, recipient) {
     }
   });
 }
+
+app.get("/", (req,res) => {
+  res.send("working");
+})
+
+
 app.post("/logout", (req, res) => {
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
@@ -407,9 +413,6 @@ app.get("/upcontest", async (req, res) => {
   }
 });
 
-app.use("/", (req,res) => {
-  res.send("working");
-})
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
