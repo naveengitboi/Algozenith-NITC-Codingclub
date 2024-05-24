@@ -13,6 +13,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
