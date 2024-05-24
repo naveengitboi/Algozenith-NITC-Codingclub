@@ -115,23 +115,23 @@ function LCCard({
               </span>
             )}
           </p>
-          <a href={data.solution}></a>
-          <div className="relative">
-            <div className="border-2 border-black rounded-md px-2 h-14 w-[300px]">
+          {/* <a href={data.solution}></a> */}
+          <div className="relative ">
+            <div className="border-2 mt-4 border-black rounded-md px-2 h-14 w-[350px] md:w-[380px]">
               <div className="mt-3 h-10 flex justify-around px-3">
-                <a href="" target="_blank" className="hover:text-black">
-                  <div className="flex text-base mt-1">
-                    Code <FaGithub className="ml-2 mt-0.5 h-5 w-5"/>
+                <a href={data.solution} target="_blank" className="hover:text-black">
+                  <div className="flex text-lg">
+                    Code <FaGithub className="ml-2 mt-1 h-5 w-5"/>
                   </div>
                 </a>
-                <a href="" target="_blank" className="hover:text-red-500">
-                  <div className="flex text-base mt-1">
-                    Video <FaYoutube className="ml-2 mt-0.5 h-5 w-6 "/>
+                <a href={data.videolink} target="_blank" className="hover:text-red-500">
+                  <div className="flex text-lg">
+                    Video <FaYoutube className="ml-2 mt-1 h-5 w-6 "/>
                   </div>
                 </a>
               </div>
             </div>
-            <label className="absolute text-base -top-2.5 left-3 px-2 bg-[#95ACC5] text-black ">
+            <label className="absolute text-base -top-[-2px] left-3 px-2 bg-[#95ACC5] text-black ">
               Solution
             </label>
           </div>

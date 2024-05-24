@@ -31,8 +31,15 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// mongoose.connect("mongodb://localhost:27017/algo");
-mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost:27017/algo");
+// mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+//   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+//   family: 4 
+// }).then(() => console.log('Database connected successfully'))
+// .catch(err => console.error('Database connection error:', err));
 
 /*** for login page ****/
 
@@ -49,7 +56,7 @@ function sendPasswordEmail(password, recipient) {
   // Create the email options
   const mailOptions = {
     from: "rakesh.punugubati123@gmail.com", //add algo mail here
-    to: "rakesh.punugubati123@gmail.com", //
+    to: recipient, //
     subject: "Your Password",
     text: `Your password is: ${password}`,
   };
@@ -63,6 +70,7 @@ function sendPasswordEmail(password, recipient) {
     }
   });
 }
+
 app.post("/logout", (req, res) => {
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
@@ -81,18 +89,18 @@ app.post("/login", (req, res) => {
           const accessToken = jwt.sign(
             { email: email },
             "jwt-access-token-secret-key",
-            { expiresIn: "1m" }
+            { expiresIn: "2h" } // Access token expires in 2 hours
           );
           const refreshToken = jwt.sign(
             { email: email },
             "jwt-refresh-token-secret-key",
-            { expiresIn: "30m" }
+            { expiresIn: "30d" } // Refresh token expires in 30 days
           );
 
-          res.cookie("accessToken", accessToken, { maxAge: 60000 });
+          res.cookie("accessToken", accessToken, { maxAge: 2 * 60 * 60 * 1000 }); // 2 hours in milliseconds
 
           res.cookie("refreshToken", refreshToken, {
-            maxAge: 1800000,
+            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
             httpOnly: true,
             secure: true,
             sameSite: "strict",
@@ -156,9 +164,9 @@ const renewToken = (req, res) => {
         const accessToken = jwt.sign(
           { email: decoded.email },
           "jwt-access-token-secret-key",
-          { expiresIn: "1m" }
+          { expiresIn: "2h" } // Access token expires in 2 hours
         );
-        res.cookie("accessToken", accessToken, { maxAge: 60000 });
+        res.cookie("accessToken", accessToken, { maxAge: 2 * 60 * 60 * 1000 }); // 2 hours in milliseconds
         exist = true;
       }
     });
@@ -191,6 +199,7 @@ app.post("/admin", async (req, res) => {
               companies: formdata.companies,
               level: formdata.level,
               solution: formdata.solution,
+              videolink: formdata.videolink,
             })
             .then(() => res.json("Posted"))
             .catch((err) => res.json("Error"));
@@ -252,7 +261,25 @@ app.post("/admin", async (req, res) => {
       uplink: formdata.uplink,
     });
     res.json("upcontest posted");
-  } else {
+  }else if(formType === "Talks"){
+    await talks.create({
+      image: formdata.image,
+      companylogo: formdata.companylogo,
+      candidName: formdata.candidName,
+      candidCourse: formdata.candidCourse,
+      candidUniversity: formdata.candidUniversity,
+      company: formdata.company,
+      roleInCompany: formdata.roleInCompany,
+      ctc: formdata.ctc,
+      heading: formdata.heading,
+      description: formdata.description,
+      type: formdata.type,
+      overview: formdata.overview,
+      results: formdata.results,
+    })
+    res.json("talk posted");
+  }
+   else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });
   }
@@ -398,6 +425,17 @@ app.get("/upcontest", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.get("/talks", async (req,res) => {
+  try {
+    const alltalksdata = await talks.find();
+    // console.log(alltalksdata);
+    res.send(alltalksdata);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

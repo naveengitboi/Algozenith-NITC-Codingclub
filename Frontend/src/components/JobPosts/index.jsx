@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import JobCard from "../../elements/JobCard";
 import url from "../url.js";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 import { animatePresenceVarients } from "../../Layout.jsx";
 import "@fontsource/poppins";
-import "@fontsource/poppins/400.css"; 
+import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/400-italic.css";
 function JobPosts() {
   const [jobsdata, setjobsdata] = useState([]);
@@ -28,16 +28,17 @@ function JobPosts() {
       : jobsdata.filter((job) => job.jobtype === jobtype);
 
   return (
-    <motion.div className="pagePadding mx-4 md:mx-28" 
-       variants={animatePresenceVarients}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+    <motion.div
+      className="pagePadding mx-4 md:mx-28"
+      variants={animatePresenceVarients}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       <div className="jobsHeader mt-5">
         <div className="titles mt-14 md:mt-0">
           <p className="popins text-[#003f7e]">Jobs and Interns</p>
-          <div className="absolute filter-jobs border-[2px] rounded-2xl border-[#003f7e]/90 space-x-6 md:space-x-8">
+          <div className="absolute filter-jobs h-[34px] md:h-[32px]  border-[3px] rounded-2xl border-[#003f7e]/90 space-x-6 md:space-x-8">
             <button
               onClick={() => setjobstype("All")}
               className={`paraSmall filterk ${
