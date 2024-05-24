@@ -36,6 +36,8 @@ app.use(cors(corsOptions));
 
 // mongoose.connect("mongodb://localhost:27017/algo");
 
+//added dot env file 
+
 mongoose.connect(process.env.MONGO_URL).then(() => {
   console.log("db connected");
 }).catch((err) => console.log(err))
