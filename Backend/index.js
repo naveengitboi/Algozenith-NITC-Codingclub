@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import oppo from "./models/opportunities.model.js";
 import editorial from "./models/editorials.model.js";
@@ -15,7 +16,8 @@ import nodemailer from "nodemailer";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); 
+dotenv.config();
 const allowedOrigins = ["http://localhost:5174", "http://localhost:5173", "https://algozenith-nitc-codingclub.vercel.app", "https://algozenith-nitc-codingclub-admin.vercel.app"];
 // CORS middleware
 const corsOptions = {
@@ -32,7 +34,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // mongoose.connect("mongodb://localhost:27017/algo");
-mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority");
+
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  console.log("db connected");
+}).catch((err) => console.log(err))
 
 /*** for login page ****/
 
@@ -338,7 +343,7 @@ app.delete("/admin", (req, res) => {
       .deleteMany({ update: { $lt: today } })
       .then((result) => {
         res.json("Success");
-      })
+      }) 
       .catch((error) => {
         console.error(error);
         res.status(500).json("Error deleting records");
@@ -399,7 +404,7 @@ app.get("/upcontest", async (req, res) => {
   }
 });
 
-app.get("/", (req,res) => {
+app.use("/", (req,res) => {
   res.send("working");
 })
 
