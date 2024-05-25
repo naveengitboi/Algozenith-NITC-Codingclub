@@ -30,10 +30,11 @@ const corsOptions = {
     }
   },
   credentials: true,
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
 };
 
 app.use(cors(corsOptions));
-
+app.options("*", cors(corsOptions));
 // mongoose.connect("mongodb://localhost:27017/algo");
 // mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority", {
 //   useNewUrlParser: true,
