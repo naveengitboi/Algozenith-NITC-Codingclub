@@ -8,6 +8,7 @@ const leetcodeSchema = new mongoose.Schema({
     companies:{type:String},
     level:{type:String},
     solution:{type:String},
+    videolink:{type:String},
 })
 
 

@@ -35,10 +35,9 @@
 }
 
 .storyImg {
-  width: 30%;
   position: absolute;
   top: 00%;
-  left: 50%;
+  left: 65%;
 }
 
 .storyArrow svg {
