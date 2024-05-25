@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const questionArray = [
   "Your academic Profile",
@@ -6,27 +7,26 @@ const questionArray = [
   "What all branches could apply?",
   "What was the selection procedure?",
   "When did you start preparing for placements?",
-  "Did your internship and project experinece gave an edge to your selection?",
+  "Did your internship and project experience give an edge to your selection?",
   "How did you prepare for tests and Interviews?",
-  "Interview experince in breif",
+  "Interview experience in brief",
   "Any advice for 1st, 2nd, 3rd years respectively?",
-  "How do you think students especially 1st and 2nd years could utilise their summer vacation?",
+  "How do you think students especially 1st and 2nd years could utilize their summer vacation?",
   "What are the important subjects and topics that this particular company expects the candidates to know well?",
   "What offline and online resources did you refer?",
-  "Tips for non-cs & challanges faced during prep?",
+  "Tips for non-CS & challenges faced during prep?",
   "Message to students?",
 ];
 
-// let arr = []
-// for(let i =0; i<14;i++){
-//   arr.push('')
-// }
-// console.log(arr)
 function Placement() {
+
+  const url = "http://localhost:8000";
+
   const [answer, setAnswer] = useState({
     index: 0,
     text: "",
   });
+
   const [fullTalk, setFullTalk] = useState({
     image: "",
     candidName: "",
@@ -37,77 +37,79 @@ function Placement() {
     heading: "",
     description: "",
     type: "",
-    questions: questionArray,
-    answers: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
     overview: "",
     results: [],
   });
 
   const questionHandlerAdder = (e, indexChange) => {
     e.preventDefault();
-    // console.log(fullTalk.results)
 
-    if (!fullTalk.results.length) {
-      let newItem = {
-        qId: indexChange,
-        que: questionArray[indexChange],
-        val: answer.text,
-      };
-      setFullTalk((prev) => ({
-        ...prev,
-        results: [...prev.results, newItem],
-      }));
-    } else {
-      setFullTalk((prev) => {
-        return{
+    const newItem = {
+      qId: indexChange,
+      que: questionArray[indexChange],
+      val: answer.text,
+    };
+
+    setFullTalk((prev) => {
+      const existingItemIndex = prev.results.findIndex(
+        (item) => item.qId === indexChange
+      );
+
+      if (existingItemIndex !== -1) {
+        const updatedResults = [...prev.results];
+        updatedResults[existingItemIndex] = newItem;
+        return {
           ...prev,
-          results : prev.results.map((each) => {
-          if (each.qId == indexChange) {
-            let newItem = {
-              qId: indexChange,
-              que: questionArray[indexChange],
-              val: answer.text,
-            };
-            return newItem;
-          }
-          return each;
-        })
-        }
-      });
-    }
-
-    
+          results: updatedResults,
+        };
+      } else {
+        return {
+          ...prev,
+          results: [...prev.results, newItem],
+        };
+      }
+    });
   };
 
   const onChangeHandler = (e) => {
     const nameVal = e.target.name;
     const inputVal = e.target.value;
-    console.log(nameVal);
-    console.log(inputVal);
     setFullTalk((prev) => ({ ...prev, [nameVal]: inputVal }));
   };
-  const onSumbitHandler = (e) => {
+
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    let flag = false;
-    const dataValues = Object.values(fullTalk);
-    for (let val of dataValues) {
-      if (val == undefined || val == "") {
-        flag = true;
-        break;
-      }
-    }
-    if (flag) {
-      alert("Enter all data");
+    const dataValues = Object.values(fullTalk).slice(0, -1); // Exclude results array
+    const isEmpty = dataValues.some((val) => val === undefined || val === "");
+
+    if (isEmpty) {
+      // alert("Please enter all data");
+      axios.post(url + "/admin", {
+        formdata: fullTalk,
+        formType: "Talks",
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+      console.log(fullTalk);
     } else {
-      //add to backend
+      // Add to backend
+      axios.post(url + "/admin", {
+        formdata: fullTalk,
+        formType: "Talks",
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
       console.log(fullTalk);
     }
   };
+
   return (
     <div className="page">
       <h1 className="pageHeading">Placement Talks</h1>
       <div className="pageFormContainer">
-        <form className="commonForm" action="">
+        <form className="commonForm" onSubmit={onSubmitHandler}>
           <input
             type="text"
             placeholder="Student Name"
@@ -116,7 +118,7 @@ function Placement() {
           />
           <input
             type="file"
-            placeholder="Compnay Logo"
+            placeholder="Company Logo"
             name="image"
             onChange={onChangeHandler}
           />
@@ -129,7 +131,7 @@ function Placement() {
           <input
             type="text"
             placeholder="University"
-            name="university"
+            name="candidUniversity"
             onChange={onChangeHandler}
           />
           <input
@@ -140,7 +142,7 @@ function Placement() {
           />
           <input
             type="text"
-            placeholder="company placed"
+            placeholder="Company placed"
             name="company"
             onChange={onChangeHandler}
           />
@@ -168,35 +170,32 @@ function Placement() {
             name="overview"
             onChange={onChangeHandler}
           />
-          {fullTalk.questions.map((que, idx) => {
-            console.log("map idx ", idx);
-            return (
-              <div className="labelAndInput">
-                <label htmlFor="question">{idx + 1 + " " + que}</label>
-                <textarea
-                  rows="4"
-                  cols="50"
-                  type="text"
-                  onChange={(e) => {
-                    setAnswer((prev) => ({
-                      index: idx,
-                      text: e.target.value,
-                    }));
-                  }}
-                  className="answerText"
-                  placeholder={"answer" + idx}
-                />
-
-                <button
-                  className="addBtn green"
-                  onClick={(e) => questionHandlerAdder(e, idx)}
-                >
-                  Add
-                </button>
-              </div>
-            );
-          })}
-          <button className="button green" onClick={onSumbitHandler}>
+          {questionArray.map((que, idx) => (
+            <div className="labelAndInput" key={idx}>
+              <label htmlFor="question">{idx + 1 + " " + que}</label>
+              <textarea
+                rows="4"
+                cols="50"
+                type="text"
+                onChange={(e) => {
+                  setAnswer({
+                    index: idx,
+                    text: e.target.value,
+                  });
+                }}
+                className="answerText"
+                placeholder={"answer" + (idx + 1)}
+              />
+              <button
+                className="addBtn green"
+                onClick={(e) => questionHandlerAdder(e, idx)}
+              >
+                Add [ + ]
+              </button>
+            </div>
+          ))}
+          <button className="button bg-blue-600" type="submit"
+          >
             Add Talk
           </button>
         </form>

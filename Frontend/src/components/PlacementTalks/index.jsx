@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
 import "./index.css";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { withCursor, removeCursorChange } from "../../Redux/ImageHoverSlicer";
 import { animatePresenceVarients } from "../../Layout";
+import axios from "axios";
+import url from "../url";
+
 export const placementTalksData = [
   {
     image: "/images/clubMem.png",
@@ -25,145 +28,77 @@ export const placementTalksData = [
     overview:
       "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
   },
-  {
-    image: "/images/clubMem.png",
-    heading: "Story Talks",
-    candidName: "Ravan",
-    candidCourse: "CS Engineering",
-    candidUniversity: "NIT, Calicut",
-    company: "Google",
-    roleInCompany: "Associate",
-    description: "Story Description",
-    type: "placement",
-    questions: ["Academics", "Academics"],
-    answers: [
-      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
-      "Following the announcement of Stadia’s",
-    ],
-    overview:
-      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
-  },
-  {
-    image: "/images/clubMem.png",
-    heading: "Story Talks",
-    candidName: "Ravan",
-    candidCourse: "CS Engineering",
-    candidUniversity: "NIT, Calicut",
-    company: "Google",
-    roleInCompany: "Associate",
-    description: "Story Description",
-    type: "placement",
-    questions: ["Academics", "Academics"],
-    answers: [
-      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
-      "Following the announcement of Stadia’s",
-    ],
-    overview:
-      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
-  },
-  {
-    image: "/images/clubMem.png",
-    heading: "Story Talks",
-    candidName: "Ravan",
-    candidCourse: "CS Engineering",
-    candidUniversity: "NIT, Calicut",
-    company: "Google",
-    roleInCompany: "Associate",
-    description: "Story Description",
-    type: "placement",
-    questions: ["Academics", "Academics"],
-    answers: [
-      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
-      "Following the announcement of Stadia’s",
-    ],
-    overview:
-      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
-  },
-  {
-    image: "/images/clubMem.png",
-    heading: "Story Talks",
-    candidName: "Ravan",
-    candidCourse: "CS Engineering",
-    candidUniversity: "NIT, Calicut",
-    company: "Google",
-    roleInCompany: "Associate",
-    description: "Story Description",
-    type: "placement",
-    questions: ["Academics", "Academics"],
-    answers: [
-      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
-      "Following the announcement of Stadia’s",
-    ],
-    overview:
-      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
-  },
+  // Additional data objects...
 ];
 
 export const listItemVarients = {
   initial: {
     opacity: 0,
-    y:100
+    y: 100,
   },
   animate: {
     opacity: 1,
-    y:0,
-    transition:{
-      duration:0.5,
-      ease:"easeInOut"
-    }
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
   },
   exit: {
     opacity: 0,
     x: -100,
-    transition:{
-      duration:1,
-      ease:"easeInOut"
-    }
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
   },
 };
 
 function LinkItem({ talk, uniq }) {
   const dispatch = useDispatch();
   return (
-    <Link to={`/placementtalks/fulltalk/${uniq + 1}`}>
+    <Link to={`/placementtalks/fulltalk/${uniq + 1}`} state={{ talk, uniq }}>
       <motion.div
         className="storyLink"
         initial="initial"
-        whileHover={"whileHover"}
+        whileHover="whileHover"
       >
         <div className="storyDetails">
-          <motion.span
-            variants={{
-              initial: { x: 0 },
-              whileHover: { x: -16 },
-            }}
-            transition={{
-              type: "spring",
-              staggerChildren: 0.05,
-              delayChildren: 0.05,
-            }}
-            className="largerSize thickFont"
-          >
-            {talk.heading.split("").map((l, i) => (
-              <motion.span
-                variants={{
-                  initial: { x: 0 },
-                  whileHover: { x: 16 },
-                }}
-                transition={{ type: "spring" }}
-                key={i}
-              >
-                {l}
-              </motion.span>
-            ))}
-          </motion.span>
-          <p className="paraMedium">{talk.description}</p>
-        </div>
+  <motion.span
+    variants={{
+      initial: { x: 0 },
+      whileHover: { x: -16 },
+    }}
+    transition={{
+      type: "spring",
+      staggerChildren: 0.05,
+      delayChildren: 0.05,
+    }}
+    className="largerSize thickFont"
+  >
+    {talk.candidName.split('').map((l, i) => (
+      <motion.span
+        variants={{
+          initial: { x: 0 },
+          whileHover: { x: l === ' ' ? 0 : 16 },
+        }}
+        transition={{ type: "spring" }}
+        key={i}
+      >
+        {l === ' ' ? '\u00A0' : l}
+      </motion.span>
+    ))}
+  </motion.span>
+  <p className="paraMedium flex">
+    {talk.roleInCompany} {" | "} {talk.company} <img src={talk.companylogo} alt="" className="h-5 ml-3" />
+  </p>
+</div>
+
 
         <motion.img
           src={talk.image}
           alt={talk.candidName}
-          className="storyImg"
+          className="storyImg h-48 w-44"
           variants={{
             initial: {
               scale: 0,
@@ -173,7 +108,7 @@ function LinkItem({ talk, uniq }) {
             whileHover: {
               scale: 1,
               opacity: 1,
-              rotate: 5,
+              rotate: 0,
             },
           }}
           transition={{ duration: 1, type: "spring" }}
@@ -203,7 +138,19 @@ function LinkItem({ talk, uniq }) {
   );
 }
 
+
 function PlacementTalks() {
+  const [Talksdata, setTalksdata] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(url + "/talks")
+      .then((res) => {
+        setTalksdata(res.data.reverse());
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <motion.div
       className="pagePadding commonPadding"
@@ -217,18 +164,12 @@ function PlacementTalks() {
           <h1 className="paraLarge">Inspirations</h1>
           <div className="gradOneSidePurpleLine"></div>
         </div>
-        {placementTalksData.map((item, idx) => {
-          return (
-            
-              <div
-                className="talkItem"
-                key={idx}>
-                <LinkItem talk={item} uniq={idx} />
-                <div className="gradCompleteLine"></div>
-              </div>
-          
-          );
-        })}
+        {Talksdata.map((item, idx) => (
+          <div className="talkItem" key={idx}>
+            <LinkItem talk={item} uniq={idx} />
+            <div className="gradCompleteLine"></div>
+          </div>
+        ))}
       </div>
     </motion.div>
   );

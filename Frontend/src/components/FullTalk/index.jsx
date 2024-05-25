@@ -2,7 +2,20 @@ import React from "react";
 import "./index.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { listItemVarients } from "../PlacementTalks";
+import { useLocation, useNavigate } from "react-router-dom";
+
 function FullTalk() {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  if (!state || !state.talk) {
+    // Redirect to the PlacementTalks page if there's no state
+    navigate("/placementtalks", { replace: true });
+    return null;
+  }
+
+  const talk = state.talk;
+  const uniq = state.uniq;
   return (
     <AnimatePresence>
       <motion.div
@@ -14,81 +27,102 @@ function FullTalk() {
       >
         <div className="ftHeroSection">
           <div className="commonPadding">
-            <h1 className="paraLarge">Intern</h1>
+            <h1 className="paraLarge">{talk.type}</h1>
             <div className="gradCompleteLine"></div>
           </div>
 
-          <div className="ftimageContainer">
-            <div className="bigTextContainerFt">
-              <h1 className="largerSize bgTextFt">#07</h1>
-              <div className="shortTextFt">
-                <p className="paraMedium">#DONOT STOP</p>
-                <p className="paraMedium">#until you done it</p>
-                <a href="" target="_blank" className="paraSmall">
-                  Instagram
-                </a>
-              </div>
+          <div className="flex flex-row mt-10 ml-72">
+            <div className="bigTextContainerFt ml-10">
+              <h1 className="largerSize bgTextFt"># {uniq + 1}</h1>
+              <img
+                src={talk.image}
+                alt={talk.candidName}
+                className="h-[350px] w-auto ml-20"
+              />
             </div>
-            <div className="imageContainerFt">
-              <img src="/images/clubMem.png" alt="" />
+            <div className="ftOverViewContainer mt-[70px]">
+              <div className="ftoDetails space-y-4">
+                <div className="ftodSection">
+                  <h1 className="thickFont">Name</h1>
+                  <p className="paraSmall ml-[52px]">{talk.candidName}</p>
+                </div>
+                <div className="ftodSection">
+                  <h1 className="thickFont">Branch</h1>
+                  <p className="paraSmall ml-[42px]">{talk.candidCourse}</p>
+                </div>
+                <div className="ftodSection">
+                  <h1 className="thickFont">University</h1>
+                  <p className="paraSmall ml-5">{talk.candidUniversity}</p>
+                </div>
+                <div className="ftodSection">
+                  <h1 className="thickFont">Company</h1>
+                  <p className="paraSmall ml-7">{talk.company}</p>
+                </div>
+                <div className="ftodSection">
+                  <h1 className="thickFont">Role</h1>
+                  <p className="paraSmall ml-16">{talk.roleInCompany}</p>
+                </div>
+                <div className="ftodSection">
+                  <h1 className="thickFont">CTC</h1>
+                  <p className="paraSmall ml-[70px]">{talk.ctc}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="ftContentContainer commonPadding">
-          <div className="ftOverViewContainer">
-            <div className="ftoDetails">
+          {/* <div className="ftOverViewContainer ">
+            <div className="ftoDetails space-y-3">
               <div className="ftodSection">
                 <h1 className="thickFont">Name</h1>
-                <p className="paraSmall">P Soma Shekar</p>
+                <p className="paraSmall">{talk.candidName}</p>
               </div>
               <div className="ftodSection">
                 <h1 className="thickFont">Branch</h1>
-                <p className="paraSmall">CS Engineering</p>
+                <p className="paraSmall">{talk.candidCourse}</p>
               </div>
               <div className="ftodSection">
                 <h1 className="thickFont">University</h1>
-                <p className="paraSmall">P Soma Shekar</p>
+                <p className="paraSmall">{talk.candidUniversity}</p>
               </div>
               <div className="ftodSection">
                 <h1 className="thickFont">Company</h1>
-                <p className="paraSmall">P Soma Shekar</p>
+                <p className="paraSmall">{talk.company}</p>
               </div>
               <div className="ftodSection">
                 <h1 className="thickFont">Role</h1>
-                <p className="paraSmall">P Soma Shekar</p>
+                <p className="paraSmall">{talk.roleInCompany}</p>
               </div>
               <div className="ftodSection">
                 <h1 className="thickFont">CTC</h1>
-                <p className="paraSmall">P Soma Shekar</p>
+                <p className="paraSmall">{talk.ctc}</p>
               </div>
             </div>
 
             <div className="ftOverviewRight">
-              <h1 className="thickFont">OverView</h1>
-              <p className="paraSmall">
-                Following the announcement of Stadia’s shutdown, questions
-                remained on what would happen with the platform’s Wi-Fi
-                proprietary controller — whether they could still be used
-                wirelessly, or become e-waste.I led the end-to-end design
-                direction of the web experience for enabling Bluetooth on the
-                controllers and played process.I led the end-to-end design
-                direction of the web experience for enabling Bluetooth on the
-                controllers and played process.
-              </p>
+              {/* <h1 className="thickFont">OverView</h1>
+              <p className="paraSmall">{talk.overview}</p> 
+              <img
+                src={talk.image}
+                alt={talk.candidName}
+                className="h-[350px] w-auto"
+              />
             </div>
-          </div>
+          </div> */}
 
           <div className="questionAndAnsContainer">
-            <div className="questionItem">
-              <h1 className="thickFont">Academics percentsage</h1>
-              <p className="paraSmall answer">
-                Following the announcement of Stadia’s shutdown, questions
-                remained on what would happen with the platform’s Wi-Fi
-                proprietary controller — whether they could still be used
-                wirelessly, or become e-waste.8.95 CGPA
-              </p>
-            </div>
+            {talk.results.map((data, index) => (
+              <div className="questionItem mb-16" key={index}>
+                <h1 className="thickFont mr-10">{data.que}</h1>
+                <p
+                  className="paraSmall answer"
+                  style={{ whiteSpace: "pre-wrap" }}
+                >
+                  {data.val}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </motion.div>
