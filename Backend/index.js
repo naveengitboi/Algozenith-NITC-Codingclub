@@ -39,7 +39,6 @@ app.options("*", cors(corsOptions));
 //   useUnifiedTopology: true,
 //   serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
 //   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-//   family: 4
 // }).then(() => console.log('Database connected successfully'))
 // .catch(err => console.error('Database connection error:', err));
 // mongoose.connect("mongodb://localhost:27017/algo");
@@ -48,6 +47,7 @@ app.options("*", cors(corsOptions));
 mongoose.connect(
   "mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority"
 );
+//added dot env file
 /*** for login page ****/
 
 // Create a transporter
@@ -273,6 +273,23 @@ app.post("/admin", async (req, res) => {
     });
     res.json("upcontest posted");
   } else if (formType === "Talks") {
+    await talks.create({
+      image: formdata.image,
+      companylogo: formdata.companylogo,
+      candidName: formdata.candidName,
+      candidCourse: formdata.candidCourse,
+      candidUniversity: formdata.candidUniversity,
+      company: formdata.company,
+      roleInCompany: formdata.roleInCompany,
+      ctc: formdata.ctc,
+      heading: formdata.heading,
+      description: formdata.description,
+      type: formdata.type,
+      overview: formdata.overview,
+      results: formdata.results,
+    });
+    res.json("talk posted");
+  } else if (formType === "Talks") {
     await talks
       .create({
         image: formdata.image,
@@ -385,6 +402,7 @@ app.delete("/admin", (req, res) => {
         res.status(500).json("Error deleting records");
       });
   } else if (meta === "talks") {
+  } else if (meta === "talks") {
   }
 });
 
@@ -438,6 +456,7 @@ app.get("/upcontest", async (req, res) => {
   }
 });
 app.get("/talks", async (req, res) => {
+app.get("/talks", async (req, res) => {
   try {
     const alltalksdata = await talks.find();
     // console.log(alltalksdata);
@@ -446,6 +465,7 @@ app.get("/talks", async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
+});
 });
 
 const port = process.env.PORT || 8000;
