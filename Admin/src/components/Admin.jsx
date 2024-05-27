@@ -6,8 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Placementtalks from "../pages/Placement";
 function App() {
-  const url = "http://localhost:8000";
-  // const url = "https://algozenith-nitc-codingclub-2.onrender.com";
+  // const url = "http://localhost:8000";
+  const url = "https://algozenithnitc-server.onrender.com";
   const [name, setn] = useState();
   const [question, setq] = useState();
   const [quesname, setqn] = useState();
