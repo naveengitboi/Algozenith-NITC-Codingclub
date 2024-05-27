@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import oppo from "./models/opportunities.model.js";
 import editorial from "./models/editorials.model.js";
-import leetcode from "./models/leetcode.model.js";
+import leetcode from "./models/Leetcode.model.js";
 import gfg from "./models/gfg.model.js";
 import upcontest from "./models/upcontests.model.js";
 import talks from "./models/talks.model.js";
@@ -273,26 +273,22 @@ app.post("/admin", async (req, res) => {
     });
     res.json("upcontest posted");
   } else if (formType === "Talks") {
-    await talks
-      .create({
-        image: formdata.image,
-        companylogo: formdata.companylogo,
-        candidName: formdata.candidName,
-        candidCourse: formdata.candidCourse,
-        candidUniversity: formdata.candidUniversity,
-        company: formdata.company,
-        roleInCompany: formdata.roleInCompany,
-        ctc: formdata.ctc,
-        heading: formdata.heading,
-        description: formdata.description,
-        type: formdata.type,
-        overview: formdata.overview,
-        results: formdata.results,
-      })
-      .then(() => {
-        res.send("Posted talk");
-      })
-      .catch((err) => res.send(err));
+    await talks.create({
+      image: formdata.image,
+      companylogo: formdata.companylogo,
+      candidName: formdata.candidName,
+      candidCourse: formdata.candidCourse,
+      candidUniversity: formdata.candidUniversity,
+      company: formdata.company,
+      roleInCompany: formdata.roleInCompany,
+      ctc: formdata.ctc,
+      heading: formdata.heading,
+      description: formdata.description,
+      type: formdata.type,
+      overview: formdata.overview,
+      results: formdata.results,
+    });
+    res.json("talk posted");
   } else {
     console.error("Error in posting things");
     res.status(500).json({ message: "Internal server error" });

@@ -276,7 +276,6 @@ function App() {
       });
   };
 
-
   const questionArray = [
     "Your academic Profile",
     "Eligibility Criteria for applying?",
@@ -318,6 +317,24 @@ function App() {
   const questionHandlerAdder = (e, indexChange) => {
     e.preventDefault();
 
+    if (answer.text == "") {
+      toast.info("Enter some data");
+      return;
+    }
+
+    // Check if all previous questions are answered
+    for (let i = 0; i < indexChange; i++) {
+      const existingItem = fullTalk.results.find((item) => item.qId === i);
+      if (!existingItem) {
+        toast.info(
+          `Please fill and add the answer for question ${
+            i + 1
+          } before proceeding.`
+        );
+        return;
+      }
+    }
+
     const newItem = {
       qId: indexChange,
       que: questionArray[indexChange],
@@ -332,17 +349,31 @@ function App() {
       if (existingItemIndex !== -1) {
         const updatedResults = [...prev.results];
         updatedResults[existingItemIndex] = newItem;
+        setAnswer((pre) => {
+          return {
+            ...pre,
+            text: "",
+          };
+        });
         return {
           ...prev,
           results: updatedResults,
         };
       } else {
+        setAnswer((pre) => {
+          return {
+            ...pre,
+            text: "",
+          };
+        });
         return {
           ...prev,
           results: [...prev.results, newItem],
         };
       }
     });
+
+    console.log(fullTalk.results);
   };
 
   const onChangeHandler = (e) => {
@@ -353,29 +384,32 @@ function App() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const dataValues = Object.values(fullTalk).slice(0, -1); // Exclude results array
+    const dataValues = Object.values(fullTalk).slice(0, -1);
     const isEmpty = dataValues.some((val) => val === undefined || val === "");
 
     if (isEmpty) {
       // alert("Please enter all data");
-      axios.post(url + "/admin", {
-        formdata: fullTalk,
-        formType: "Talks",
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
+      toast.info("Please enter all fields");
       console.log(fullTalk);
     } else {
       // Add to backend
-      axios.post(url + "/admin", {
-        formdata: fullTalk,
-        formType: "Talks",
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
-      console.log(fullTalk);
+      axios
+        .post(url + "/admin", {
+          formdata: fullTalk,
+          formType: "Talks",
+        })
+        .then((res) => {
+          if (res.data == "Posted talk") {
+            toast.success("Posted talk successfully");
+          } else {
+            toast.error("Error in Backend posting");
+          }
+          console.log(res.data);
+        })
+        .catch((err) => {
+          toast.error("Error in frontend");
+          console.error(err);
+        });
     }
   };
 
@@ -629,79 +663,75 @@ function App() {
           {/* {time3 && <h1 className="text-purple-500 mx-10">{notify3}</h1>} */}
         </div>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="dark"
-        transition:Bounce
-      />
       <div className="page">
-      <h1 className="pageHeading">Placement Talks</h1>
-      <div className="pageFormContainer">
-        <div className="absolute text-8xl top-40"> hi</div>
-        <form className="commonForm" onSubmit={onSubmitHandler}>
-          <input
-            type="text"
-            placeholder="Student Name"
-            name="candidName"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="url"
-            placeholder="Student Photo link"
-            name="image"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="url"
-            placeholder="Company logo link"
-            name="companylogo"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Course (Branch)"
-            name="candidCourse"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="University"
-            name="candidUniversity"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Placement/Intern"
-            name="type"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Company placed"
-            name="company"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Role in placed Company"
-            name="roleInCompany"
-            onChange={onChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="CTC Offered"
-            name="ctc"
-            onChange={onChangeHandler}
-          />
-          {/* <input
+        <h1 className="pageHeading">Placement Talks</h1>
+        <div className="pageFormContainer">
+          <form className="commonForm" onSubmit={onSubmitHandler}>
+            <input
+              type="text"
+              placeholder="Student Name"
+              name="candidName"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="url"
+              placeholder="Student Photo link"
+              name="image"
+              onChange={onChangeHandler}
+            />
+            <div>
+              <span>Go to the link for getting photo url :</span>{" "}
+              <a
+                href="https://postimages.org/"
+                target="_blank"
+                className="text-blue-600 font-bold"
+              >
+                Click Here
+              </a>
+            </div>
+            <input
+              type="url"
+              placeholder="Company logo link"
+              name="companylogo"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="Course (Branch)"
+              name="candidCourse"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="University"
+              name="candidUniversity"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="Placement/Intern"
+              name="type"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="Company placed"
+              name="company"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="Role in placed Company"
+              name="roleInCompany"
+              onChange={onChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="CTC Offered"
+              name="ctc"
+              onChange={onChangeHandler}
+            />
+            {/* <input
             type="text"
             placeholder="Talk Heading"
             name="heading"
@@ -719,37 +749,49 @@ function App() {
             name="overview"
             onChange={onChangeHandler}
           /> */}
-          {questionArray.map((que, idx) => (
-            <div className="labelAndInput" key={idx}>
-              <label htmlFor="question">{idx + 1 + " " + que}</label>
-              <textarea
-                rows="4"
-                cols="50"
-                type="text"
-                onChange={(e) => {
-                  setAnswer({
-                    index: idx,
-                    text: e.target.value,
-                  });
-                }}
-                className="answerText"
-                placeholder={"answer" + (idx + 1)}
-              />
-              <button
-                className="addBtn green"
-                onClick={(e) => questionHandlerAdder(e, idx)}
-              >
-                Add [ + ]
-              </button>
-            </div>
-          ))}
-          <button className="button bg-blue-600" type="submit"
-          >
-            Add Talk
-          </button>
-        </form>
+            {questionArray.map((que, idx) => (
+              <div className="labelAndInput" key={idx}>
+                <label htmlFor="question">{idx + 1 + " " + que}</label>
+                <textarea
+                  rows="4"
+                  cols="50"
+                  type="text"
+                  onChange={(e) => {
+                    setAnswer({
+                      index: idx,
+                      text: e.target.value,
+                    });
+                  }}
+                  className="answerText"
+                  placeholder={"answer" + (idx + 1)}
+                />
+                <button
+                  className="addBtn green"
+                  onClick={(e) => questionHandlerAdder(e, idx)}
+                >
+                  Add [ + ]
+                </button>
+              </div>
+            ))}
+            <button className="button bg-blue-600" type="submit">
+              Add Talk
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+        transition:Bounce
+      />
     </div>
   );
 }

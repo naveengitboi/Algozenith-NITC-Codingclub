@@ -13,7 +13,7 @@ function Members({ batch, batchYear }) {
         <div className="flex flex-wrap md:justify-center items-center">
           {batch.map((mem, idx) => {
             return (
-              <div className="memContainer">
+              <div className="memContainer" key={idx}>
                 <div className="personProf flex justify-start ml-2 md:ml-0">
                   <p className="tinySize">
                     <span className="mr-1">{idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`}</span>{" "}

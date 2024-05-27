@@ -6,10 +6,10 @@ import UCHome from "../homeElements/UCHome";
 import GridEffect from "../homeElements/GridEffect";
 import InfiniteScroller from "../../elements/InfiniteScroller";
 import MVision from "../homeElements/MVision";
-import PotdHome from "../homeElements/PotdHome";
+// import PotdHome from "../homeElements/PotdHome";
 import potdlogo from "../Pics/potdlogo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 

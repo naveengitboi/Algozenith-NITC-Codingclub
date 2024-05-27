@@ -1,3 +1,3 @@
-const url = "https://algozenith-server.vercel.app/";
+const url = "http://localhost:8000";
 
 export default url;

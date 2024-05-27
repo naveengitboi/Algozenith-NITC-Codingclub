@@ -33,7 +33,7 @@
 .commonForm {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  /* align-items: start; */
   box-shadow: 0 0 2px 2px rgb(239, 239, 239);
   padding: 3rem 4rem;
 }
@@ -44,6 +44,7 @@
   border: 2px solid rgb(150, 150, 150);
   border-radius: 0.25rem;
   min-width: 500px;
+  /* max-width: 500px; */
   margin: 0.5rem 0;
   outline: none;
 }
