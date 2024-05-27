@@ -456,7 +456,6 @@ app.get("/upcontest", async (req, res) => {
   }
 });
 app.get("/talks", async (req, res) => {
-app.get("/talks", async (req, res) => {
   try {
     const alltalksdata = await talks.find();
     // console.log(alltalksdata);
@@ -465,7 +464,6 @@ app.get("/talks", async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
-});
 });
 
 const port = process.env.PORT || 8000;
