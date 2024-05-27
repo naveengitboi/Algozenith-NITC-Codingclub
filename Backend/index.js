@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import oppo from "./models/opportunities.model.js";
 import editorial from "./models/editorials.model.js";
-import leetcode from "./models/Leetcode.model.js";
+import leetcode from "./models/leetcode.model.js";
 import gfg from "./models/gfg.model.js";
 import upcontest from "./models/upcontests.model.js";
 import talks from "./models/talks.model.js";
