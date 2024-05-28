@@ -3,6 +3,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import url from "../url";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +16,7 @@ function Login() {
   axios.defaults.withCredentials = true;
   const submitPopup = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/login', { type: "togglepopup", data: { checkEmail } })
+    axios.post(url + '/login', { type: "togglepopup", data: { checkEmail } })
       .then(response => {
         console.log(response.data); // Log the response to see what data is received
         if (response.data.message === 'Valid user') {
@@ -37,7 +38,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8000/login', { type : "handleSubmit", data: {email, password} })
+    axios.post(url + '/login', { type : "handleSubmit", data: {email, password} })
       .then(response => {
         console.log(response); 
         if (response.data.message === 'Invalid user') {
@@ -135,12 +136,10 @@ function Login() {
           </div>
         </form>
       </div>
-      {/* Success popup */}
       {showSuccessPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
           <div className="bg-white p-6 rounded-md shadow-md">
             <p className="text-lg font-medium">Successfully logged in!</p>
-            {/* Additional content */}
           </div>
         </div>
       )}

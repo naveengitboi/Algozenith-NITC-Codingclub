@@ -4,10 +4,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Placementtalks from "../pages/Placement";
+import url from "../url";
 function App() {
   // const url = "http://localhost:8000";
-  const url = "https://algozenithnitc-server.onrender.com";
+  // const url = "https://algozenithnitc-server.onrender.com";
+  // const url = "https://algozenith-nitc-codingclub-pdfq.vercel.app"
   const [name, setn] = useState();
   const [question, setq] = useState();
   const [quesname, setqn] = useState();
