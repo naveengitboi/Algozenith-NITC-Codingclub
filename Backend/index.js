@@ -18,12 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 dotenv.config();
+
 const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:5173",
   "https://algozenith-nitc-codingclub.vercel.app",
   "https://algozenith-nitc-codingclub-admin.vercel.app",
 ];
+
 // CORS middleware
 const corsOptions = {
   origin: allowedOrigins,
@@ -33,42 +35,36 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-// mongoose.connect("mongodb://localhost:27017/algo");
-// mongoose.connect("mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
-//   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-// }).then(() => console.log('Database connected successfully'))
-// .catch(err => console.error('Database connection error:', err));
-// mongoose.connect("mongodb://localhost:27017/algo");
 
-//added dot env file
+// Connect to MongoDB
 mongoose.connect(
-  "mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority"
-);
-//added dot env file
-/*** for login page ****/
+  "mongodb+srv://algozenith:nitc@cluster0.pknc4ob.mongodb.net/algozenith?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+)
+.then(() => console.log('Database connected successfully'))
+.catch(err => console.error('Database connection error:', err));
 
-// Create a transporter
+// Create a transporter for nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "rakesh.punugubati123@gmail.com", //add algo zenith email id
-    pass: "qcgf vruc eqbx mrqp", // create a pass key and add here
+    user: "rakesh.punugubati123@gmail.com",
+    pass: "qcgf vruc eqbx mrqp",
   },
 });
+
 // Function to send password email
 function sendPasswordEmail(password, recipient) {
-  // Create the email options
   const mailOptions = {
-    from: "rakesh.punugubati123@gmail.com", //add algo mail here
-    to: recipient, //
+    from: "rakesh.punugubati123@gmail.com",
+    to: recipient,
     subject: "Your Password",
     text: `Your password is: ${password}`,
   };
 
-  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error occurred:", error);
@@ -77,9 +73,11 @@ function sendPasswordEmail(password, recipient) {
     }
   });
 }
+
 app.get("/", (req, res) => {
   res.send("working");
 });
+
 app.post("/logout", (req, res) => {
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
@@ -93,35 +91,39 @@ app.post("/login", (req, res) => {
     const { email, password } = data;
     console.log(email, password);
     UserModel.findOne({ email, password })
-      .then(function (user) {
+      .then(user => {
         if (user) {
           const accessToken = jwt.sign(
             { email: email },
             "jwt-access-token-secret-key",
-            { expiresIn: "2h" } // Access token expires in 2 hours
+            { expiresIn: "2h" }
           );
           const refreshToken = jwt.sign(
             { email: email },
             "jwt-refresh-token-secret-key",
-            { expiresIn: "30d" } // Refresh token expires in 30 days
+            { expiresIn: "1d" }
           );
 
           res.cookie("accessToken", accessToken, {
             maxAge: 2 * 60 * 60 * 1000,
-          }); // 2 hours in milliseconds
+            httpOnly: true,
+            secure: false, // Change this to true in production
+            sameSite: "lax",
+          });
 
           res.cookie("refreshToken", refreshToken, {
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+            maxAge: 1 * 24 * 60 * 60 * 1000,
             httpOnly: true,
-            secure: true,
-            sameSite: "strict",
+            secure: false, // Change this to true in production
+            sameSite: "lax",
           });
+
           res.json({ message: "Valid user" });
         } else {
           res.json({ message: "Invalid user" });
         }
       })
-      .catch(function (err) {
+      .catch(err => {
         console.log(err);
         res.status(500).send("Error occurred");
       });
@@ -129,7 +131,7 @@ app.post("/login", (req, res) => {
     const { checkEmail } = data;
     console.log(checkEmail);
     UserModel.findOne({ email: checkEmail })
-      .then(function (user) {
+      .then(user => {
         if (user) {
           sendPasswordEmail(user.password, checkEmail);
           res.json({ message: "Valid user" });
@@ -137,23 +139,25 @@ app.post("/login", (req, res) => {
           res.json({ message: "Invalid user" });
         }
       })
-      .catch(function (err) {
+      .catch(err => {
         console.log(err);
         res.status(500).send("Error occurred");
       });
   }
 });
 
-const verfyUser = (req, res, next) => {
-  const accesstoken = req.cookies.accessToken;
-  if (!accesstoken) {
+const verifyUser = (req, res, next) => {
+  const accessToken = req.cookies.accessToken;
+  if (!accessToken) {
     if (renewToken(req, res)) {
       next();
+    } else {
+      return res.status(401).json({ valid: false, message: "Unauthorized" });
     }
   } else {
-    jwt.verify(accesstoken, "jwt-access-token-secret-key", (err, decoded) => {
+    jwt.verify(accessToken, "jwt-access-token-secret-key", (err, decoded) => {
       if (err) {
-        return res.json({ valid: false, message: "Invalid Token" });
+        return res.status(401).json({ valid: false, message: "Invalid Token" });
       } else {
         req.email = decoded.email;
         next();
@@ -163,29 +167,31 @@ const verfyUser = (req, res, next) => {
 };
 
 const renewToken = (req, res) => {
-  const refreshtoken = req.cookies.refreshToken;
-  let exist = false;
-  if (!refreshtoken) {
-    return res.json({ valid: false, message: "No refresh token" });
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    return false;
   } else {
-    jwt.verify(refreshtoken, "jwt-refresh-token-secret-key", (err, decoded) => {
-      if (err) {
-        return res.json({ valid: false, message: "Invalid Refresh Token" });
-      } else {
-        const accessToken = jwt.sign(
-          { email: decoded.email },
-          "jwt-access-token-secret-key",
-          { expiresIn: "2h" } // Access token expires in 2 hours
-        );
-        res.cookie("accessToken", accessToken, { maxAge: 2 * 60 * 60 * 1000 }); // 2 hours in milliseconds
-        exist = true;
-      }
-    });
+    try {
+      const decoded = jwt.verify(refreshToken, "jwt-refresh-token-secret-key");
+      const newAccessToken = jwt.sign(
+        { email: decoded.email },
+        "jwt-access-token-secret-key",
+        { expiresIn: "2h" }
+      );
+      res.cookie("accessToken", newAccessToken, {
+        maxAge: 2 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: false, // Change this to true in production
+        sameSite: "lax",
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
-  return exist;
 };
 
-app.get("/admin", verfyUser, (req, res) => {
+app.get("/admin", verifyUser, (req, res) => {
   return res.json({ valid: true, message: "authorized" });
 });
 
