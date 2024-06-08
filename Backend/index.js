@@ -103,7 +103,7 @@ app.post("/login", (req, res) => {
           const refreshToken = jwt.sign(
             { email: email },
             "jwt-refresh-token-secret-key",
-            { expiresIn: "30d" } // Refresh token expires in 30 days
+            { expiresIn: "1d" } // Refresh token expires in 30 days
           );
 
           res.cookie("accessToken", accessToken, {
@@ -111,7 +111,7 @@ app.post("/login", (req, res) => {
           }); // 2 hours in milliseconds
 
           res.cookie("refreshToken", refreshToken, {
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+            maxAge: 1 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
             httpOnly: true,
             secure: true,
             sameSite: "strict",
