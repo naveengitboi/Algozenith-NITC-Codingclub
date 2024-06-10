@@ -279,7 +279,8 @@
     font-size: larger;
   }
   .mail-id {
-    font-size: small;
+    font-size: 68%;
+    margin-right: 1rem;
   }
 }
 
@@ -301,7 +302,7 @@
   }
 
   .memContainer {
-    margin: 0 0.6rem;
+    margin: 0 0rem;
     max-width: fit-content;
 
   }
@@ -342,7 +343,7 @@
     max-width: 190px;
   }
   .actionsDiv button {
-    padding: 0.85rem;
+    padding: 0.5rem 0;
     text-align: center;
     justify-content: center;
     margin-top: 10px;

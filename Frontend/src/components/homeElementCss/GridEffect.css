@@ -71,6 +71,15 @@
 .paraLarge {
   font-size: small;
 }
+.upc {
+  font-size: larger;
+}
+.jobs {
+  font-size: x-large;
+}
+.we-aim {
+  font-size: x-large;
+}
 .gridElement {
   --bradius: 0.5rem;
   display: flex;

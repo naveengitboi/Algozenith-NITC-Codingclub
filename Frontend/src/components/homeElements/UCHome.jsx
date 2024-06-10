@@ -38,7 +38,7 @@ function UCHome() {
     <div>
       <div className="jobsHeader">
         <div className="titles">
-          <p className="paraLarge">Upcoming Contests</p>
+          <p className="paraLarge upc">Upcoming Contests</p>
           <div className="titleSvg">
             <Link to="/potd">
               <LiaArrowRightSolid />
@@ -48,7 +48,7 @@ function UCHome() {
         <div className="gradCompleteLine"></div>
       </div>
 
-      <div className="UCcardHome space-y-10 md:space-y-0">
+      <div className="flex md:flex-row flex-col mt-10 md:ml-0 ml-5 space-y-10 md:space-y-0">
         {UCdata.slice(0,4).map((item, idx) => {
           return (
             <UCCard

@@ -199,7 +199,7 @@
     font-weight: 700;
   }
   .job-type {
-    font-size: large;
+    font-size: 17px;
   }
   .role {
     font-size: large;
@@ -210,6 +210,13 @@
   .filterk {
     font-size: 4mm;
     padding: 4px 8px;
+  }
+  .jobCard {
+    min-width: 325px;
+    max-width: 325px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 

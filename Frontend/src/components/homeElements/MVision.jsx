@@ -17,7 +17,7 @@ function MVision() {
   return (
     <motion.div  className="joinUsPage">
       <div className="aboutHeader">
-        <h1 className="paraLarge">We Aim</h1>
+        <h1 className="paraLarge we-aim">We Aim</h1>
         <div className="gradOneSidePurpleLine"></div>
       </div>
       <div className="action">

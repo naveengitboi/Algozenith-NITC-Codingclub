@@ -21,7 +21,7 @@ function Members({ batch, batchYear }) {
                   </p>
                 </div>
 
-                <div className="imageContainer md:mx-0 mx-2">
+                <div className="imageContainer md:mr-0 mr-[12px]">
                   <a href={mem.linkedIn} target="_blank">
                     {mem.linkedIn === "" ? (
                       ""

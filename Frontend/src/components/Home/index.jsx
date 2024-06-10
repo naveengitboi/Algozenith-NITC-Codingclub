@@ -10,7 +10,7 @@ import MVision from "../homeElements/MVision";
 import potdlogo from "../Pics/potdlogo.png";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
 const counterData = [
@@ -45,10 +45,11 @@ export default function Home() {
       <div className="homeHeroContainer ">
         <div className="heroDetails">
           <h1 className="medLSize md:text-6xl text-2xl">
-            Stop <br /> <span className="largerSize md:text-7xl text-3xl">Chaos</span>{" "}
+            Stop <br />{" "}
+            <span className="largerSize md:text-7xl text-3xl">Chaos</span>{" "}
             roadmaps
           </h1>
-          <p className="paraSmall w-28 md:w-auto paraText text-md">
+          <p className="paraSmall w-28 md:w-[300px] paraText text-md">
             We believe that coding is not just about writing lines of code; it's
             about unlocking the potential to innovate, create, and
             problem-solve.
@@ -61,28 +62,15 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="heroImg">
+        <div className="heroImg ">
           <img src="/images/algogrid.png" alt="algogrid" />
         </div>
-        <NavLink
-          to="/potd"
-          // className={`navLinkContainer ${bounce ? "bounceAnimation" : ""}`}
-        >
-          <img
-            src={potdlogo}
-            alt=""
-            className="hov cursor-pointer h-20 left-80 top-96 md:h-40 absolute md:left-auto md:top-[460px] md:z-50"
-            onMouseEnter={() => setShowMessage(true)}
-            onMouseLeave={() => setShowMessage(false)}
-          />
-        </NavLink>
-        {/* <div className="flex fixed bottom-64 right-32 z-50">
-          <FontAwesomeIcon
-            icon={faInfoCircle}
-            className="h-[23px] info-icon ml-1 mt-2 text-blue-700 "
-          />
-          {showMessage && <div className="bg-slate-600 w-52 mt-[70px]">P.</div>}
-        </div> */}
+        <Link to="/potd">
+        <div className="shining-container md:mt-80 mt-64 mr-2 md:mr-0">
+          <img src={potdlogo} alt="POTD" className="potd-image" />
+        </div>
+        </Link>
+
       </div>
 
       <div className="gapBtwSection">

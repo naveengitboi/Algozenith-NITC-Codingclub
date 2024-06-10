@@ -25,20 +25,20 @@ function Navbar() {
           className={isActive ? "open" : ""}
         >
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/" onClick={() => setIsActive(flase)}>Home</NavLink>
           </li>
           <li>
-            <NavLink to="/placementtalks">Placement Talks</NavLink>
+            <NavLink to="/placementtalks" onClick={() => setIsActive(flase)}>Placement Talks</NavLink>
           </li>
           {/* <li><NavLink to='/events'>Events</NavLink></li> */}
           <li>
-            <NavLink to="/opportunities">Job Opportunities</NavLink>
+            <NavLink to="/opportunities" onClick={() => setIsActive(flase)}>Job Opportunities</NavLink>
           </li>
           <li>
-            <NavLink to="/potd">PotD, E&C</NavLink>
+            <NavLink to="/potd" onClick={() => setIsActive(flase)}>POTD & Editorials</NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/about" onClick={() => setIsActive(flase)}>About</NavLink>
           </li>
         </ul>
       </nav>

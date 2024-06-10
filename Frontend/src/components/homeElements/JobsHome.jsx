@@ -4,8 +4,6 @@ import url from "../url.js";
 import "../JobPosts/index.css";
 import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
-
-// import { jobsPosts } from "../JobPosts";
 import JobCard from "../../elements/JobCard";
 
 
@@ -28,7 +26,7 @@ function JobsHome() {
     <div className="jobsHome">
       <div className="jobsHeader">
         <div className="titles">
-          <p className="paraLarge">Jobs and Interns</p>
+          <p className="paraLarge jobs">Jobs and Interns</p>
           <div className="titleSvg">
             <Link to="/opportunities">
               <LiaArrowRightSolid />

@@ -32,3 +32,15 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media screen and (max-width: 769px) {
+  .mvtPoints .paraSmall {
+    margin: 1rem 0;
+    color: rgb(235, 235, 235);
+    font-weight: normal;
+    font-size: 11px;
+  }
+  .main {
+    font-size: 11px;
+  }
+}

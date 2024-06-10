@@ -57,10 +57,10 @@ function About() {
           </div>
         </div>
 
-        <div className="aboutHeader aboutTopContainer">
+        {/* <div className="aboutHeader aboutTopContainer">
           <h1 className="paraLarge">Faculty Co-ordinator</h1>
           <div className="gradOneSidePurpleLine"></div>
-        </div>
+        </div> */}
 
         <div className=" gapBwSections">
           <Members batch={b22mem} batchYear={"B22"} />
@@ -77,7 +77,7 @@ function About() {
                 href="https://in.linkedin.com/in/kattamurikowshiq"
                 target="_blank"
               >
-                <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[136px] rounded-sm rounded-bl-xl" />
+                <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[116px] md:ml-[136px] rounded-sm rounded-bl-xl" />
                 <img
                   src="/images/clubmem/b20/kowshiq_b20.jpg"
                   className="md:h-[220px] h-[230px] md:w-auto w-[270px]  rounded-md border-gradient border-gradient-lead"
@@ -88,7 +88,7 @@ function About() {
               </a>
               <div className="w-[320px]">
                 <h1 className="founder ml-5"> K Kowshiq</h1>
-                <p className="paraSmall text-sm px-2">
+                <p className="paraSmall text-xs md:text-sm px-2">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Beatae voluptatem debitis eaque laboriosam aut esse nemo culpa
                   dolore consequuntur mollitia neque vitae unde sunt
@@ -99,7 +99,7 @@ function About() {
             <div className="mt-5 flex">
               <div className="w-[320px] ">
                 <h1 className="founder md:ml-5">D Rahul</h1>
-                <p className="paraSmall text-sm">
+                <p className="paraSmall text-xs md:text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Beatae voluptatem debitis eaque laboriosam aut esse nemo culpa
                   dolore consequuntur mollitia neque vitae unde sunt
@@ -110,7 +110,7 @@ function About() {
                 href="https://in.linkedin.com/in/dasari-rahul-7a0830219"
                 target="_blank"
               >
-                <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[136px] rounded-sm rounded-bl-xl" />
+                <FaLinkedinIn className="absolute mt-1 bg-blue-600 text-white h-7 w-7 p-1 ml-[117px] md:ml-[136px] rounded-sm rounded-bl-xl" />
                 <img
                   src="/images/clubmem/b20/rahul_b20.jpg"
                   className="md:h-[220px] md:w-[180px] h-[230px] w-[270px] rounded-md border-gradient border-gradient-lead"
