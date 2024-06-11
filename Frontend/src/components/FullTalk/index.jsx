@@ -26,33 +26,33 @@ function FullTalk() {
         exit="exit"
       >
         <div className="ftHeroSection">
-          <div className="commonPadding">
+          <div className="commonPadding md:mt-1 mt-5">
             <h1 className="paraLarge">{talk.type}</h1>
             <div className="gradCompleteLine"></div>
           </div>
 
-          <div className="flex flex-row mt-10 ml-72">
-            <div className="bigTextContainerFt ml-10">
+          <div className="flex md:flex-row flex-col mt-10 md:ml-72">
+            <div className="bigTextContainerFt md:ml-10 ml-7">
               <h1 className="largerSize bgTextFt"># {uniq + 1}</h1>
               <img
                 src={talk.image}
                 alt={talk.candidName}
-                className="h-[350px] w-auto ml-20"
+                className="md:h-[350px] h-[200px] ml-7 w-auto md:ml-20"
               />
             </div>
-            <div className="ftOverViewContainer mt-[70px]">
+            <div className="ftOverViewContainer mt-[50px]">
               <div className="ftoDetails space-y-4">
                 <div className="ftodSection">
                   <h1 className="thickFont">Name</h1>
-                  <p className="paraSmall ml-[52px]">{talk.candidName}</p>
+                  <p className="paraSmall md:ml-[62px] ml-[51px]">{talk.candidName}</p>
                 </div>
                 <div className="ftodSection">
                   <h1 className="thickFont">Branch</h1>
-                  <p className="paraSmall ml-[42px]">{talk.candidCourse}</p>
+                  <p className="paraSmall md:ml-[48px] ml-[40px]">{talk.candidCourse}</p>
                 </div>
                 <div className="ftodSection">
                   <h1 className="thickFont">University</h1>
-                  <p className="paraSmall ml-5">{talk.candidUniversity}</p>
+                  <p className="paraSmall md:ml-5 ml-[22px]">{talk.candidUniversity}</p>
                 </div>
                 <div className="ftodSection">
                   <h1 className="thickFont">Company</h1>
@@ -60,11 +60,11 @@ function FullTalk() {
                 </div>
                 <div className="ftodSection">
                   <h1 className="thickFont">Role</h1>
-                  <p className="paraSmall ml-16">{talk.roleInCompany}</p>
+                  <p className="paraSmall md:ml-[75px] ml-[61px]">{talk.roleInCompany}</p>
                 </div>
                 <div className="ftodSection">
                   <h1 className="thickFont">CTC</h1>
-                  <p className="paraSmall ml-[70px]">{talk.ctc}</p>
+                  <p className="paraSmall md:ml-[81px] ml-[65px]">{talk.ctc}</p>
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@ function FullTalk() {
 
           <div className="questionAndAnsContainer">
             {talk.results.map((data, index) => (
-              <div className="questionItem mb-16" key={index}>
+              <div className="questionItem md:mb-16 mb-12" key={index}>
                 <h1 className="thickFont mr-10">{data.que}</h1>
                 <p
                   className="paraSmall answer"

@@ -9,28 +9,6 @@ import { animatePresenceVarients } from "../../Layout";
 import axios from "axios";
 import url from "../url";
 
-export const placementTalksData = [
-  {
-    image: "/images/clubMem.png",
-    candidName: "Ravan",
-    candidCourse: "CS Engineering",
-    candidUniversity: "NIT, Calicut",
-    company: "Google",
-    roleInCompany: "Associate",
-    heading: "Story Talks",
-    description: "Story Description",
-    type: "placement",
-    questions: ["Academics", "Academics"],
-    answers: [
-      `Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA`,
-      "Following the announcement of Stadia’s",
-    ],
-    overview:
-      "Following the announcement of Stadia’s shutdown, questions remained on what would happen with the platform’s Wi-Fi proprietary controller — whether they could still be used wirelessly, or become e-waste.8.95 CGPA",
-  },
-  // Additional data objects...
-];
-
 export const listItemVarients = {
   initial: {
     opacity: 0,
@@ -64,36 +42,41 @@ function LinkItem({ talk, uniq }) {
         whileHover="whileHover"
       >
         <div className="storyDetails">
-  <motion.span
-    variants={{
-      initial: { x: 0 },
-      whileHover: { x: -16 },
-    }}
-    transition={{
-      type: "spring",
-      staggerChildren: 0.05,
-      delayChildren: 0.05,
-    }}
-    className="largerSize thickFont"
-  >
-    {talk.candidName.split('').map((l, i) => (
-      <motion.span
-        variants={{
-          initial: { x: 0 },
-          whileHover: { x: l === ' ' ? 0 : 16 },
-        }}
-        transition={{ type: "spring" }}
-        key={i}
-      >
-        {l === ' ' ? '\u00A0' : l}
-      </motion.span>
-    ))}
-  </motion.span>
-  <p className="paraMedium flex">
-    {talk.roleInCompany} {" | "} {talk.company} <img src={talk.companylogo} alt="" className="h-5 ml-3" />
-  </p>
-</div>
-
+          <motion.span
+            variants={{
+              initial: { x: 0 },
+              whileHover: { x: -16 },
+            }}
+            transition={{
+              type: "spring",
+              staggerChildren: 0.05,
+              delayChildren: 0.05,
+            }}
+            className="largerSize thickFont"
+          >
+            {talk.candidName.split("").map((l, i) => (
+              <motion.span
+                variants={{
+                  initial: { x: 0 },
+                  whileHover: { x: l === " " ? 0 : 16 },
+                }}
+                transition={{ type: "spring" }}
+                key={i}
+              >
+                {l === " " ? "\u00A0" : l}
+              </motion.span>
+            ))}
+          </motion.span>
+          <p className="paraMedium flex md:flex-row flex-col">
+            <div>
+              {talk.roleInCompany} {" | "}
+            </div>
+            <div className="md:ml-2 ml-0 md:mt-0 mt-3 flex">
+            {talk.company}{" "}
+              <img src={talk.companylogo} alt="" className="h-5 ml-3" />
+            </div>
+          </p>
+        </div>
 
         <motion.img
           src={talk.image}
@@ -137,7 +120,6 @@ function LinkItem({ talk, uniq }) {
     </Link>
   );
 }
-
 
 function PlacementTalks() {
   const [Talksdata, setTalksdata] = useState([]);
