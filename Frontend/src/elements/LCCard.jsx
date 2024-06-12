@@ -45,7 +45,7 @@ function LCCard({
         onMouseEnter={() => setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(null)}
         onClick={() => setFlippedIndex(index === flippedIndex ? null : index)}
-        className="h-48 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+        className="h-48 w-[400px] shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
       >
         <div className="flex flex-col items-center ml-2 mt-8">
           <h1
@@ -76,7 +76,7 @@ function LCCard({
           setHoveredIndex(null);
           setFlippedIndex(index === flippedIndex ? null : index);
         }}
-        className="h-48 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+        className="h-48 w-[400px] shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
       >
         <div className="p-2 font-semibold flex flex-col space-y-2 text-xs popin text-white">
           <a className="flex scrollableText" href={data.question}>
@@ -84,10 +84,6 @@ function LCCard({
             {
               <div className="ml-1 flex">
                 <h1>{data.quesname}</h1>
-                {/* <FontAwesomeIcon
-                  icon={faSquareArrowUpRight}
-                  className="mt-1.5 ml-1"
-                /> */}
               </div>
             }
           </a>

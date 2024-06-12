@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import UCCard from "../../elements/UCCard.jsx";
 import ECCard from "../../elements/ECCard.jsx";
 import LCCard from "../../elements/LCCard.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import url from "../url.js";
 import {
   faBarsStaggered,
@@ -31,6 +32,10 @@ function Potd() {
   const [flippedIndexgfg, setFlippedIndexgfg] = useState(null);
   const [openfilter, setopenfilter] = useState(false);
   const [notfound, setnotfound] = useState(false);
+  const elementRef = useRef(null);
+  const gfgRef = useRef(null);
+  const ucRef = useRef(null);
+  const pceRef = useRef(null);
 
   const datenow = new Date();
   const datt = datenow.toDateString().substring(4, 7);
@@ -108,20 +113,21 @@ function Potd() {
     "December",
   ];
 
+  const slideRight = (element) => {
+    element.scrollLeft += 500;
+  };
+  const slideLeft = (element) => {
+    element.scrollLeft -= 500;
+  };
+
   const Customprev = ({ onClick }) => (
-    <button
-      className="custom-arrow custom-prev-arrow"
-      onClick={onClick}
-    >
+    <button className="custom-arrow custom-prev-arrow" onClick={onClick}>
       <FontAwesomeIcon icon={faChevronLeft} />
     </button>
   );
 
   const Customnext = ({ onClick }) => (
-    <button
-      className="custom-arrow custom-next-arrow"
-      onClick={onClick}
-    >
+    <button className="custom-arrow custom-next-arrow" onClick={onClick}>
       <FontAwesomeIcon icon={faChevronRight} />
     </button>
   );
@@ -328,24 +334,40 @@ function Potd() {
           </div>
           {/* <div className="flex flex-col items-center"> */}
           {/* <div className="slider-width mt-5 bg-black"> */}
-          <Slider
+          {/* <Slider
             {...PotdSettings}
             prevArrow={<Customprev />}
             nextArrow={<Customnext />}
             className="md:mx-36 mx-5 lc-slider"
-          >
-            {monthdata.map((data, index) => (
-              <LCCard
-                key={index}
-                index={index}
-                data={data}
-                flippedIndex={flippedIndex}
-                setFlippedIndex={setFlippedIndex}
-                hoveredIndex={hoveredIndex}
-                setHoveredIndex={setHoveredIndex}
-              />
-            ))}
-          </Slider>
+          > */}
+          <div className="relative group">
+            <IoChevronBackOutline
+              onClick={() => slideLeft(elementRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-24`}
+            />
+            <div
+              className="flex overflow-x-auto md:mx-44 mx-2 gap-4 scrollbar-hide scroll-smooth"
+              ref={elementRef}
+            >
+              {monthdata.map((data, index) => (
+                <LCCard
+                  key={index}
+                  index={index}
+                  data={data}
+                  flippedIndex={flippedIndex}
+                  setFlippedIndex={setFlippedIndex}
+                  hoveredIndex={hoveredIndex}
+                  setHoveredIndex={setHoveredIndex}
+                />
+              ))}
+            </div>
+            <IoChevronForwardOutline
+              onClick={() => slideRight(elementRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[4px] mt-[-50px]`}
+            />
+          </div>
+
+          {/* </Slider> */}
           {/* </div> */}
           {/* <hr className="h-0.5 mt-8 w-3/4 bg-gradient-to-r via-[#4E6378] from-[#CCE4FF] to-[#CCE4FF] rounded-full"></hr> */}
           {/* </div> */}
@@ -359,24 +381,32 @@ function Potd() {
           </div>
           {/* <div className="flex flex-col items-center"> */}
           {/* <div className="w-11/12 mt-5"> */}
-          <Slider
-            {...PotdSettings}
-            prevArrow={<Customprev />}
-            nextArrow={<Customnext />}
-            className="md:mx-36 mx-5 lc-slider"
-          >
-            {monthdatagfg.map((data, index) => (
-              <GFGCard
-                key={index}
-                index={index}
-                data={data}
-                flippedIndexgfg={flippedIndexgfg}
-                setFlippedIndexgfg={setFlippedIndexgfg}
-                hoveredIndexgfg={hoveredIndexgfg}
-                setHoveredIndexgfg={setHoveredIndexgfg}
-              />
-            ))}
-          </Slider>
+          <div className="relative group">
+            <IoChevronBackOutline
+              onClick={() => slideLeft(gfgRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-24`}
+            />
+            <div
+              className="flex overflow-x-auto md:mx-44 mx-2 gap-4 scrollbar-hide scroll-smooth"
+              ref={gfgRef}
+            >
+              {monthdatagfg.map((data, index) => (
+                <GFGCard
+                  key={index}
+                  index={index}
+                  data={data}
+                  flippedIndexgfg={flippedIndexgfg}
+                  setFlippedIndexgfg={setFlippedIndexgfg}
+                  hoveredIndexgfg={hoveredIndexgfg}
+                  setHoveredIndexgfg={setHoveredIndexgfg}
+                />
+              ))}
+            </div>
+            <IoChevronForwardOutline
+              onClick={() => slideRight(gfgRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[4px] mt-[-50px]`}
+            />
+          </div>
           {/* </div> */}
           {/* <hr className="h-0.5 mt-8 mb-10 w-3/4 bg-gradient-to-r to-[#4E6378] from-[#CCE4FF] rounded-full"></hr> */}
           {/* </div> */}
@@ -404,11 +434,14 @@ function Potd() {
             onMouseEnter={() => setIsHov(true)}
             onMouseLeave={() => setIsHov(false)}
           > */}
-            <Slider
-              {...ContestSettings}
-              prevArrow={<Customprevcontest />}
-              nextArrow={<Customnextcontest />}
-              className="contest-slider md:mx-36 mx-16"
+          <div className="relative group">
+            <IoChevronBackOutline
+              onClick={() => slideLeft(ucRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-24`}
+            />
+            <div
+              className="flex overflow-x-auto py-4 md:mx-44 mx-3 md:gap-4 scrollbar-hide scroll-smooth"
+              ref={ucRef}
             >
               {UCdata.map((data, index) => {
                 return (
@@ -422,7 +455,12 @@ function Potd() {
                   />
                 );
               })}
-            </Slider>
+            </div>
+            <IoChevronForwardOutline
+              onClick={() => slideRight(ucRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[65px] mt-[-50px]`}
+            />
+          </div>
           {/* </div> */}
           {/* </div> */}
 
@@ -435,12 +473,15 @@ function Potd() {
           </div>
           {/* <div className="flex flex-col mx-20 items-center"> */}
           {/* <div className="w-11/12 mt-5 mb-10 bg-white/10"> */}
-          <Slider
-            {...ContestSettings}
-            prevArrow={<Customprevcontest />}
-            nextArrow={<Customnextcontest />}
-            className="contest-slider md:mx-36 mx-16 mb-16"
-          >
+          <div className="relative group">
+            <IoChevronBackOutline
+              onClick={() => slideLeft(pceRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-24`}
+            />
+            <div
+              className="flex overflow-x-auto py-4 md:mx-44 mx-3 md:gap-4 scrollbar-hide scroll-smooth"
+              ref={pceRef}
+            >
             {ECdata.map((data, index) => (
               <ECCard
                 key={index}
@@ -451,7 +492,12 @@ function Potd() {
                 monthconversion={monthconversion}
               />
             ))}
-          </Slider>
+          </div>
+            <IoChevronForwardOutline
+              onClick={() => slideRight(pceRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[65px] mt-[-50px]`}
+            />
+          </div>
         </div>
         // </div>
         // </div>

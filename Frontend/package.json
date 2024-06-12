@@ -30,7 +30,8 @@
     "react-use-measure": "^2.1.1",
     "slick-carousel": "^1.8.1",
     "slick-slider": "^1.8.2",
-    "swiper": "^11.0.7"
+    "swiper": "^11.0.7",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@iconify/tailwind": "^0.1.4",

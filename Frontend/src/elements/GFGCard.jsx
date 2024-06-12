@@ -45,7 +45,7 @@ function GFGCard({
         onClick={() =>
           setFlippedIndexgfg(index === flippedIndexgfg ? null : index)
         }
-        className="h-48 mx-2 shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]/90"
+        className="h-48 w-[400px] shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]/90"
       >
         <div className="flex flex-col items-center ml-2 mt-8">
           <h1
@@ -76,7 +76,7 @@ function GFGCard({
           setHoveredIndexgfg(null);
           setFlippedIndexgfg(index === flippedIndexgfg ? null : index);
         }}
-        className="h-48 shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+        className="h-48 w-[400px] shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
       >
         <div className="p-2 text-sm font-semibold flex flex-col popin space-y-2 text-white ">
         <a className="flex scrollableText" href={data.question}>
