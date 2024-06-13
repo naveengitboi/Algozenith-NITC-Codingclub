@@ -175,6 +175,11 @@
   font-family: "Poppins";
   font-weight: 600;
 }
+.jobCard:hover {
+  transform: scale(1.08);
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 769px) {
   .jobsHomesCards {
@@ -209,7 +214,7 @@
   }
   .filterk {
     font-size: 4mm;
-    padding: 4px 8px;
+    padding: 4px 9px;
   }
   .jobCard {
     min-width: 325px;
@@ -219,4 +224,5 @@
     justify-content: space-between;
   }
 }
+
 

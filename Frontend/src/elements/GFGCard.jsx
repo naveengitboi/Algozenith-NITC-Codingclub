@@ -45,7 +45,7 @@ function GFGCard({
         onClick={() =>
           setFlippedIndexgfg(index === flippedIndexgfg ? null : index)
         }
-        className="h-48 w-[400px] shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]/90"
+        className="h-48 md:w-[400px] w-[340px] shadow-lg cursor-pointer rounded-2xl flex justify-between bg-gradient-to-r to-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] from-[#64778C]/90"
       >
         <div className="flex flex-col items-center ml-2 mt-8">
           <h1
@@ -76,11 +76,11 @@ function GFGCard({
           setHoveredIndexgfg(null);
           setFlippedIndexgfg(index === flippedIndexgfg ? null : index);
         }}
-        className="h-48 w-[400px] shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
+        className="h-48 md:w-[400px] w-[340px] shadow-lg rounded-2xl flex justify-between bg-gradient-to-r from-[#95ACC5] via-[#90a6bf] via-[#8096AE] via-[#7489a0] to-[#64778C]"
       >
         <div className="p-2 text-sm font-semibold flex flex-col popin space-y-2 text-white ">
         <a className="flex scrollableText" href={data.question}>
-            <h1 className="text-black font-bold">Question:</h1>
+            <h1 className="text-black font-bold">Question :</h1>
             {
               <div className="ml-1 flex">
                 <h1>{data.quesname} hbonhnuhbjn</h1>
@@ -92,21 +92,21 @@ function GFGCard({
             }
           </a>
           <h1>
-            <span className="text-black">Concepts: </span>
+            <span className="text-black">Concepts : </span>
             {data.concept}
           </h1>
           <h1>
-            <span className="text-black">Companies: </span>
+            <span className="text-black">Companies : </span>
             {data.companies}
           </h1>
           <p>
-            <span className="text-black font-extrabold">Difficulty level:</span>
+            <span className="text-black font-extrabold">Level :</span>
             {data.level === "Easy" || data.level === "easy" ? (
               <span className="bg-green-500 text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
                 Easy
               </span>
             ) : data.level === "Medium" || data.level === "medium" ? (
-              <span className="bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0.5 rounded-xl">
+              <span className="bg-[#f6cd52] text-white ml-2 text-xs px-2 pb-0 rounded-xl">
                 Medium
               </span>
             ) : (
@@ -117,7 +117,7 @@ function GFGCard({
           </p>
           <a href={data.solution}></a>
           <div className="relative">
-            <div className="border-2 border-black rounded-md px-2 h-14 w-[350px] md:w-[380px]">
+            <div className="border-2 border-black rounded-md px-2 h-14 w-[320px] md:w-[380px]">
               <div className="mt-3 h-10 flex justify-around px-3">
                 <a href="" target="_blank" className="hover:text-black">
                   <div className="flex text-lg">

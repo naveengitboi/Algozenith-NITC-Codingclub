@@ -8,6 +8,7 @@ import { withCursor, removeCursorChange } from "../../Redux/ImageHoverSlicer";
 import { animatePresenceVarients } from "../../Layout";
 import axios from "axios";
 import url from "../url";
+import Loader from "../../elements/Loader";
 
 export const listItemVarients = {
   initial: {
@@ -123,17 +124,22 @@ function LinkItem({ talk, uniq }) {
 
 function PlacementTalks() {
   const [Talksdata, setTalksdata] = useState([]);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
+    setloading(true);
     axios
       .get(url + "/talks")
       .then((res) => {
         setTalksdata(res.data.reverse());
+        setloading(false);
       })
       .catch((err) => console.error(err));
   }, []);
 
   return (
+    <>
+    {loading ? <Loader/> :(
     <motion.div
       className="pagePadding commonPadding"
       variants={animatePresenceVarients}
@@ -153,7 +159,8 @@ function PlacementTalks() {
           </div>
         ))}
       </div>
-    </motion.div>
+    </motion.div>)}
+    </>
   );
 }
 

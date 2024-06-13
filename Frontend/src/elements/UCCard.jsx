@@ -19,7 +19,7 @@ function UCCard({index, data , hoveredIndexuc, setHoveredIndexuc, monthconversio
                   onMouseEnter={() => setHoveredIndexuc(index)}
                   onMouseLeave={() => setHoveredIndexuc(null)}
                   onClick={() => handleCardClick(index)}
-                  className="flex ucdata w-64 h-72 mx-4 shadow-xl rounded-2xl bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
+                  className="flex ucdata w-64 h-72 mx-4 shadow-slate-400 shadow-lg rounded-2xl bg-gradient-to-br from-[#69a2dd] to-[#42576e] via-[#567fa9]"
                 >
                   {data.upplatform === "Leetcode" ||
                   data.upplatform === "leetcode" ? (

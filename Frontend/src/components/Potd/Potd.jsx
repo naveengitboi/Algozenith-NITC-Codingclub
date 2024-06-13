@@ -20,6 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import GFGCard from "../../elements/GFGCard.jsx";
 import { FaFilter } from "react-icons/fa6";
+import Loader from "../../elements/Loader.jsx";
 
 function Potd() {
   const [lcdata, setLcData] = useState([]);
@@ -48,46 +49,57 @@ function Potd() {
   const [monthdatagfg, setmonthdatagfg] = useState(curmonthgfg);
   const [ECdata, setECdata] = useState([]);
   const [UCdata, setUCdata] = useState([]);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
+
+    setloading(true);
     axios
       .get(url + "/leetcode")
       .then((res) => {
         setLcData(res.data.reverse());
-        setnotfound(false);
+        setloading(false);
       })
       .catch((err) => {
         console.error(err);
-        setnotfound(true);
       });
 
+    setloading(true);
     axios
       .get(url + "/gfg")
       .then((res) => {
         setgfgdata(res.data.reverse());
+        setloading(false);
       })
       .catch((err) => console.error(err));
 
+
+    setloading(true);
     axios
       .get(url + "/editorials")
       .then((res) => {
         setECdata(res.data.reverse());
+        setloading(false);
       })
       .catch((err) => console.error(err));
 
+    setloading(true);
     axios
       .get(url + "/upcontest")
       .then((res) => {
         setUCdata(res.data.reverse());
-        console.log(UCdata);
+        setloading(false);
       })
       .catch((err) => console.error(err));
 
+    setloading(true);
     const val = lcdata.filter((dat) => dat.date.substring(0, 3) === month);
     setmonthdata(val.reverse());
 
     const gfgval = gfgdata.filter((dat) => dat.date.substring(0, 3) === month);
     setmonthdatagfg(gfgval.reverse());
+
+    setloading(false);
   }, []);
 
   useEffect(() => {
@@ -113,111 +125,40 @@ function Potd() {
     "December",
   ];
 
+  const [isMediumOrAbove, setIsMediumOrAbove] = useState(
+    window.innerWidth >= 768
+  );
+
+  const updateMedia = () => {
+    setIsMediumOrAbove(window.innerWidth >= 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   const slideRight = (element) => {
-    element.scrollLeft += 500;
+    element.scrollLeft += isMediumOrAbove ? 500 : 355;
   };
   const slideLeft = (element) => {
-    element.scrollLeft -= 500;
+    element.scrollLeft -= isMediumOrAbove ? 500 : 355;
   };
 
-  const Customprev = ({ onClick }) => (
-    <button className="custom-arrow custom-prev-arrow" onClick={onClick}>
-      <FontAwesomeIcon icon={faChevronLeft} />
-    </button>
-  );
-
-  const Customnext = ({ onClick }) => (
-    <button className="custom-arrow custom-next-arrow" onClick={onClick}>
-      <FontAwesomeIcon icon={faChevronRight} />
-    </button>
-  );
-
-  const Customprevcontest = ({ onClick }) => (
-    <button
-      className="custom-arrow-contest custom-prev-arrow-contest"
-      onClick={onClick}
-    >
-      <FontAwesomeIcon icon={faChevronLeft} />
-    </button>
-  );
-
-  const Customnextcontest = ({ onClick }) => (
-    <button
-      className="custom-arrow-contest custom-next-arrow-contest"
-      onClick={onClick}
-    >
-      <FontAwesomeIcon icon={faChevronRight} />
-    </button>
-  );
-
-  var PotdSettings = {
-    swipeToSlide: true,
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3.1,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+  const contestslideRight = (element) => {
+    element.scrollLeft += isMediumOrAbove ? 500 : 288;
   };
-
-  var ContestSettings = {
-    swipeToSlide: true,
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4.1,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+  const contestslideLeft = (element) => {
+    element.scrollLeft -= isMediumOrAbove ? 500 : 288;
   };
 
   return (
     <>
-      {notfound && (
-        <div className="pagePadding commonPadding">
-          <img src={errorpage} className="" />
-        </div>
-      )}
-      {!notfound && (
+      {loading ? <Loader/> : (
         <div className="pagePadding md:mt-0 mt-10">
           <div className="flex flex-col items-center mt-5">
             <div className="md:w-3/4 w-11/12 flex justify-between">
-              <p className="text-[#003f7e] font-bold paraLarge md:text-3xl text-[28px]">
+              <p className="text-[#003f7e] font-bold paraLarge md:text-3xl text-[24px]">
                 Problem Of The Day
               </p>
               <div>
@@ -230,7 +171,7 @@ function Potd() {
                 />
                 <div className="flex justify-end">
                   {openfilter && (
-                    <div className="absolute py-0 z-10 w-52 h-36 mt-[-38px] flex flex-col justify-center bg-slate-100 rounded-xl ">
+                    <div className="absolute py-0 z-20 w-52 h-36 mt-[-38px] flex flex-col justify-center bg-slate-100 rounded-xl ">
                       <div className="flex mx-2 justify-between">
                         <h1 className="text-[#2167ac] font-bold">
                           Choose by Month
@@ -245,73 +186,73 @@ function Potd() {
                       </div>
                       <div className="mt-2 items-center ml-2 mr-2 grid gap-2 grid-cols-4 ">
                         <div
-                          onClick={() => setmonth("Jan")}
-                          className=" text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
+                          onClick={() => { setmonth("Jan"); setTimeout(() => { setopenfilter(false);}, 300);}}
+                          className=" text-[#2167ac] transition-all ease-in-out pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Jan
                         </div>
                         <div
-                          onClick={() => setmonth("Feb")}
+                          onClick={() => { setmonth("Feb"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className=" text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Feb
                         </div>
                         <div
-                          onClick={() => setmonth("Mar")}
+                          onClick={() => { setmonth("Mar"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Mar
                         </div>
                         <div
-                          onClick={() => setmonth("Apr")}
+                          onClick={() => { setmonth("Apr"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Apr
                         </div>
                         <div
-                          onClick={() => setmonth("May")}
+                          onClick={() => { setmonth("May"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           May
                         </div>
                         <div
-                          onClick={() => setmonth("Jun")}
+                          onClick={() => { setmonth("Jun"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Jun
                         </div>
                         <div
-                          onClick={() => setmonth("Jul")}
+                          onClick={() => { setmonth("Jul"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Jul
                         </div>
                         <div
-                          onClick={() => setmonth("Aug")}
+                          onClick={() => { setmonth("Aug"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Aug
                         </div>
                         <div
-                          onClick={() => setmonth("Sep")}
+                          onClick={() => { setmonth("Sep"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Sep
                         </div>
                         <div
-                          onClick={() => setmonth("Oct")}
+                          onClick={() => { setmonth("Oct"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Oct
                         </div>
                         <div
-                          onClick={() => setmonth("Nov")}
+                          onClick={() => { setmonth("Nov"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Nov
                         </div>
                         <div
-                          onClick={() => setmonth("Dec")}
+                          onClick={() => { setmonth("Dec"); setTimeout(() => { setopenfilter(false);}, 300);}}
                           className="text-[#2167ac] pl-2 hover:text-white hover:bg-[#2167ac]/70 rounded-lg font-semibold cursor-pointer"
                         >
                           Dec
@@ -326,8 +267,8 @@ function Potd() {
             {/* <hr className="h-0.5 w-3/4 bg-gradient-to-r from-[#4E6378] to-[#CCE4FF] mt-0.5 rounded-full"></hr> */}
           </div>
           <div className="flex flex-col items-center">
-            <div className="w-3/4">
-              <h1 className="text-[#003f7e] font-bold paraSmall text-2xl my-5">
+            <div className="md:w-3/4 w-11/12">
+              <h1 className="text-[#003f7e] font-bold paraSmall md:text-2xl text-xl my-5">
                 Leetcode
               </h1>
             </div>
@@ -343,7 +284,7 @@ function Potd() {
           <div className="relative group">
             <IoChevronBackOutline
               onClick={() => slideLeft(elementRef.current)}
-              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-24`}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-20`}
             />
             <div
               className="flex overflow-x-auto md:mx-44 mx-2 gap-4 scrollbar-hide scroll-smooth"
@@ -363,7 +304,7 @@ function Potd() {
             </div>
             <IoChevronForwardOutline
               onClick={() => slideRight(elementRef.current)}
-              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[4px] mt-[-50px]`}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-8 md:mt-[4px] mt-[-50px]`}
             />
           </div>
 
@@ -372,9 +313,9 @@ function Potd() {
           {/* <hr className="h-0.5 mt-8 w-3/4 bg-gradient-to-r via-[#4E6378] from-[#CCE4FF] to-[#CCE4FF] rounded-full"></hr> */}
           {/* </div> */}
 
-          <div className="flex flex-col md:ml-44 ml-12 ">
+          <div className="flex flex-col md:ml-44 ml-4 ">
             <div className="">
-              <h1 className="text-[#003f7e] font-bold text-2xl mt-10 mb-5 ">
+              <h1 className="text-[#003f7e] font-bold md:text-2xl text-xl mt-10 mb-5 ">
                 GeeksforGeeks
               </h1>
             </div>
@@ -384,7 +325,7 @@ function Potd() {
           <div className="relative group">
             <IoChevronBackOutline
               onClick={() => slideLeft(gfgRef.current)}
-              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-24`}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[4px] mt-[-50px] md:left-28 right-20`}
             />
             <div
               className="flex overflow-x-auto md:mx-44 mx-2 gap-4 scrollbar-hide scroll-smooth"
@@ -404,7 +345,7 @@ function Potd() {
             </div>
             <IoChevronForwardOutline
               onClick={() => slideRight(gfgRef.current)}
-              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[4px] mt-[-50px]`}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-8 md:mt-[4px] mt-[-50px]`}
             />
           </div>
           {/* </div> */}
@@ -413,7 +354,7 @@ function Potd() {
 
           <div className="flex flex-col items-center mt-20">
             <div className="md:w-3/4 w-11/12 flex justify-between">
-              <h1 className="text-[#003f7e] font-bold paraLarge md:text-3xl text-[28px]">
+              <h1 className="text-[#003f7e] font-bold paraLarge md:text-3xl text-[24px]">
                 Contests and Editorials
               </h1>
             </div>
@@ -422,8 +363,8 @@ function Potd() {
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="md:w-3/4 w-10/12">
-              <h1 className="text-[#003f7e] upc-mobile font-bold text-2xl my-5">
+            <div className="md:w-3/4 w-11/12">
+              <h1 className="text-[#003f7e] upc-mobile font-bold md:text-2xl text-xl my-5">
                 Upcoming Contests
               </h1>
             </div>
@@ -436,8 +377,8 @@ function Potd() {
           > */}
           <div className="relative group">
             <IoChevronBackOutline
-              onClick={() => slideLeft(ucRef.current)}
-              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-24`}
+              onClick={() => contestslideLeft(ucRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-20`}
             />
             <div
               className="flex overflow-x-auto py-4 md:mx-44 mx-3 md:gap-4 scrollbar-hide scroll-smooth"
@@ -457,45 +398,45 @@ function Potd() {
               })}
             </div>
             <IoChevronForwardOutline
-              onClick={() => slideRight(ucRef.current)}
-              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[65px] mt-[-50px]`}
+              onClick={() => contestslideRight(ucRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-8 md:mt-[65px] mt-[-50px]`}
             />
           </div>
           {/* </div> */}
           {/* </div> */}
 
           <div className="flex flex-col items-center">
-            <div className="md:w-3/4 w-10/12">
-              <h1 className="text-[#003f7e] pe-mobile font-bold text-2xl mt-10 mb-5">
+            <div className="md:w-3/4 w-11/12 md:pr-0 pr-20">
+              <h1 className="text-[#003f7e] pe-mobile font-bold md:text-2xl text-xl mt-10 mb-5">
                 Previous Contests and Editorials
               </h1>
             </div>
           </div>
           {/* <div className="flex flex-col mx-20 items-center"> */}
           {/* <div className="w-11/12 mt-5 mb-10 bg-white/10"> */}
-          <div className="relative group">
+          <div className="relative group mb-10">
             <IoChevronBackOutline
-              onClick={() => slideLeft(pceRef.current)}
-              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-24`}
+              onClick={() => contestslideLeft(pceRef.current)}
+              className={`md:text-[60px] text-[30px] text-black z-10 active:scale-75 transition-all ease-in-out cursor-pointer bg-gray-300 md:h-[185px] md:w-12 rounded-lg md:hidden block md:group-hover:block absolute md:mt-[65px] mt-[-50px] md:left-28 right-20`}
             />
             <div
               className="flex overflow-x-auto py-4 md:mx-44 mx-3 md:gap-4 scrollbar-hide scroll-smooth"
               ref={pceRef}
             >
-            {ECdata.map((data, index) => (
-              <ECCard
-                key={index}
-                index={index}
-                data={data}
-                hoveredIndexec={hoveredIndexec}
-                setHoveredIndexec={setHoveredIndexec}
-                monthconversion={monthconversion}
-              />
-            ))}
-          </div>
+              {ECdata.map((data, index) => (
+                <ECCard
+                  key={index}
+                  index={index}
+                  data={data}
+                  hoveredIndexec={hoveredIndexec}
+                  setHoveredIndexec={setHoveredIndexec}
+                  monthconversion={monthconversion}
+                />
+              ))}
+            </div>
             <IoChevronForwardOutline
-              onClick={() => slideRight(pceRef.current)}
-              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-12 md:mt-[65px] mt-[-50px]`}
+              onClick={() => contestslideRight(pceRef.current)}
+              className={`md:text-[60px] text-[30px] text-black md:hidden active:scale-75 transition-all ease-in-out block md:group-hover:block cursor-pointer z-10 top-0 bg-gray-300 md:h-[185px] md:w-12 rounded-lg absolute md:right-28 right-8 md:mt-[65px] mt-[-50px]`}
             />
           </div>
         </div>
