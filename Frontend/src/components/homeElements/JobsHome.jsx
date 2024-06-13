@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import url from "../url.js";
 import "../JobPosts/index.css";
 import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
@@ -8,20 +6,7 @@ import JobCard from "../../elements/JobCard";
 
 
 
-function JobsHome() {
-  const [jobsdata, setjobsdata] = useState([]);
-
-  useEffect (() => {
-    axios.get(url + "/opportunities")
-    .then((res) =>{
-      setjobsdata(res.data.reverse());
-      console.log(res.data[0]);
-
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-  },[]);
+function JobsHome({jobsdata}) {
   return (
     <div className="jobsHome">
       <div className="jobsHeader">

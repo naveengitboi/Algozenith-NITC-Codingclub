@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import url from "../url";
 import { Link } from "react-router-dom";
 import { LiaArrowRightSolid } from "react-icons/lia";
 import UCCard from "../../elements/UCCard";
 
-function UCHome() {
-  const [UCdata, setUCdata] = useState([]);
+function UCHome({UCdata}) {
   const [hoveredIndexuc, setHoveredIndexuc] = useState(null);
 
   const monthconversion = [
@@ -25,15 +22,6 @@ function UCHome() {
     "December",
   ];
 
-  useEffect(() => {
-    axios
-      .get(url + "/upcontest")
-      .then((res) => {
-        setUCdata(res.data);
-        console.log(UCdata);
-      })
-      .catch((err) => console.error(err));
-  }, []);
   return (
     <div>
       <div className="jobsHeader">

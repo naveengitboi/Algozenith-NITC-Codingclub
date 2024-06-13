@@ -9,6 +9,9 @@ import MVision from "../homeElements/MVision";
 import potdlogo from "../Pics/potdlogo.png";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
+import url from "../url.js"
+import Loader from "../../elements/Loader.jsx";
 
 const counterData = [
   {
@@ -26,8 +29,35 @@ const counterData = [
 ];
 
 export default function Home() {
+  const [UCdata, setUCdata] = useState([]);
+  const [jobsdata, setjobsdata] = useState([]);
+  const [loading, setloader] = useState(false);
+
+  useEffect(() => {
+    setloader(true);
+    axios
+      .get(url + "/upcontest")
+      .then((res) => {
+        setUCdata(res.data);
+        setloader(false);
+      })
+      .catch((err) => console.error(err));
+
+      setloader(true);
+      axios.get(url + "/opportunities")
+      .then((res) =>{
+        setjobsdata(res.data.reverse());
+        setloader(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+
+  }, []);
   
   return (
+    <>
+    {loading ? <Loader/> :(
     <div className="pagePadding commonPadding
     ">
       <div className="homeHeroContainer ">
@@ -62,11 +92,11 @@ export default function Home() {
       </div>
 
       <div className="gapBtwSection">
-        <UCHome />
+        <UCHome UCdata={UCdata}/>
       </div>
 
       <div className="jobsHomePageContainer gapBtwSection">
-        <JobsHome />
+        <JobsHome jobsdata={jobsdata}/>
       </div>
 
       <div className="gapBtwSection">
@@ -80,6 +110,7 @@ export default function Home() {
       <div className="resourcesPage gapBtwSection">
         <InfiniteScroller />
       </div>
-    </div>
+    </div>)}
+    </>
   );
 }
