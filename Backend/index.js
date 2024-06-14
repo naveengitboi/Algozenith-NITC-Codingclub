@@ -24,6 +24,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://algozenith-nitc-codingclub.vercel.app",
   "https://algozenith-nitc-codingclub-admin.vercel.app",
+  "https://algozenith-nitc.vercel.app",
 ];
 
 // CORS middleware
